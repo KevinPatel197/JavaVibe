@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Chat</title>
+        <ui:include src="includes/css.xhtml"/>
+    </h:head>
+    <body class="  ">
+        <!-- Wrapper Start -->
+        <div class="wrapper">
+
+            <!--Navigation-->
+            <ui:include src="includes/navigation.xhtml"></ui:include>
+
+            <!-- Header  -->
+            <ui:include src="includes/header.xhtml"></ui:include>
+
+            <!-- FriendList -->
+            <ui:include src="includes/friendlist.xhtml" />
+
+            <!-- Page Content  --> 
+
+            <div id="content-page" class="content-page">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-body chat-page p-0">
+                                    <div class="chat-data-block">
+                                        <div class="row">
+                                            <div class="col-lg-3 chat-data-left scroller">
+                                                <div class="chat-search pt-3 ps-3">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="chat-profile me-3">
+                                                            <c:if test="#{session.getAttribute('UImage') eq null }">
+                                                                <img src="/Vibe/Images/ProfileImage/images.jpg" alt="profile-img" class="avatar-60" />
+                                                            </c:if>
+                                                            <c:if test="#{session.getAttribute('UImage') ne null}">
+                                                                <img src="/Vibe/Images/ProfileImage/#{session.getAttribute('UImage')}" alt="profile-img" class="avatar-60" />
+                                                            </c:if>
+                                                        </div>
+                                                        <div class="chat-caption">
+                                                            <h5 class="mb-0">#{session.getAttribute("UfullName")}</h5>
+                                                        </div>
+                                                        <button type="submit" class="close-btn-res p-3"><i class="ri-close-fill"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="chat-sidebar-channel scroller mt-4 ps-3">
+                                                    <h5 class="">Friends</h5>
+                                                    <ul class="iq-chat-ui nav flex-column nav-pills">
+                                                        <c:forEach var="friendlist" items="#{friendManagedBean.showAllFriends()}">
+                                                            <li>
+                                                                <a  data-bs-toggle="pill" href="#chat#{friendlist.friendid.userid}">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="avatar me-2">
+                                                                            <c:if test="#{friendlist.friendid.profilephoto eq null }">
+                                                                                <img src="/Vibe/Images/ProfileImage/images.jpg" alt="profile-img" class="avatar-50" />
+                                                                            </c:if>
+                                                                            <c:if test="#{friendlist.friendid.profilephoto ne null}">
+                                                                                <img src="/Vibe/Images/ProfileImage/#{friendlist.friendid.profilephoto}" alt="profile-img" class="avatar-50" />
+                                                                            </c:if>
+                                                                            <span class="avatar-status"><i class="ri-checkbox-blank-circle-fill text-success"></i></span>
+                                                                        </div>
+                                                                        <div class="chat-sidebar-name">
+                                                                            <h6 class="mb-0">#{friendlist.friendid.firstname} #{friendlist.friendid.lastname}</h6>
+                                                                            <span>#{friendlist.friendid.email}</span>
+                                                                        </div>
+                                                                        <div class="chat-meta float-right text-center mt-2 me-1">
+                                                                            <div class="chat-msg-counter bg-primary text-white">20</div>
+                                                                            <span class="text-nowrap">05 min</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                        </c:forEach>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-9 chat-data p-0 chat-data-right">
+                                                <div class="tab-content">
+                                                    <div class="tab-pane fade active show" id="default-block" role="tabpanel">
+                                                        <div class="chat-start">
+                                                            <span class="iq-start-icon text-primary"><i class="ri-message-3-line"></i></span>
+                                                            <button id="chat-start" class="btn bg-white mt-3">Start
+                                                                Conversation!</button>
+                                                        </div>
+                                                    </div>
+                                                    <c:forEach var="friendchat" items="#{friendManagedBean.showAllFriends()}">
+                                                        <div class="tab-pane fade" id="chat#{friendchat.friendid.userid}" role="tabpanel">
+                                                            <div class="chat-head">
+                                                                <header class="d-flex justify-content-between align-items-center bg-white pt-3 pe-3 pb-3">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="sidebar-toggle">
+                                                                            <i class="ri-menu-3-line"></i>
+                                                                        </div>
+                                                                        <div class="avatar chat-user-profile m-0 me-3">
+                                                                            <c:if test="#{friendchat.friendid.profilephoto eq null }">
+                                                                                <img src="/Vibe/Images/ProfileImage/images.jpg" alt="profile-img" class="avatar-50" />
+                                                                            </c:if>
+                                                                            <c:if test="#{friendchat.friendid.profilephoto ne null}">
+                                                                                <img src="/Vibe/Images/ProfileImage/#{friendchat.friendid.profilephoto}" alt="profile-img" class="avatar-50" />
+                                                                            </c:if>
+                                                                            <span class="avatar-status"><i class="ri-checkbox-blank-circle-fill text-success"></i></span>
+                                                                        </div>
+                                                                        <h5 class="mb-0">#{friendchat.friendid.firstname} #{friendchat.friendid.lastname}</h5>
+                                                                    </div>
+                                                                </header>
+                                                            </div>
+                                                            <div class="chat-content scroller">
+                                                                <c:forEach id="chatlist" var="chat" items="#{chatManagedBean.chatList(friendchat.friendid.userid)}">
+                                                                    <c:if test="#{chat.senderid.userid ne friendchat.friendid.userid}">
+                                                                        <div class="chat d-flex other-user">
+                                                                            <div class="chat-user">
+                                                                                <a class="avatar m-0">
+                                                                                    <c:if test="#{chat.senderid.profilephoto eq null }">
+                                                                                        <img src="/Vibe/Images/ProfileImage/images.jpg" alt="profile-img" class="avatar-35" />
+                                                                                    </c:if>
+                                                                                    <c:if test="#{chat.senderid.profilephoto ne null}">
+                                                                                        <img src="/Vibe/Images/ProfileImage/#{chat.senderid.profilephoto}" alt="profile-img" class="avatar-35" />
+                                                                                    </c:if>
+                                                                                </a>
+                                                                                <span class="chat-time mt-1">#{chat.datetime.hours}:#{chat.datetime.minutes}</span>
+                                                                            </div>
+                                                                            <div class="chat-detail">
+                                                                                <div class="chat-message">
+                                                                                    <p>#{chat.message}</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </c:if>
+                                                                    <c:if test="#{chat.senderid.userid eq friendchat.friendid.userid}">
+                                                                        <div class="chat chat-left">
+                                                                            <div class="chat-user">
+                                                                                <a class="avatar m-0">
+                                                                                    <c:if test="#{friendchat.friendid.profilephoto eq null }">
+                                                                                        <img src="/Vibe/Images/ProfileImage/images.jpg" alt="profile-img" class="avatar-35" />
+                                                                                    </c:if>
+                                                                                    <c:if test="#{friendchat.friendid.profilephoto ne null}">
+                                                                                        <img src="/Vibe/Images/ProfileImage/#{chat.senderid.profilephoto}" alt="profile-img" class="avatar-35" />
+                                                                                    </c:if>
+                                                                                </a>
+                                                                                <span class="chat-time mt-1">#{chat.datetime.hours}:#{chat.datetime.minutes}</span>
+                                                                            </div>
+                                                                            <div class="chat-detail">
+                                                                                <div class="chat-message">
+                                                                                    <p>#{chat.message}</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                            </div>
+                                                            <div class="chat-footer p-3 bg-white">
+                                                                <h:form class="d-flex align-items-center">
+                                                                    <h:inputText value="#{chatManagedBean.message}" a:placeholder="Type Your Message" class="form-control me-3"></h:inputText>
+                                                                    <h:commandButton action="#{chatManagedBean.sendChat(friendchat.friendid.userid)}" class="btn btn-primary d-flex align-items-center px-2" value="Send"></h:commandButton>
+                                                                </h:form>
+                                                            </div>
+                                                        </div>
+                                                    </c:forEach>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Wrapper End-->
+
+
+        <!-- Scripts -->
+        <ui:include src="includes/bottomscript.xhtml" />
+
+
+    </body>
+</html>

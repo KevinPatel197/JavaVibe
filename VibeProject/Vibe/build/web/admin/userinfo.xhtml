@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <h:head>
+        <title>Admin | User Info</title>
+        <ui:include src="includes/css.xhtml" />
+
+    </h:head>
+    <h:body>
+
+        <!-- Wrapper Start -->
+        <div class="wrapper">
+            <!--Navigation-->
+            <ui:include src="includes/navigation.xhtml"></ui:include>
+
+            <!-- Header  -->
+            <ui:include src="includes/header.xhtml"></ui:include>
+
+
+            <div id="content-page" class="content-page">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card card-block card-stretch card-height blog-list">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6">
+
+                                            <c:if test="#{uinfoManagedBean.profilephoto eq null }">
+                                                <div class="image-block">
+                                                    <img src="/Vibe/Images/ProfileImage/images.jpg" class="img-fluid rounded w-100" alt="blog-img"/>
+                                                </div>
+                                            </c:if>
+                                            <c:if test="#{uinfoManagedBean.profilephoto ne null}">
+                                                <div class="image-block">
+                                                    <img src="/Vibe/Images/ProfileImage/#{uinfoManagedBean.profilephoto}" class="img-fluid rounded w-100" alt="blog-img"/>
+                                                </div>
+                                            </c:if>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h:form>
+
+                                                <div class="blog-description p-2">
+                                                    <h2 class="mb-2">User Info</h2>
+                                                    <p>Interest : #{uinfoManagedBean.intrested_in}</p>
+                                                    <p>FB : #{uinfoManagedBean.fb_link}</p>
+                                                    <p>Insta : #{uinfoManagedBean.insta_link}</p>
+                                                    <p>Bio : #{uinfoManagedBean.bio}</p>
+                                                    <p>Language : #{uinfoManagedBean.language}</p>
+                                                </div> 
+
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card card-block card-stretch card-height blog-list">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6">
+                                            <h:form>
+
+                                                <div class="blog-description p-2">
+                                                    <h2 class="mb-2">Education</h2>
+                                                    <p>Institute : #{uinfoManagedBean.institutename}</p>
+                                                    <p>Joining Date : #{uinfoManagedBean.joiningdate}</p>
+                                                    <p>Ending Date : #{uinfoManagedBean.endingdate}</p>
+                                                    <p>Address : #{uinfoManagedBean.instituteaddress}</p>
+                                                </div> 
+
+                                                <div class="blog-description p-2">
+                                                    <h2 class="mb-2">Skills</h2>
+                                                    <p>Skill Name : #{uinfoManagedBean.skillname}</p>
+                                                    <p>Skill Info : #{uinfoManagedBean.skillinfo}</p>
+                                                    <p>Portfolio : #{uinfoManagedBean.skillportfolio}</p>
+                                                </div> 
+
+                                                <div class="blog-description p-2">
+                                                    <h2 class="mb-2">Work</h2>
+                                                    <p>Company : #{uinfoManagedBean.companyname}</p>
+                                                    <p>Joining Date : #{uinfoManagedBean.workjoiningdate}</p>
+                                                    <p>Ending date : #{uinfoManagedBean.workendingdate}</p>
+                                                    <p>Company Address: #{uinfoManagedBean.companyaddress}</p>
+                                                </div>
+
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- Wrapper End-->
+
+        <!-- Scripts -->
+        <ui:include src="includes/bottomscript.xhtml" />      
+
+
+    </h:body>
+</html>
+

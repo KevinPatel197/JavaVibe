@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <h:head>
+        <title>Admin | Ads</title>
+        <ui:include src="includes/css.xhtml" />
+        
+    </h:head>
+    <h:body>
+        <!-- loader Start -->
+        <div id="loading">
+            <div id="loading-center">
+            </div>
+        </div>
+        <!-- loader END -->
+
+        <!-- Wrapper Start -->
+        <div class="wrapper">
+            <!--Navigation-->
+            <ui:include src="includes/navigation.xhtml"></ui:include>
+
+            <!-- Header  -->
+            <ui:include src="includes/header.xhtml"></ui:include>
+
+
+            <div id="content-page" class="content-page">
+                <div class="container">
+                    <div class="col-sm-12">
+                        <div class="admin_card">
+                            <div class="card-header d-flex justify-content-between">
+                                <div class="header-title">
+                                    <h4 class="card-title">User Ads Subscriptions</h4>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <h:dataTable class="table table-striped table-bordered" value="#{adminManagedBean.adsuserShowAll()}" var="ac">
+                                        <h:column>
+                                            <f:facet name="header">User</f:facet>
+                                                #{ac.userid.username}
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Ads Type</f:facet>
+                                                #{ac.adsid.adstype} 
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Ad Content</f:facet>
+                                                #{ac.adscontent} 
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Description</f:facet>
+                                                #{ac.description}
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Link</f:facet>
+                                                #{ac.link}
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Start Date</f:facet>
+                                                #{ac.startdate}
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">End Date</f:facet>
+                                                #{ac.enddate}
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Is Expired</f:facet>
+                                                #{ac.isExpried}
+                                        </h:column>
+                                        
+                                        
+                                    </h:dataTable>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- Wrapper End-->
+
+        <!-- Scripts -->
+        <ui:include src="includes/bottomscript.xhtml" />      
+        
+        
+    </h:body>
+</html>
+

@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+  <h:head>
+      <title>All Ads</title>
+      <ui:include src="includes/css.xhtml"/>
+  </h:head>
+  <body class="  ">
+    <!-- Wrapper Start -->
+    <div class="wrapper">
+        
+            <!--Navigation-->
+            <ui:include src="includes/navigation.xhtml"></ui:include>
+
+            <!-- Header  -->
+            <ui:include src="includes/header.xhtml"></ui:include>
+
+            <!-- FriendList -->
+            <ui:include src="includes/friendlist.xhtml" />
+            
+            <!-- Page Content  --> 
+            <div id="content-page" class="content-page">
+            <div class="container">
+                <div class="row">
+                    <h3 class="text-center">All Suggested Pages</h3>
+                    
+                    <c:forEach var="useradslist" items="#{adsManagedBean.showallads()}">
+                        <div class="col-lg-4 col-md-6 mt-5">
+                            <div class="card">
+                            <div class="card-body">
+                                 <div class="mb-3">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <img src="../assets/images/page-img/42.png" alt="story-img" class="rounded-circle img-fluid avatar-50"/>
+                                        <div class="stories-data ms-3">
+                                            <h5>#{useradslist.userid.firstname} #{useradslist.userid.lastname}</h5>
+                                            <p class="mb-0">Type : #{useradslist.adsid.adstype}</p>
+                                            <p class="mb-0">Content : #{useradslist.adscontent}</p>
+                                            <p class="mb-0">Description : #{useradslist.description}</p>
+                                        </div>
+                                    </div>
+                                    <img src="../assets/images/small/img-1.jpg" class="img-fluid rounded" alt="Responsive image"/>
+                                    <br></br>
+                                    <br></br>
+                                    <h:form>
+                                        <h:commandButton  id="btn_show" class="btn btn-primary"  action="#{userManagedBean.showProfileInfo(useradslist.userid.userid)}" value="View Page" style="width: 280px"/><br/><br/>
+                                    </h:form>
+                                 </div>
+                            </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                    
+                </div>
+            </div>
+      </div>
+    </div>
+    <!-- Wrapper End-->
+    
+
+        <!-- Scripts -->
+        <ui:include src="includes/bottomscript.xhtml" />
+    
+
+  
+</body>
+</html>

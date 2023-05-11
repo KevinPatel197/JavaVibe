@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+  <h:head>
+      <title>Work</title>
+      <ui:include src="includes/css.xhtml"/>
+  </h:head>
+  <body class="  ">
+    <!-- Wrapper Start -->
+    <div class="wrapper">
+        
+            <!--Navigation-->
+            <ui:include src="includes/navigation.xhtml"></ui:include>
+
+            <!-- Header  -->
+            <ui:include src="includes/header.xhtml"></ui:include>
+
+            <!-- FriendList -->
+            <ui:include src="includes/friendlist.xhtml" />
+            
+            <!-- Page Content  --> 
+            <div id="content-page" class="content-page">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card position-relative inner-page-bg bg-primary" style="height: 150px;">
+                                <div class="inner-page-title">
+                                    <h3 class="text-white">Add Work</h3>
+                                </div>  
+                            </div>
+                        </div>
+                        <div>
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between">
+                                    <div class="header-title">
+                                        <h4 class="card-title">Input Details</h4>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <h:form> 
+                                        
+                                        <h:inputHidden id="uw_id" value="#{userworkManagedBean.uw_id}"/>
+                                        
+                                        <div class="form-group">
+                                            <h:outputLabel for="" class="form-label"> Company Name : </h:outputLabel> 
+                                            <h:inputText id="cname" class="form-control" value="#{userworkManagedBean.companyname}"/>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <h:outputLabel for="" class="form-label"> Joining Date : </h:outputLabel> 
+                                            <h:inputText id="jdate" class="form-control" value="#{userworkManagedBean.joiningdate}"/>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <h:outputLabel for="" class="form-label"> Ending Date : </h:outputLabel> 
+                                            <h:inputText id="edate" class="form-control" value="#{userworkManagedBean.endingdate}"/>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <h:outputLabel for="" class="form-label"> Address : </h:outputLabel> 
+                                            <h:inputText id="addr" class="form-control" value="#{userworkManagedBean.companyaddress}"/>
+                                        </div>
+                                        <h:commandButton  id="btn_update" class="btn btn-primary"  action="#{userworkManagedBean.updateUserWork()}" value="Add"/><br/><br/>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <!-- Wrapper End-->
+    
+
+        <!-- Scripts -->
+        <ui:include src="includes/bottomscript.xhtml" />
+    
+  
+</body>
+</html>

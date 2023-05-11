@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <h:head>
+        <title>Admin | Ads</title>
+        <ui:include src="includes/css.xhtml" />
+
+    </h:head>
+    <h:body>
+        <!-- loader Start -->
+        <div id="loading">
+            <div id="loading-center">
+            </div>
+        </div>
+        <!-- loader END -->
+
+        <!-- Wrapper Start -->
+        <div class="wrapper">
+            <!--Navigation-->
+            <ui:include src="includes/navigation.xhtml"></ui:include>
+
+            <!-- Header  -->
+            <ui:include src="includes/header.xhtml"></ui:include>
+
+
+            <div id="content-page" class="content-page">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card position-relative inner-page-bg bg-primary" style="height: 150px;">
+                                <div class="inner-page-title">
+                                    <h3 class="text-white">Add Advertisements</h3>
+                                </div>  
+                            </div>
+                        </div>
+                        <div>
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between">
+                                    <div class="header-title">
+                                        <h4 class="card-title">Input Details</h4>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <h:form>                                        
+                                        <div class="form-group">
+                                            <h:outputLabel for="" class="form-label"> Type : </h:outputLabel> 
+                                            <h:inputText id="type" class="form-control" value="#{adminManagedBean.adstype}"/>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <h:outputLabel for="" class="form-label"> Price : </h:outputLabel> 
+                                            <h:inputText id="price" class="form-control" value="#{adminManagedBean.price}"/>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <h:outputLabel for="" class="form-label"> Time Limit : </h:outputLabel> 
+                                            <h:inputText id="timelimit" class="form-control" value="#{adminManagedBean.timelimit}"/>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <h:outputLabel for="" class="form-label"> Description : </h:outputLabel> 
+                                            <h:inputText id="desc" class="form-control" value="#{adminManagedBean.description}"/>
+                                        </div>
+                                        <h:commandButton  id="btn_insert" class="btn btn-primary"  action="#{adminManagedBean.insertads()}" value="Insert"/><br/><br/>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Wrapper End-->
+
+
+        <!-- Scripts -->
+        <ui:include src="includes/bottomscript.xhtml" />      
+
+
+    </h:body>
+</html>
+

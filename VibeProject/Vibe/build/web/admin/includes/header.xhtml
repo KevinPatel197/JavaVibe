@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Header</title>
+    </h:head>
+    <h:body>
+        <div class="iq-top-navbar">
+            <div class="iq-navbar-custom">
+                <nav class="navbar navbar-expand-lg navbar-light p-0">
+                    <div class="iq-navbar-logo d-flex justify-content-between">
+                        <a href="index-2.html">
+                            <img src="../assets/images/logo.png" class="img-fluid" alt=""/>
+                            <span>Vibe</span>
+                        </a>
+                        <div class="iq-menu-bt align-self-center">
+                            <div class="wrapper-menu">
+                                <div class="main-circle"><i class="ri-menu-line"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-label="Toggle navigation">
+                        <i class="ri-menu-3-line"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav  ms-auto navbar-list">
+                            <h:form>
+                                <h:commandButton class="btn btn-primary iq-sign-btn" action="#{loginManagedBean.vibeLogout()}" value="Sign Out"></h:commandButton>
+                            </h:form>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="   d-flex align-items-center dropdown-toggle" id="drop-down-arrow" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <c:if test="#{session.getAttribute('AImage') eq null }">
+                                        <img src="/Vibe/Images/ProfileImage/images.jpg" class="img-fluid rounded-circle me-3" alt="user"/>
+                                    </c:if>
+                                    <c:if test="#{session.getAttribute('AImage') ne null}">
+                                        <img src="/Vibe/Images/ProfileImage/#{session.getAttribute('UImage')}" class="img-fluid rounded-circle me-3" alt="user"/>
+                                    </c:if>
+                                    <div class="caption">
+                                        <h6 class="mb-0 line-height">#{session.getAttribute('AfullName')}</h6>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>               
+                    </div>
+                </nav>
+            </div>
+        </div> 
+    </h:body>
+</html>
+

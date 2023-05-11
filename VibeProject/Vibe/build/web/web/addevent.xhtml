@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+  <h:head>
+      <title>Event</title>
+      <ui:include src="includes/css.xhtml"/>
+  </h:head>
+  <body class="  ">
+    <!-- Wrapper Start -->
+    <div class="wrapper">
+        
+            <!--Navigation-->
+            <ui:include src="includes/navigation.xhtml"></ui:include>
+
+            <!-- Header  -->
+            <ui:include src="includes/header.xhtml"></ui:include>
+
+            <!-- FriendList -->
+            <ui:include src="includes/friendlist.xhtml" />
+            
+            <!-- Page Content  --> 
+            <div id="content-page" class="content-page">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card position-relative inner-page-bg bg-primary" style="height: 150px;">
+                                <div class="inner-page-title">
+                                    <h3 class="text-white">Host Event</h3>
+                                </div>  
+                            </div>
+                        </div>
+                        <div>
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between">
+                                    <div class="header-title">
+                                        <h4 class="card-title">Input Details</h4>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <h:form> 
+                                        
+                                        <h:inputHidden id="eventid" value="#{eventManagedBean.eventid}"/>
+                                        
+                                        <div class="form-group">
+                                            <h:outputLabel for="" class="form-label"> Event Name : </h:outputLabel> 
+                                            <h:inputText id="ename" class="form-control" value="#{eventManagedBean.eventname}" a:placeholder="Enter event name.."/>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <h:outputLabel for="" class="form-label"> Start Date : </h:outputLabel> 
+                                            <h:inputText id="sdate" class="form-control" value="#{eventManagedBean.eventstartdate}" a:placeholder="Enter start date.."/>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <h:outputLabel for="" class="form-label"> End Date : </h:outputLabel> 
+                                            <h:inputText id="edate" class="form-control" value="#{eventManagedBean.eventenddate}" a:placeholder="Enter end date.."/>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <h:outputLabel for="" class="form-label"> Info : </h:outputLabel> 
+                                            <h:inputText id="info" class="form-control" value="#{eventManagedBean.eventinfo}" a:placeholder="Enter info.."/>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <h:outputLabel for="" class="form-label"> Venue : </h:outputLabel> 
+                                            <h:inputText id="venue" class="form-control" value="#{eventManagedBean.venue}" a:placeholder="Enter venue.."/>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <h:outputLabel for="" class="form-label"> Type : </h:outputLabel> 
+                                            <h:inputText id="type" class="form-control" value="#{eventManagedBean.type}" a:placeholder="Enter type.."/>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <h:outputLabel for="" class="form-label"> Fees : </h:outputLabel> 
+                                            <h:inputText id="fees" class="form-control" value="#{eventManagedBean.fees}" a:placeholder="Enter fees.."/>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <h:outputLabel for="" class="form-label"> Mode : </h:outputLabel> 
+                                            <h:inputText id="mode" class="form-control" value="#{eventManagedBean.mode}" a:placeholder="Enter mode.."/>
+                                        </div>
+                                        <h:commandButton  id="btn_update" class="btn btn-primary"  action="#{eventManagedBean.updateHostEvent()}" value="Add"/><br/><br/>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <!-- Wrapper End-->
+    
+
+        <!-- Scripts -->
+        <ui:include src="includes/bottomscript.xhtml" />
+    
+  
+</body>
+</html>

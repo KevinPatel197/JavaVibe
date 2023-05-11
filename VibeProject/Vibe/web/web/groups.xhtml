@@ -1,0 +1,178 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Groups</title>
+        <ui:include src="includes/css.xhtml"/>
+    </h:head>
+    <body class="  ">
+        <!-- Wrapper Start -->
+        <div class="wrapper">
+
+            <!--Navigation-->
+            <ui:include src="includes/navigation.xhtml"></ui:include>
+
+            <!-- Header  -->
+            <ui:include src="includes/header.xhtml"></ui:include>
+
+            <!-- FriendList -->
+            <ui:include src="includes/friendlist.xhtml" />
+
+            <!-- Page Content  -->
+            <div class="header-for-bg">
+                <div class="background-header position-relative">
+                    <img src="../assets/images/page-img/profile-bg7.jpg" class="img-fluid w-100" alt="header-bg"/>
+                    <div class="title-on-header">
+                        <div class="data-block">
+                            <h2>Groups</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h:form>
+                <div id="content-page" class="content-page">
+                    <div class="container">
+                        <div class="d-flex">
+                            <h3>Create New Group</h3>
+                            <h:commandButton class="btn btn-primary rounded mx-3" value="Add" action="add-group.xhtml"></h:commandButton>
+                        </div>
+                        <hr/>
+                        <div class="my-2">
+                            <h3>My Groups</h3>
+                        </div>
+                        <hr/>
+                        <div class="d-grid gap-3 d-grid-template-1fr-19">
+                            <c:if test="#{groupManagedBean.showAllUserGroup().size() eq null}">
+                                <h4 class="text-info mx-5">No Group Created</h4>
+                            </c:if>
+                            <c:forEach var="mygroup" items="#{groupManagedBean.showAllUserGroup()}">
+                                <div class="card mb-0">
+                                    <div class="card-body text-center">
+                                        <div class="group-info pt-3 pb-3">
+                                            <h4><a href="#">#{mygroup.groupname}</a></h4>
+                                            <p>#{mygroup.description}</p>
+                                        </div>
+                                        <div class="group-details d-inline-block pb-3">
+                                            <ul class="d-flex align-items-center justify-content-between list-inline m-0 p-0">
+                                                <li class="pe-3 ps-3">
+                                                    <p class="mb-0">Post</p>
+                                                    <h6>0</h6>
+                                                </li>
+                                                <li class="pe-3 ps-3">
+                                                    <p class="mb-0">Member</p>
+                                                    <c:if test="#{groupManagedBean.groupMembersFindByGroupid(mygroup.groupid).size() ne null}">
+                                                        <h6>#{groupManagedBean.groupMembersFindByGroupid(mygroup.groupid).size()}</h6>
+                                                    </c:if>
+                                                    <c:if test="#{groupManagedBean.groupMembersFindByGroupid(mygroup.groupid).size() eq null}">
+                                                        <h6>0</h6>
+                                                    </c:if>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <h:commandButton action="#{groupManagedBean.groupFindById(mygroup.groupid)}" value="Details" class="btn btn-primary d-block w-100 my-2"></h:commandButton>
+                                        <h:commandButton action="#{groupManagedBean.deleteGroup(mygroup.groupid)}" value="Delete" class="btn btn-danger d-block w-100"></h:commandButton>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
+                        <hr/>
+                        <div class="my-2">
+                            <h3>Groups Joined</h3>
+                        </div>
+                        <hr/>
+                        <div class="d-grid gap-3 d-grid-template-1fr-19">
+                            <c:if test="#{groupManagedBean.joinedGroup().size() eq null}">
+                                <h4 class="text-info mx-5">No Group Joined</h4>
+                            </c:if>
+                            <c:forEach var="mygroup" items="#{groupManagedBean.joinedGroup()}">
+                                <c:if test="#{mygroup.groupid.isDeleted eq false}">
+                                    <div class="card mb-0">
+                                        <div class="card-body text-center">
+                                            <div class="group-info pt-3 pb-3">
+                                                <h4><a href="#">#{mygroup.groupid.groupname}</a></h4>
+                                                <p>#{mygroup.groupid.description}</p>
+                                            </div>
+                                            <div class="group-details d-inline-block pb-3">
+                                                <ul class="d-flex align-items-center justify-content-between list-inline m-0 p-0">
+                                                    <li class="pe-3 ps-3">
+                                                        <p class="mb-0">Post</p>
+                                                        <h6>0</h6>
+                                                    </li>
+                                                    <li class="pe-3 ps-3">
+                                                        <p class="mb-0">Member</p>
+                                                        <c:if test="#{groupManagedBean.groupMembersFindByGroupid(mygroup.groupid.groupid).size() ne null}">
+                                                            <h6>#{groupManagedBean.groupMembersFindByGroupid(mygroup.groupid.groupid).size()}</h6>
+                                                        </c:if>
+                                                        <c:if test="#{groupManagedBean.groupMembersFindByGroupid(mygroup.groupid.groupid).size() eq null}">
+                                                            <h6>0</h6>
+                                                        </c:if>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <h:commandButton action="#{groupManagedBean.groupFindById(mygroup.groupid.groupid)}" value="Details" class="btn btn-primary d-block w-100"></h:commandButton>
+                                        </div>
+                                    </div>
+                                </c:if>
+                            </c:forEach>
+                        </div>
+                        <hr/>
+                        <div class="my-2">
+                            <h3>Suggested Groups</h3>
+                        </div>
+                        <hr/>
+                        <div class="d-grid gap-3 d-grid-template-1fr-19">
+                            <c:if test="#{groupManagedBean.showAllGroup().size() eq null}">
+                                <h4 class="text-info mx-5">No Suggested Group</h4>
+                            </c:if>
+                            <c:forEach var="group" items="#{groupManagedBean.showAllGroup()}">
+                                <c:if test="#{groupManagedBean.checkMember(group.groupid).size() ne 1}">
+                                    <div class="card mb-0">
+                                        <div class="card-body text-center">
+                                            <div class="group-info pt-3 pb-3">
+                                                <h4>#{group.groupname}</h4>
+                                                <p>#{group.description}</p>
+                                                <p>Created By #{group.adminid.firstname} #{group.adminid.lastname}</p>
+                                            </div>
+                                            <div class="group-details d-inline-block pb-3">
+                                                <ul class="d-flex align-items-center justify-content-between list-inline m-0 p-0">
+                                                    <li class="pe-3 ps-3">
+                                                        <p class="mb-0">Post</p>
+                                                        <h6>0</h6>
+                                                    </li>
+                                                    <li class="pe-3 ps-3">
+                                                        <p class="mb-0">Member</p>
+                                                        <c:if test="#{groupManagedBean.groupMembersFindByGroupid(group.groupid).size() ne null}">
+                                                            <h6>#{groupManagedBean.groupMembersFindByGroupid(group.groupid).size()}</h6>
+                                                        </c:if>
+                                                        <c:if test="#{groupManagedBean.groupMembersFindByGroupid(group.groupid).size() eq null}">
+                                                            <h6>0</h6>
+                                                        </c:if>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <h:commandButton action="#{groupManagedBean.joinGroup(group.groupid)}" value="Join" class="btn btn-success d-block w-100"></h:commandButton>
+                                        </div>
+                                    </div>
+                                </c:if>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+        </div>
+        <!-- Wrapper End-->
+
+        <!-- Footer -->
+
+
+        <!-- Scripts -->
+        <ui:include src="includes/bottomscript.xhtml" />
+
+
+    </body>
+</html>

@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>FriendList</title>
+    </h:head>
+    <h:body>
+        <div class="right-sidebar-mini right-sidebar">
+            <div class="right-sidebar-panel p-0">
+                <div class="card shadow-none">
+                    <div class="card-body p-0">
+                        <div class="media-height p-3" data-scrollbar="init">
+                            <h:form>
+                                <c:forEach var="friends" items="#{friendManagedBean.showAllFriends()}" >
+                                    <div class="d-flex align-items-center mb-4">
+                                        <div class="iq-profile-avatar">
+                                            <c:if test="#{friends.friendid.profilephoto eq null }">
+                                                <img class="rounded-circle avatar-50" src="/Vibe/Images/ProfileImage/images.jpg" alt=""/>
+                                            </c:if>
+                                            <c:if test="#{friends.friendid.profilephoto ne null}">
+                                                <img class="rounded-circle avatar-50" src="/Vibe/Images/ProfileImage/#{friends.friendid.profilephoto}" alt=""/>
+                                            </c:if>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h6 class="mb-0">#{friends.friendid.firstname} #{friends.friendid.lastname}</h6>
+                                            <!--                                            <p class="mb-0">Just Now</p>-->
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </h:form>
+                        </div>
+                        <div class="right-sidebar-toggle bg-primary text-white mt-3">
+                            <i class="ri-arrow-left-line side-left-icon"></i>
+                            <i class="ri-arrow-right-line side-right-icon"><span class="ms-3 d-inline-block">Close Menu</span></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </h:body>
+</html>
+

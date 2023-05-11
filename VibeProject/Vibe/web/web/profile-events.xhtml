@@ -1,0 +1,212 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Your Events</title>
+        <ui:include src="includes/css.xhtml"/>
+    </h:head>
+    <body class="  ">
+        <!-- Wrapper Start -->
+        <div class="wrapper">
+
+            <!--Navigation-->
+            <ui:include src="includes/navigation.xhtml"></ui:include>
+
+            <!-- Header  -->
+            <ui:include src="includes/header.xhtml"></ui:include>
+
+            <!-- FriendList -->
+            <ui:include src="includes/friendlist.xhtml" />
+
+            <!-- Page Content  --> 
+            <br></br><br></br>
+
+            <div class="header-for-bg">
+                <div class="background-header position-relative">
+                    <!--                <img src="../assets/images/page-img/profile-bg6.jpg" class="img-fluid w-100" alt="header-bg"/>-->
+                    <div class="title-on-header">
+                        <div class="data-block">
+                            <h2>Your Events</h2>
+                        </div>
+                        <h:form>
+                            <h:commandButton class="btn mb-1 btn-primary" action="addevent.xhtml" value="Host Event"/>    
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+            <br></br><br></br><br></br><br></br><br></br>
+            <!-- Page Content  -->       
+            <div id="content-page" class="content-page">
+                <div class="container">
+
+                    <h:form>
+                        <c:if test="#{eventManagedBean.showHostedEvents().size() eq 0}">
+                            <li class="d-block text-center mb-0 pb-0">
+                                <span class="me-3 btn">No events found hosted by you</span>
+                                                        
+                            </li>
+                        </c:if>
+                        <c:if test="#{eventManagedBean.showHostedEvents().size() > 0}">
+                            <div class="d-grid gap-3 d-grid-template-1fr-19">
+                                <c:forEach var="sugevents" items="#{eventManagedBean.showHostedEvents()}">
+                                    <div class="">
+                                        <div class="card rounded  mb-0">
+                                            <div class="event-images">
+                                                <a href="#">
+                                                    <img src="../assets/images/page-img/58.jpg" class="img-fluid" alt="Responsive image"/>
+                                                </a>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="d-flex">
+                                                    <div class="date-of-event">
+                                                        <span>#{sugevents.eventstartdate}</span>
+                                                        <h5>#{sugevents.eventenddate}</h5>
+                                                    </div>
+                                                    <div class="events-detail ms-3">
+                                                        <h5><a href="../app/event-detail.html">#{sugevents.eventname}</a></h5>
+                                                        <p>#{sugevents.eventinfo}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <h:commandButton class="btn mb-1 btn-primary" action="#{eventManagedBean.getHostedEventInfo(sugevents.eventid)}" value="Know More"/>                            
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </c:if>
+                    </h:form> 
+
+
+                </div>
+            </div>
+            
+            
+            <br></br><br></br><br></br><br></br>
+            <div class="header-for-bg">
+                <div class="background-header position-relative">
+                    <!--                <img src="../assets/images/page-img/profile-bg6.jpg" class="img-fluid w-100" alt="header-bg"/>-->
+                    <div class="title-on-header">
+                        <div class="data-block">
+                            <h2>Subscribed Events</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br></br><br></br><br></br><br></br>
+            <!-- Page Content  -->       
+            <div id="content-page" class="content-page">
+                <div class="container">
+
+                    <h:form>
+                        <c:if test="#{eventManagedBean.showSubscribedEvents().size() eq 0}">
+                            <li class="d-block text-center mb-0 pb-0">
+                                <span class="me-3 btn">No Event Subscriptions</span>
+                            </li>
+                        </c:if>
+                        <c:if test="#{eventManagedBean.showSubscribedEvents().size() > 0}">
+
+                            <div class="d-grid gap-0 d-grid-template-1fr-19">  
+                                <c:forEach var="subevents" items="#{eventManagedBean.showSubscribedEvents()}">
+
+                                    <div class="card rounded mb-0" >
+                                        <div class="event-images">
+                                            <img src="../assets/images/page-img/51.jpg" class="img-fluid" alt="Responsive image"/>                              
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="d-flex">
+                                                <div class="date-of-event">
+                                                    <span>#{subevents.eventstartdate}</span>
+                                                    <h5>#{subevents.eventenddate}</h5>
+                                                </div>
+                                                <div class="events-detail ms-3">
+                                                    <h5><a href="../app/event-detail.html">#{subevents.eventname}</a></h5>
+                                                    <p>#{subevents.eventinfo}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <h:commandButton class="btn mb-1 btn-primary" action="#{eventManagedBean.getEventInfo(subevents.eventid)}" value="Know More"/>                            
+                                    </div>
+                                    <br></br><br></br>
+
+                                </c:forEach> 
+                            </div>
+                        </c:if>
+                    </h:form> 
+
+
+                </div>
+            </div>
+
+            
+            <br></br><br></br><br></br><br></br>
+            <div class="header-for-bg">
+                <div class="background-header position-relative">
+                    <!--                <img src="../assets/images/page-img/profile-bg6.jpg" class="img-fluid w-100" alt="header-bg"/>-->
+                    <div class="title-on-header">
+                        <div class="data-block">
+                            <h2>Events You might like</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br></br><br></br><br></br><br></br><br></br>
+            <!-- Page Content  -->       
+            <div id="content-page" class="content-page">
+                <div class="container">
+                    <h:form>
+                        <c:if test="#{eventManagedBean.showSuggestedEvents().size() eq 0}">
+                            <li class="d-block text-center mb-0 pb-0">
+                                <span class="me-3 btn">No Suggestions</span>
+                            </li>
+                        </c:if>
+                        <c:if test="#{eventManagedBean.showSuggestedEvents().size() > 0}">
+                            <div class="d-grid gap-3 d-grid-template-1fr-19">
+                                <c:forEach var="sugevents" items="#{eventManagedBean.showSuggestedEvents()}">
+                                    <div class="">
+                                        <div class="card rounded  mb-0">
+                                            <div class="event-images">
+                                                <a href="#">
+                                                    <img src="../assets/images/page-img/59.jpg" class="img-fluid" alt="Responsive image"/>
+                                                </a>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="d-flex">
+                                                    <div class="date-of-event">
+                                                        <span>#{sugevents.eventstartdate}</span>
+                                                        <h5>#{sugevents.eventenddate}</h5>
+                                                    </div>
+                                                    <div class="events-detail ms-3">
+                                                        <h5><a href="../app/event-detail.html">#{sugevents.eventname}</a></h5>
+                                                        <p>#{sugevents.eventinfo}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <h:commandButton class="btn mb-1 btn-primary" action="#{eventManagedBean.getEventInfo(sugevents.eventid)}" value="Know More"/>                            
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </c:if>
+                    </h:form> 
+
+
+                </div>
+            </div>
+
+        </div>
+        <!-- Wrapper End-->
+
+        <!-- Scripts -->
+        <ui:include src="includes/bottomscript.xhtml" />
+
+
+    </body>
+</html>
