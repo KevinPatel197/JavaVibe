@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Admin
+ * @author kevin
  */
 public class LoginFilter implements Filter {
 

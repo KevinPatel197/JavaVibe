@@ -23,7 +23,7 @@ import javax.ws.rs.core.Response;
 
 /**
  *
- * @author pooja
+ * @author kevin
  */
 @Named(value = "commentManagedBean")
 @ApplicationScoped

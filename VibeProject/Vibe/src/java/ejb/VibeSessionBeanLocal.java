@@ -12,7 +12,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author LENOVO
+ * @author kevin
  */
 @Local
 public interface VibeSessionBeanLocal {

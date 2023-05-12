@@ -42,7 +42,7 @@ import javax.ws.rs.core.MediaType;
 /**
  * REST Web Service
  *
- * @author LENOVO
+ * @author kevin
  */
 @Path("generic")
 public class GenericResource {

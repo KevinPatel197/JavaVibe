@@ -10,7 +10,7 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  *
- * @author LENOVO
+ * @author kevin
  */
 public class HashUtility {
     

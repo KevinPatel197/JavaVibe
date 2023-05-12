@@ -27,7 +27,7 @@ import javax.ws.rs.core.Response;
 
 /**
  *
- * @author LENOVO
+ * @author kevin
  */
 @Named(value = "adminManagedBean")
 @ApplicationScoped

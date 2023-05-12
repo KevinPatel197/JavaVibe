@@ -3,7 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/kevin/OneDrive/Desktop/SEM-8/Vstsal%20Material/(805)Project/VIBE/Vibe(JAVA)/Vibe/src/conf/persistence.xml</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/auth/SecureAuthentication.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/jwtrest/JWTCredential.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/record/KeepRecord.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/jwtrest/TokenProvider.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/jwtrest/Constants.java</file>
         </group>
     </open-files>
 </project-private>

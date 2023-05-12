@@ -38,7 +38,7 @@ import utility.HashUtility;
 
 /**
  *
- * @author LENOVO
+ * @author kevin
  */
 @Stateless
 public class VibeSessionBean implements VibeSessionBeanLocal {

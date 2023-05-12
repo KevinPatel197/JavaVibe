@@ -26,7 +26,7 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 /**
  *
- * @author pooja
+ * @author kevin
  */
 
 @Named(value = "userskillsManagedBean")
