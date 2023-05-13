@@ -3,12 +3,31 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/auth/SecureAuthentication.java</file>
-            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/jwtrest/JWTCredential.java</file>
-            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/nbproject/build-impl.xml</file>
-            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/record/KeepRecord.java</file>
-            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/jwtrest/TokenProvider.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/entity/Likes.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/entity/UserContactInfo.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/entity/UserEducation.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/entity/City.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/entity/Country.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/entity/State.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/entity/UserSkills.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/entity/Post.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/entity/Ads.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/entity/EventUsercount.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/rest/GenericResource.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/entity/GroupMembers.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/entity/User.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/web/login.xhtml</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/entity/Events.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/entity/Groups.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/entity/AdsUser.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/entity/Comments.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/entity/FriendRequest.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/utility/HashUtility.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/entity/Chat.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/rest/ApplicationConfig.java</file>
             <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/jwtrest/Constants.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/entity/FriendList.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/entity/UserWork.java</file>
         </group>
     </open-files>
 </project-private>

@@ -1,19 +1,19 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-       xmlns:h="http://xmlns.jcp.org/jsf/html"
-       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-       xmlns:f="http://xmlns.jcp.org/jsf/core"
-       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
-  <h:head>
-      <title>Event Info</title>
-      <ui:include src="includes/css.xhtml"/>
-  </h:head>
-  <body class="  ">
-    <!-- Wrapper Start -->
-    <div class="wrapper">
-        
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Event Info</title>
+        <ui:include src="includes/css.xhtml"/>
+    </h:head>
+    <body class="  ">
+        <!-- Wrapper Start -->
+        <div class="wrapper">
+
             <!--Navigation-->
             <ui:include src="includes/navigation.xhtml"></ui:include>
 
@@ -22,66 +22,66 @@
 
             <!-- FriendList -->
             <ui:include src="includes/friendlist.xhtml" />
-            
-             <!-- Page Content  -->
-             
-             <div id="content-page" class="content-page">
-         <div class="container">
-               <div class="row">
-                  <div class="col-lg-12">
-                     <div class="card card-block card-stretch card-height blog-list">
-                        <div class="card-body">
-                           <div class="row align-items-center">
-                              <div class="col-md-6">
-                                 <div class="image-block">
-                                    <img src="../assets/images/blog/01.jpg" class="img-fluid rounded w-100" alt="blog-img"/>
-                                 </div>
-                              </div>
-                              <div class="col-md-6">
-                                  <h:form>
-                                      <h:inputHidden id="euc_id" value="#{eventManagedBean.euc_id}"/>
-                                 <div class="blog-description p-2">
-                                    <div class="blog-meta d-flex align-items-center justify-content-between mb-2">
-                                       <div class="date"><a href="#" tabindex="-1">4 Month ago</a>
-                                       </div>
+
+            <!-- Page Content  -->
+
+            <div id="content-page" class="content-page">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card card-block card-stretch card-height blog-list">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6">
+                                            <div class="image-block">
+                                                <img src="../assets/images/blog/01.jpg" class="img-fluid rounded w-100" alt="blog-img"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h:form>
+                                                <h:inputHidden id="euc_id" value="#{eventManagedBean.euc_id}"/>
+                                                <div class="blog-description p-2">
+                                                    <div class="blog-meta d-flex align-items-center justify-content-between mb-2">
+                                                        <div class="date"><a href="#" tabindex="-1">4 Month ago</a>
+                                                        </div>
+                                                    </div>
+                                                    <h5 class="mb-2">#{eventManagedBean.eventname}</h5>
+                                                    <p>Hosted By : #{eventManagedBean.hostid}</p>
+                                                    <p>#{eventManagedBean.eventstartdate} - #{eventManagedBean.eventenddate}</p>
+                                                    <p>Venue : #{eventManagedBean.venue}</p>
+                                                    <p>Type : #{eventManagedBean.type}</p>
+                                                    <p>Fees : #{eventManagedBean.fees}</p>
+                                                    <p>Mode : #{eventManagedBean.mode}</p>
+                                                    <c:if test="#{eventManagedBean.showeventmembers(eventManagedBean.eventid).size() eq null}">
+                                                        <p>Guests : 0</p>
+                                                    </c:if>
+                                                    <c:if test="#{eventManagedBean.showeventmembers(eventManagedBean.eventid).size() > 0}">
+                                                        <p>Guests : #{eventManagedBean.showeventmembers(eventManagedBean.eventid).size()}</p>
+                                                    </c:if>
+                                                    <c:if test="#{eventManagedBean.isInterested eq 'true'}">
+                                                        <h:commandButton  id="btn_unsub" class="btn btn-danger"  action="#{eventManagedBean.UnsubscribeEvent(eventManagedBean.eventid, eventManagedBean.euc_id)}" value="Unsubscribe"/><br/><br/>
+                                                    </c:if>
+
+                                                    <c:if test="#{eventManagedBean.isInterested eq 'false'}">
+                                                        <h:commandButton  id="btn_sub" class="btn btn-success"  action="#{eventManagedBean.subscribeEvent()}" value="Subscribe"/><br/><br/>
+                                                    </c:if>
+                                                </div>
+                                            </h:form>
+                                        </div>
                                     </div>
-                                     <h5 class="mb-2">#{eventManagedBean.eventname}</h5>
-                                     <p>Hosted By : #{eventManagedBean.hostid}</p>
-                                     <p>#{eventManagedBean.eventstartdate} - #{eventManagedBean.eventenddate}</p>
-                                     <p>Venue : #{eventManagedBean.venue}</p>
-                                     <p>Type : #{eventManagedBean.type}</p>
-                                     <p>Fees : #{eventManagedBean.fees}</p>
-                                     <p>Mode : #{eventManagedBean.mode}</p>
-                                     <c:if test="#{eventManagedBean.showeventmembers(eventManagedBean.eventid).size() eq null}">
-                                         <p>Guests : 0</p>
-                                     </c:if>
-                                     <c:if test="#{eventManagedBean.showeventmembers(eventManagedBean.eventid).size() > 0}">
-                                         <p>Guests : #{eventManagedBean.showeventmembers(eventManagedBean.eventid).size()}</p>
-                                     </c:if>
-                                     <c:if test="#{eventManagedBean.isInterested eq 'true'}">
-                                         <h:commandButton  id="btn_unsub" class="btn btn-danger"  action="#{eventManagedBean.UnsubscribeEvent(eventManagedBean.eventid, eventManagedBean.euc_id)}" value="Unsubscribe"/><br/><br/>
-                                     </c:if>
-                                     
-                                     <c:if test="#{eventManagedBean.isInterested eq 'false'}">
-                                         <h:commandButton  id="btn_sub" class="btn btn-success"  action="#{eventManagedBean.subscribeEvent()}" value="Subscribe"/><br/><br/>
-                                     </c:if>
-                                 </div>
-                                  </h:form>
-                              </div>
-                           </div>
+                                </div>
+                            </div>
                         </div>
-                     </div>
-                  </div>
-               </div>
-         </div>
-      </div>
-    </div>
-    <!-- Wrapper End-->
-    
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Wrapper End-->
+
 
         <!-- Scripts -->
         <ui:include src="includes/bottomscript.xhtml" />
-   
-  
-</body>
+
+
+    </body>
 </html>

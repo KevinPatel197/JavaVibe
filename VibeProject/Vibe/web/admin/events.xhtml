@@ -10,7 +10,7 @@
     <h:head>
         <title>Admin | Ads</title>
         <ui:include src="includes/css.xhtml" />
-        
+
     </h:head>
     <h:body>
         <!-- loader Start -->
@@ -41,38 +41,38 @@
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <h:form>
-                                    <h:dataTable class="table table-striped table-bordered" value="#{adminManagedBean.eventsShowAll()}" var="ev">
-                                        <h:column>
-                                            <f:facet name="header">Event Name</f:facet>
-                                                #{ev.eventname}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">Host</f:facet>
-                                                #{ev.hostid.firstname} #{ev.hostid.lastname} 
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">Start Date</f:facet>
-                                                #{ev.eventstartdate} 
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">End Date</f:facet>
-                                                #{ev.eventenddate}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">Venue</f:facet>
-                                                #{ev.venue}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">Fees</f:facet>
-                                                #{ev.fees}
-                                        </h:column>  
-                                        <h:column>
-                                            <f:facet name="header">Info</f:facet>
-                                            <h:commandButton class="btn mb-1 btn-primary" action="#{eventManagedBean.showEventInfo(ev.eventid)}" value="Know More"/>                            
-                                        </h:column>
-                                        
-                                    </h:dataTable>
-                                        </h:form>
+                                        <h:dataTable class="table table-striped table-bordered" value="#{adminManagedBean.eventsShowAll()}" var="ev">
+                                            <h:column>
+                                                <f:facet name="header">Event Name</f:facet>
+                                                    #{ev.eventname}
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">Host</f:facet>
+                                                    #{ev.hostid.firstname} #{ev.hostid.lastname} 
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">Start Date</f:facet>
+                                                    #{ev.eventstartdate} 
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">End Date</f:facet>
+                                                    #{ev.eventenddate}
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">Venue</f:facet>
+                                                    #{ev.venue}
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">Fees</f:facet>
+                                                    #{ev.fees}
+                                            </h:column>  
+                                            <h:column>
+                                                <f:facet name="header">Info</f:facet>
+                                                <h:commandButton class="btn mb-1 btn-primary" action="#{eventManagedBean.showEventInfo(ev.eventid)}" value="Know More"/>                            
+                                            </h:column>
+
+                                        </h:dataTable>
+                                    </h:form>
                                 </div>
                             </div>
                         </div>
@@ -86,8 +86,8 @@
 
         <!-- Scripts -->
         <ui:include src="includes/bottomscript.xhtml" />      
-        
-        
+
+
     </h:body>
 </html>
 
