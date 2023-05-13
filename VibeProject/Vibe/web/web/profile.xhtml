@@ -1,13 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <title>Profile</title>
+        <title>Vibe | Profile</title>
         <ui:include src="includes/css.xhtml"/>
     </h:head>
     <body class="  ">
@@ -621,43 +619,46 @@
                                                         <div class="tab-pane fade" id="v-pills-work-tab" role="tabpanel" aria-labelledby="v-pills-work-tab">
                                                             <h4 class="mb-3">Work</h4>
                                                             <hr/>
-                                                            <h:form>
-                                                                <c:if test="#{userworkManagedBean.showUserWorkInfo().size() eq null}">
-                                                                    <li class="d-block text-center mb-0 pb-0">
-                                                                        <h:commandButton  id="btn_add" class="btn btn-primary"  action="addwork.xhtml" value="Add"/><br/><br/>
-                                                                    </li>                                                            
-                                                                </c:if>
-                                                                <c:if test="#{userworkManagedBean.showUserWorkInfo().size() > 0}">
-                                                                    <c:forEach var="works" items="#{userworkManagedBean.showUserWorkInfo()}">
-                                                                        <li class="d-flex mb-4 align-items-center justify-content-between">
-                                                                            <div class="user-img img-fluid"><img src="../assets/images/user/01.jpg" alt="story-img" class="rounded-circle avatar-40"/></div>
-                                                                            <div class="w-100">
-                                                                                <div class="d-flex justify-content-between">
-                                                                                    <div class="ms-3">
-                                                                                        <h6>#{works.companyname}</h6>
-                                                                                        <p class="mb-0">#{works.companyaddress}</p>
-                                                                                        <p class="mb-0">#{works.joiningdate} - #{works.endingdate}</p>
+                                                            <ul class="suggestions-lists m-0 p-0">
+                                                                <h:form>
+                                                                    <c:if test="#{userWorkManagedBean.showUserWorkInfo().size() eq null}">
+                                                                        <li class="d-block text-center mb-0 pb-0">
+                                                                            <h:commandButton  id="btn_add" class="btn btn-primary"  action="addwork.xhtml" value="Add"/><br/><br/>
+                                                                        </li>                                                            
+                                                                    </c:if>
+                                                                    <c:if test="#{userWorkManagedBean.showUserWorkInfo().size() > 0}">
+                                                                        <c:forEach var="works" items="#{userWorkManagedBean.showUserWorkInfo()}">
+                                                                            <li class="d-flex mb-4 align-items-center justify-content-between">
+                                                                                <div class="user-img img-fluid"><img src="../assets/images/user/01.jpg" alt="story-img" class="rounded-circle avatar-40"/></div>
+                                                                                <div class="w-100">
+                                                                                    <div class="d-flex justify-content-between">
+                                                                                        <div class="ms-3">
+                                                                                            <h6>#{works.companyname}</h6>
+                                                                                            <p class="mb-0">#{works.companyaddress}</p>
+                                                                                            <p class="mb-0">#{works.joiningdate} - #{works.endingdate}</p>
+                                                                                        </div>
+                                                                                        <h:commandLink id="btn_edit" action="#{userWorkManagedBean.editUserWork(works.uwId)}" value="edit"/> 
                                                                                     </div>
-                                                                                    <h:commandLink id="btn_edit" action="#{userworkManagedBean.editUserWork(works.uwId)}" value="edit"/> 
                                                                                 </div>
-                                                                            </div>
-                                                                        </li>
-                                                                    </c:forEach>
-                                                                </c:if>
-                                                            </h:form>
+                                                                            </li>
+                                                                        </c:forEach>
+                                                                    </c:if>
+                                                                </h:form>
+                                                            </ul>
                                                         </div>
 
                                                         <div class="tab-pane fade" id="v-pills-edu-tab" role="tabpanel" aria-labelledby="v-pills-edu-tab">
                                                             <h4 class="mb-3">Education</h4>
+                                                            <hr/>
                                                             <ul class="suggestions-lists m-0 p-0">
                                                                 <h:form>
-                                                                    <c:if test="#{usereduManagedBean.showUserEduInfo().size() eq null}">
+                                                                    <c:if test="#{userEduManagedBean.showUserEduInfo().size() eq null}">
                                                                         <li class="d-block text-center mb-0 pb-0">
                                                                             <h:commandButton  id="btn_add" class="btn btn-primary"  action="addedu.xhtml" value="Add"/><br/><br/>
-                                                                        </li>                                                            
+                                                                        </li>                                                             
                                                                     </c:if>
-                                                                    <c:if test="#{usereduManagedBean.showUserEduInfo().size() > 0}">
-                                                                        <c:forEach var="edu" items="#{usereduManagedBean.showUserEduInfo()}">
+                                                                    <c:if test="#{userEduManagedBean.showUserEduInfo().size() > 0}">
+                                                                        <c:forEach var="edu" items="#{userEduManagedBean.showUserEduInfo()}">
                                                                             <li class="d-flex mb-4 align-items-center justify-content-between">
                                                                                 <div class="user-img img-fluid"><img src="../assets/images/user/01.jpg" alt="story-img" class="rounded-circle avatar-40"/></div>
                                                                                 <div class="w-100">
@@ -668,7 +669,7 @@
                                                                                             <p class="mb-0">#{edu.joiningdate} - #{edu.endingdate}</p>
                                                                                         </div>
                                                                                         <h:form>
-                                                                                            <h:commandLink id="btn_edit" action="#{usereduManagedBean.editUserEdu(edu.ueId)}" value="edit"/>
+                                                                                            <h:commandLink id="btn_edit" action="#{userEduManagedBean.editUserEdu(edu.ueId)}" value="edit"/> 
                                                                                         </h:form> 
                                                                                     </div>
                                                                                 </div>
@@ -680,21 +681,25 @@
                                                         </div>
 
                                                         <div class="tab-pane fade" id="v-pills-skills-tab" role="tabpanel" aria-labelledby="v-pills-skills-tab">
-                                                            <h:form>
-                                                                <c:if test="#{userskillsManagedBean.showUserSkillInfo().size() eq null}">
-                                                                    <li class="d-block text-center mb-0 pb-0">
-                                                                        <h:commandButton  id="btn_add" class="btn btn-primary"  action="addskill.xhtml" value="Add"/><br/><br/>
-                                                                    </li>                                                            
-                                                                </c:if>
-                                                                <c:if test="#{userskillsManagedBean.showUserSkillInfo().size() > 0}">
-                                                                    <c:forEach var="skill" items="#{userskillsManagedBean.showUserSkillInfo()}">
-                                                                        <h4 class="mb-3">#{skill.skillname}</h4>
-                                                                        <p>Info : #{skill.skillinfo}</p>
-                                                                        <p>Portfolio : #{skill.skillportfolio}</p>
-                                                                        <h:commandLink id="btn_edit" action="#{userskillsManagedBean.editUserSkill(skill.usId)}" value="edit"/>
-                                                                    </c:forEach>
-                                                                </c:if>
-                                                            </h:form>
+                                                            <h4 class="mb-3">Skills</h4>
+                                                            <hr/>
+                                                            <ul class="suggestions-lists m-0 p-0">
+                                                                <h:form>
+                                                                    <c:if test="#{userSkillsManagedBean.showUserSkillInfo().size() eq null}">
+                                                                        <li class="d-block text-center mb-0 pb-0">
+                                                                            <h:commandButton  id="btn_add" class="btn btn-primary"  action="addskill.xhtml" value="Add"/><br/><br/>
+                                                                        </li>                                                            
+                                                                    </c:if>
+                                                                    <c:if test="#{userSkillsManagedBean.showUserSkillInfo().size() > 0}">
+                                                                        <c:forEach var="skill" items="#{userSkillsManagedBean.showUserSkillInfo()}">
+                                                                            <h4 class="mb-3">#{skill.skillname}</h4>
+                                                                            <p>Info : #{skill.skillinfo}</p>
+                                                                            <p>Portfolio : #{skill.skillportfolio}</p>
+                                                                            <h:commandLink id="btn_edit" action="#{userSkillsManagedBean.editUserSkill(skill.usId)}" value="edit"/>
+                                                                        </c:forEach>
+                                                                    </c:if>
+                                                                </h:form>
+                                                            </ul>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -726,7 +731,7 @@
                                                                                     <div class="d-flex align-items-center">
                                                                                         <a href="#">
                                                                                             <c:if test="#{friendsinfo.friendid.profilephoto eq null}">
-                                                                                                <img src="/Vibe/Images/ProfileImage/images.jpg" width="150px" height="150px" class="img-fluid" alt="user"/>
+                                                                                                <img src="/Vibe/Images/ProfileImage/images.jpg" width="50px" height="50px" class="img-fluid" alt="user"/>
                                                                                             </c:if>
                                                                                             <c:if test="#{friendsinfo.friendid.profilephoto ne null}">
                                                                                                 <img src="/Vibe/Images/ProfileImage/#{friendsinfo.friendid.profilephoto}" alt="gallary-image" class="img-fluid" />
@@ -747,9 +752,6 @@
                                                                                                 <i class="ri-check-line me-1 text-white"></i> Friend
                                                                                             </span>
                                                                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton01">
-                                                                                                <a class="dropdown-item" href="#">Get Notification</a>
-                                                                                                <a class="dropdown-item" href="#">Close Friend</a>
-                                                                                                <a class="dropdown-item" href="#">Unfollow</a>
                                                                                                 <a class="dropdown-item" href="#">Unfriend</a>
                                                                                                 <a class="dropdown-item" href="#">Block</a>
                                                                                             </div>
@@ -789,14 +791,14 @@
                                                                         <c:if test="#{postinfo.posttype eq 'Image'}">
                                                                             <div class="">
                                                                                 <div class="user-images position-relative overflow-hidden">
-                                                                                    <a href="#">
-                                                                                        <img src="/Vibe/Images/Post/Images/#{postinfo.post}" class="img-fluid rounded" alt="Images"/>                                                                            </a>
+                                                                                    <a href="#" >
+                                                                                        <img src="/Vibe/Images/Post/Images/#{postinfo.post}" class="img-fluid rounded" alt="Images"/>
+                                                                                    </a>
                                                                                     <div class="image-hover-data">
                                                                                         <div class="product-elements-icon">
                                                                                             <ul class="d-flex align-items-center m-0 p-0 list-inline">
-                                                                                                <li><a href="#" class="pe-3 text-white"> 60 <i class="ri-thumb-up-line"></i> </a></li>
-                                                                                                <li><a href="#" class="pe-3 text-white"> 30 <i class="ri-chat-3-line"></i> </a></li>
-                                                                                                <li><a href="#" class="pe-3 text-white"> 10 <i class="ri-share-forward-line"></i> </a></li>
+                                                                                                <li><i class="ri-thumb-up-line"></i></li>
+                                                                                                <li><i class="ri-chat-3-line"></i></li>
                                                                                             </ul>
                                                                                         </div>
                                                                                     </div>
@@ -908,3 +910,4 @@
 
     </body>
 </html>
+
