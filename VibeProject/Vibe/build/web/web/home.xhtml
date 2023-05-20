@@ -5,7 +5,8 @@
        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
        xmlns:f="http://xmlns.jcp.org/jsf/core"
        xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
         <title>Vibe | Home</title>
@@ -522,45 +523,154 @@
                                     </ul>
                                 </div>
                             </div>
+                            
+                            
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between">
                                     <div class="header-title">
-                                        <h4 class="card-title">Events</h4>
-                                    </div>
-                                    <div class="card-header-toolbar d-flex align-items-center">
-                                        <div class="dropdown">
-                                            <div class="dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" role="button">
-                                                <i class="ri-more-fill h4"></i>
-                                            </div>
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="">
-                                                <a class="dropdown-item" href="#"><i class="ri-eye-fill me-2"></i>View</a>
-                                                <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill me-2"></i>Delete</a>
-                                                <a class="dropdown-item" href="#"><i class="ri-pencil-fill me-2"></i>Edit</a>
-                                                <a class="dropdown-item" href="#"><i class="ri-printer-fill me-2"></i>Print</a>
-                                                <a class="dropdown-item" href="#"><i class="ri-file-download-fill me-2"></i>Download</a>
-                                            </div>
-                                        </div>
+                                        <h4 class="card-title">Events You might like</h4>
                                     </div>
                                 </div>
-                                <div class="card-body">
-                                    <ul class="media-story list-inline m-0 p-0">
-                                        <li class="d-flex mb-4 align-items-center ">
-                                            <img src="../assets/images/page-img/s4.jpg" alt="story-img" class="rounded-circle img-fluid"/>
-                                            <div class="stories-data ms-3">
-                                                <h5>Web Workshop</h5>
-                                                <p class="mb-0">1 hour ago</p>
-                                            </div>
-                                        </li>
-                                        <li class="d-flex align-items-center">
-                                            <img src="../assets/images/page-img/s5.jpg" alt="story-img" class="rounded-circle img-fluid"/>
-                                            <div class="stories-data ms-3">
-                                                <h5>Fun Events and Festivals</h5>
-                                                <p class="mb-0">1 hour ago</p>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <ul class="media-story list-inline m-0 p-0">
+                                    <li class="d-flex mb-2 align-items-center ">
+                                        <h:form>
+                                            <c:if test="#{eventManagedBean.showSuggestedEvents().size() eq 0}">
+                                                <li class="d-block text-center mb-0 pb-0">
+                                                    <span class="me-3 btn">No Suggestions</span>
+                                                </li>
+                                            </c:if>
+                                            <c:if test="#{eventManagedBean.showSuggestedEvents().size() > 0}">
+                                                <div class="d-grid gap-3 d-grid-template-1fr-19">
+                                                    <c:forEach var="sugevents" items="#{eventManagedBean.showSuggestedEvents()}">
+                                                        <div class="">
+                                                            <div class="card rounded  mb-0">
+                                                                <div class="event-images">
+                                                                    <a href="#">
+                                                                        <img src="../assets/images/page-img/59.jpg" class="img-fluid" alt="Responsive image"/>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <div class="d-flex">
+                                                                        <div class="date-of-event">
+                                                                            <span>#{sugevents.eventstartdate}</span>
+                                                                            <h5>#{sugevents.eventenddate}</h5>
+                                                                        </div>
+                                                                        <div class="events-detail ms-3">
+                                                                            <h5><a href="../app/event-detail.html">#{sugevents.eventname}</a></h5>
+                                                                            <p>#{sugevents.eventinfo}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <h:commandButton class="btn mb-1 btn-primary" action="#{eventManagedBean.getEventInfo(sugevents.eventid)}" value="Know More"/>                            
+                                                            </div>
+                                                        </div>
+                                                    </c:forEach>
+                                                </div>
+                                            </c:if>
+                                        </h:form> 
+
+                                    </li>
+                                </ul>
                             </div>
+
+
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between">
+                                    <div class="header-title">
+                                        <h4 class="card-title">Your Subscribed Events</h4>
+                                    </div>
+                                </div>
+                                <ul class="media-story list-inline m-0 p-0">
+                                    <li class="d-flex mb-2 align-items-center ">
+                                        <h:form>
+                                            <c:if test="#{eventManagedBean.showSubscribedEvents().size() eq 0}">
+                                                <li class="d-block text-center mb-0 pb-0">
+                                                    <span class="me-3 btn">No Event Subscriptions</span>
+                                                </li>
+                                            </c:if>
+                                            <c:if test="#{eventManagedBean.showSubscribedEvents().size() > 0}">
+
+                                                <div class="d-grid gap-0 d-grid-template-1fr-19">  
+                                                    <c:forEach var="subevents" items="#{eventManagedBean.showSubscribedEvents()}">
+
+                                                        <div class="card rounded mb-0" >
+                                                            <div class="event-images">
+                                                                <img src="../assets/images/page-img/51.jpg" class="img-fluid" alt="Responsive image"/>                              
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <div class="d-flex">
+                                                                    <div class="date-of-event">
+                                                                        <span>#{subevents.eventstartdate}</span>
+                                                                        <h5>#{subevents.eventenddate}</h5>
+                                                                    </div>
+                                                                    <div class="events-detail ms-3">
+                                                                        <h5><a href="../app/event-detail.html">#{subevents.eventname}</a></h5>
+                                                                        <p>#{subevents.eventinfo}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <h:commandButton class="btn mb-1 btn-primary" action="#{eventManagedBean.getEventInfo(subevents.eventid)}" value="Know More"/>                            
+                                                            <br/><br/>
+                                                        </div>
+                                                    </c:forEach> 
+                                                </div>
+                                            </c:if>
+                                        </h:form> 
+                                    </li>
+                                </ul>
+                            </div>
+
+
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between">
+                                    <div class="header-title">
+                                        <h4 class="card-title">Events You Hosting</h4>
+                                    </div>
+                                </div>
+                                <ul class="media-story list-inline m-0 p-0">
+                                    <li class="d-flex mb-2 align-items-center ">
+                                        <h:form>
+                                            <c:if test="#{eventManagedBean.showHostedEvents().size() eq 0}">
+                                                <li class="d-block text-center mb-0 pb-0">
+                                                    <span class="me-3 btn">No events found hosted by you</span>
+                                                </li>
+                                            </c:if>
+                                            <c:if test="#{eventManagedBean.showHostedEvents().size() > 0}">
+                                                <div class="d-grid gap-3 d-grid-template-1fr-19">
+                                                    <c:forEach var="sugevents" items="#{eventManagedBean.showHostedEvents()}">
+                                                        <div class="">
+                                                            <div class="card rounded  mb-0">
+                                                                <div class="event-images">
+                                                                    <a href="#">
+                                                                        <img src="../assets/images/page-img/58.jpg" class="img-fluid" alt="Responsive image"/>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <div class="d-flex">
+                                                                        <div class="date-of-event">
+                                                                            <span>#{sugevents.eventstartdate}</span>
+                                                                            <h5>#{sugevents.eventenddate}</h5>
+                                                                        </div>
+                                                                        <div class="events-detail ms-3">
+                                                                            <h5><a href="../app/event-detail.html">#{sugevents.eventname}</a></h5>
+                                                                            <p>#{sugevents.eventinfo}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <h:commandButton class="btn mb-1 btn-primary" action="#{eventManagedBean.getHostedEventInfo(sugevents.eventid)}" value="Know More"/>                            
+                                                            </div>
+                                                        </div>
+                                                    </c:forEach>
+                                                </div>
+                                            </c:if>
+                                        </h:form> 
+                                    </li>
+                                </ul>
+                            </div>
+
                         </div>
                     </div>
                 </div>

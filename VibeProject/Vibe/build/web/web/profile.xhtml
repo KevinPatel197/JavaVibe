@@ -105,9 +105,6 @@
                                                         <div class="header-title">
                                                             <h4 class="card-title">Photos</h4>
                                                         </div>
-                                                        <div class="card-header-toolbar d-flex align-items-center">
-                                                            <p class="m-0"><a href="javacsript:void();">Add Photo </a></p>
-                                                        </div>
                                                     </div>
                                                     <div class="card-body">
                                                         <ul class="profile-img-gallary p-0 m-0 list-unstyled">
@@ -130,7 +127,7 @@
                                                             <h4 class="card-title">Friends</h4>
                                                         </div>
                                                         <div class="card-header-toolbar d-flex align-items-center">
-                                                            <p class="m-0"><a href="javacsript:void();">Add New </a></p>
+                                                            <p class="m-0"><a href="friend-requests.xhtml">Add New </a></p>
                                                         </div>
                                                     </div>
                                                     <div class="card-body">
@@ -626,8 +623,8 @@
                                                                             <h:commandButton  id="btn_add" class="btn btn-primary"  action="addwork.xhtml" value="Add"/><br/><br/>
                                                                         </li>                                                            
                                                                     </c:if>
-                                                                    <c:if test="#{userWorkManagedBean.showUserWorkInfo().size() > 0}">
-                                                                        <c:forEach var="works" items="#{userWorkManagedBean.showUserWorkInfo()}">
+                                                                    <c:if test="#{userworkManagedBean.showUserWorkInfo().size() > 0}">
+                                                                        <c:forEach var="works" items="#{userworkManagedBean.showUserWorkInfo()}">
                                                                             <li class="d-flex mb-4 align-items-center justify-content-between">
                                                                                 <div class="user-img img-fluid"><img src="../assets/images/user/01.jpg" alt="story-img" class="rounded-circle avatar-40"/></div>
                                                                                 <div class="w-100">
@@ -637,7 +634,7 @@
                                                                                             <p class="mb-0">#{works.companyaddress}</p>
                                                                                             <p class="mb-0">#{works.joiningdate} - #{works.endingdate}</p>
                                                                                         </div>
-                                                                                        <h:commandLink id="btn_edit" action="#{userWorkManagedBean.editUserWork(works.uwId)}" value="edit"/> 
+                                                                                        <h:commandLink id="btn_edit" action="#{userworkManagedBean.editUserWork(works.uwId)}" value="edit"/> 
                                                                                     </div>
                                                                                 </div>
                                                                             </li>
@@ -657,8 +654,8 @@
                                                                             <h:commandButton  id="btn_add" class="btn btn-primary"  action="addedu.xhtml" value="Add"/><br/><br/>
                                                                         </li>                                                             
                                                                     </c:if>
-                                                                    <c:if test="#{userEduManagedBean.showUserEduInfo().size() > 0}">
-                                                                        <c:forEach var="edu" items="#{userEduManagedBean.showUserEduInfo()}">
+                                                                    <c:if test="#{usereduManagedBean.showUserEduInfo().size() > 0}">
+                                                                        <c:forEach var="edu" items="#{usereduManagedBean.showUserEduInfo()}">
                                                                             <li class="d-flex mb-4 align-items-center justify-content-between">
                                                                                 <div class="user-img img-fluid"><img src="../assets/images/user/01.jpg" alt="story-img" class="rounded-circle avatar-40"/></div>
                                                                                 <div class="w-100">
@@ -669,7 +666,7 @@
                                                                                             <p class="mb-0">#{edu.joiningdate} - #{edu.endingdate}</p>
                                                                                         </div>
                                                                                         <h:form>
-                                                                                            <h:commandLink id="btn_edit" action="#{userEduManagedBean.editUserEdu(edu.ueId)}" value="edit"/> 
+                                                                                            <h:commandLink id="btn_edit" action="#{usereduManagedBean.editUserEdu(edu.ueId)}" value="edit"/> 
                                                                                         </h:form> 
                                                                                     </div>
                                                                                 </div>
@@ -690,12 +687,12 @@
                                                                             <h:commandButton  id="btn_add" class="btn btn-primary"  action="addskill.xhtml" value="Add"/><br/><br/>
                                                                         </li>                                                            
                                                                     </c:if>
-                                                                    <c:if test="#{userSkillsManagedBean.showUserSkillInfo().size() > 0}">
-                                                                        <c:forEach var="skill" items="#{userSkillsManagedBean.showUserSkillInfo()}">
+                                                                    <c:if test="#{userskillsManagedBean.showUserSkillInfo().size() > 0}">
+                                                                        <c:forEach var="skill" items="#{userskillsManagedBean.showUserSkillInfo()}">
                                                                             <h4 class="mb-3">#{skill.skillname}</h4>
                                                                             <p>Info : #{skill.skillinfo}</p>
                                                                             <p>Portfolio : #{skill.skillportfolio}</p>
-                                                                            <h:commandLink id="btn_edit" action="#{userSkillsManagedBean.editUserSkill(skill.usId)}" value="edit"/>
+                                                                            <h:commandLink id="btn_edit" action="#{userskillsManagedBean.editUserSkill(skill.usId)}" value="edit"/>
                                                                         </c:forEach>
                                                                     </c:if>
                                                                 </h:form>
@@ -794,14 +791,7 @@
                                                                                     <a href="#" >
                                                                                         <img src="/Vibe/Images/Post/Images/#{postinfo.post}" class="img-fluid rounded" alt="Images"/>
                                                                                     </a>
-                                                                                    <div class="image-hover-data">
-                                                                                        <div class="product-elements-icon">
-                                                                                            <ul class="d-flex align-items-center m-0 p-0 list-inline">
-                                                                                                <li><i class="ri-thumb-up-line"></i></li>
-                                                                                                <li><i class="ri-chat-3-line"></i></li>
-                                                                                            </ul>
-                                                                                        </div>
-                                                                                    </div>
+                                                                                    
                                                                                 </div>
                                                                             </div>
                                                                         </c:if>

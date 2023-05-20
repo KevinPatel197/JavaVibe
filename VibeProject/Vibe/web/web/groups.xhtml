@@ -101,7 +101,12 @@
                                                 <ul class="d-flex align-items-center justify-content-between list-inline m-0 p-0">
                                                     <li class="pe-3 ps-3">
                                                         <p class="mb-0">Post</p>
-                                                        <h6>0</h6>
+                                                        <c:if test="#{postManagedBean.feedByGroupId(groupManagedBean.groupId).size() ne null}">
+                                                            <p class="mb-0">#{groupManagedBean.groupMembersFindByGroupid(groupManagedBean.groupId).size()}</p>
+                                                        </c:if>
+                                                        <c:if test="#{postManagedBean.feedByGroupId(groupManagedBean.groupId).size() eq null}">
+                                                            <p class="mb-0" >0</p>
+                                                        </c:if>
                                                     </li>
                                                     <li class="pe-3 ps-3">
                                                         <p class="mb-0">Member</p>
@@ -142,7 +147,12 @@
                                                 <ul class="d-flex align-items-center justify-content-between list-inline m-0 p-0">
                                                     <li class="pe-3 ps-3">
                                                         <p class="mb-0">Post</p>
-                                                        <h6>0</h6>
+                                                        <c:if test="#{postManagedBean.feedByGroupId(groupManagedBean.groupId).size() ne null}">
+                                                            <p class="mb-0">#{groupManagedBean.groupMembersFindByGroupid(groupManagedBean.groupId).size()}</p>
+                                                        </c:if>
+                                                        <c:if test="#{postManagedBean.feedByGroupId(groupManagedBean.groupId).size() eq null}">
+                                                            <p class="mb-0" >0</p>
+                                                        </c:if>
                                                     </li>
                                                     <li class="pe-3 ps-3">
                                                         <p class="mb-0">Member</p>
