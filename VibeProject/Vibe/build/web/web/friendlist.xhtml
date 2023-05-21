@@ -63,11 +63,11 @@
                                                                         <h:commandLink action="#{userManagedBean.showProfileInfo(friends.friendid.userid)}" value="#{friends.friendid.firstname} #{friends.friendid.lastname}" class="my-3"></h:commandLink>
 <!--                                                                        <a href="friend-profile.html">#{friends.friendid.firstname} #{friends.friendid.lastname}</a>-->
                                                                     </h4>
-                                                                    <h6>From #{friends.friendid.stateid.statename}</h6>
-                                                                    <p>#{friends.friendid.email}</p>
-                                                                </div>
+                                                                <!--<h6>From #{friends.friendid.stateid.statename}</h6>-->
+                                                                    <h6>#{friends.friendid.email}</h6>
+                                                                                                                                  </div>
                                                             </div>
-                                                            <button type="submit" class="btn btn-primary">Following</button>
+                                                            <h:commandLink value="Unfriend" action="#" class="btn btn-primary" />
                                                         </div>
                                                     </div>
                                                 </div>

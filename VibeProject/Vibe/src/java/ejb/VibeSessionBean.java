@@ -55,6 +55,8 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     //DONE
+    
+    
     //Country
     @Override
     public String countryInsert(int countryId, String sortName, String countryName, int phoneCode, boolean isActive) {
@@ -600,9 +602,8 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
             user.setProfilephoto(profilePhoto);
             user.setCoverphoto(coverPhoto);
 
-            
             em.persist(user);
-            
+
             return "User Updated";
 
         } catch (Exception e) {
@@ -1292,7 +1293,6 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
                     .setParameter("userid", userId)
                     .getResultList();
 
-            
             return userwork;
 
         } catch (Exception e) {
@@ -1327,13 +1327,13 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
 
             em.persist(g);
             em.merge(u);
-            
+
             return g;
 
         } catch (Exception e) {
-            
+
             System.out.println(e.getMessage());
-            
+
             return null;
         }
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -1404,10 +1404,10 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
         }
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public List<Groups> groupShowAllByUser(int userId) {
-        
+
         try {
 
             List<Groups> group = em.createNamedQuery("Groups.findAllByUserId")
@@ -1425,9 +1425,9 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
             return null;
 
         }
-        
+
     }
-    
+
     @Override
     public List<Groups> groupShowAll(int userId) {
 
@@ -1450,7 +1450,7 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
         }
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public List<Groups> groupShowAll() {
 
@@ -1581,10 +1581,10 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
         }
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public List<GroupMembers> group_member_FindByGroupid(int groupId) {
-        
+
         try {
 
             List<GroupMembers> groupmember = em.createNamedQuery("GroupMembers.findAllMemberByGroupId")
@@ -1602,12 +1602,12 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
             return null;
 
         }
-        
+
     }
-    
+
     @Override
-    public List<GroupMembers> group_member_checkGroupMember(int userId ,int groupId) {
-        
+    public List<GroupMembers> group_member_checkGroupMember(int userId, int groupId) {
+
         try {
 
             List<GroupMembers> groupmember = em.createNamedQuery("GroupMembers.checkMember")
@@ -1626,9 +1626,9 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
             return null;
 
         }
-        
+
     }
-    
+
     @Override
     public List<GroupMembers> group_member_findGroupsByUserId(int userId) {
         try {
@@ -1646,7 +1646,7 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
         } catch (Exception e) {
 
             System.out.println(e.getMessage());
-            
+
             return null;
 
         }
@@ -1740,7 +1740,7 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
             System.out.println(e.getMessage());
             return "false";
         }
-        
+
     }
 
     @Override
@@ -1807,7 +1807,7 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
         } catch (Exception e) {
             return e.getMessage();
         }
-        
+
     }
 
     @Override
@@ -1844,7 +1844,7 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
         }
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public List<Post> postShowAllByUserId(int userId) {
         try {
@@ -1865,7 +1865,7 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
 
         }
     }
-    
+
     @Override
     public List<Post> postShowAllByGroupId(int groupId) {
         try {
@@ -2048,9 +2048,9 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
         }
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
-    public List<Likes> isLiked(int postId,int userId) {
+    public List<Likes> isLiked(int postId, int userId) {
         try {
 
             List<Likes> l = em.createNamedQuery("Likes.isliked")
@@ -2063,7 +2063,7 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
         }
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public List<Likes> likeCount(int postId) {
         try {
@@ -2077,7 +2077,6 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
         }
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 
     //Friend_Request
     @Override
@@ -2582,7 +2581,7 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
         }
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public List<Events> suggestedEvents(int Id) {
         try {
@@ -2601,7 +2600,7 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
 
         }
     }
-    
+
     @Override
     public List<Events> subscribedEvents(int Id) {
         try {
@@ -2620,7 +2619,7 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
 
         }
     }
-    
+
     @Override
     public List<Events> hostedEvents(int Id) {
         try {
@@ -2766,7 +2765,7 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
         }
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public List<EventUsercount> event_usercount_FindByEventId(int eventId) {
 
@@ -2788,12 +2787,11 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
         }
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
-    public EventUsercount eventFindSubscribe(int eventId,int userId) {
+    public EventUsercount eventFindSubscribe(int eventId, int userId) {
         try {
 
-            
             EventUsercount e = (EventUsercount) em.createNamedQuery("EventUsercount.findsubscribe")
                     .setParameter("eventid", eventId)
                     .setParameter("userid", userId)
@@ -2950,11 +2948,9 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
         }
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
+
     @Override
-    public List<Comments> commentsFindByPostId(int postId)
-    {
+    public List<Comments> commentsFindByPostId(int postId) {
         try {
 
             List<Comments> c = em.createNamedQuery("Comments.findByPostid")
@@ -2968,20 +2964,19 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
     }
 
     //Chats
-    
     @Override
     public String chatInsert(int chatId, String message, boolean isDelevered, boolean isRead, boolean isDeleted, int senderId, int receiverId) {
-        
+
         try {
-            
+
             User sender = em.find(User.class, senderId);
             User receiver = em.find(User.class, receiverId);
 
             Collection<Chat> csc = sender.getChatCollection();
             Collection<Chat> crc = receiver.getChatCollection();
-            
+
             Chat c = new Chat();
-            
+
             c.setChatid(chatId);
             c.setMessage(message);
             c.setDatetime(new Date());
@@ -2990,28 +2985,28 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
             c.setIsDelevered(isDelevered);
             c.setReceiverid(receiver);
             c.setSenderid(sender);
-            
+
             csc.add(c);
             crc.add(c);
             sender.setChatCollection(csc);
             receiver.setChatCollection(crc);
-            
+
             em.persist(c);
             em.merge(sender);
             em.merge(receiver);
-            
+
             return "Chat Sent!";
-            
+
         } catch (Exception e) {
-            
+
             return e.getMessage();
-            
+
         }
     }
 
     @Override
     public List<Chat> chatFindByReceiverId(int receiver, int sender) {
-        
+
         try {
 
             List<Chat> c = em.createNamedQuery("Chat.findAllChatByReceiver")
@@ -3021,16 +3016,16 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
             return c;
 
         } catch (Exception e) {
-            
+
             System.out.println(e);
-            
+
             return null;
         }
     }
-    
+
     @Override
     public List<Chat> chatFindBySenderId(int sender, int receiver) {
-        
+
         try {
 
             List<Chat> c = em.createNamedQuery("Chat.findAllChatBySender")
@@ -3043,7 +3038,6 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
             return null;
         }
     }
-    
 
     //Ads_User
     @Override
@@ -3506,7 +3500,7 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
         }
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     //Login 
     @Override
     public User vibeLogin(String email, String password) {
@@ -3541,5 +3535,6 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
 
         }
     }
+
 
 }

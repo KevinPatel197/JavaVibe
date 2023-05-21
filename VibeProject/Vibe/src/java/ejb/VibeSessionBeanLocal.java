@@ -19,6 +19,7 @@ public interface VibeSessionBeanLocal {
     
     //Login
     public User vibeLogin(String email, String password);
+   
     
     
     //Country
@@ -146,6 +147,8 @@ public interface VibeSessionBeanLocal {
     public FriendList friend_list_FindById(int flId);
     public List<FriendList> friend_list_ShowAllByUserId(int userId);
     public List<FriendList> friend_list_ShowAll();  //admin
+    
+    
     
     //Events
     public String eventInsert(int eventId, String eventName, String post, String eventStartDate, String eventEndDate, String eventInfo, String venue, String type, int fees, String mode, int guestCount, boolean is_removed, int hostId);
