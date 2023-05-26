@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Block-List</title>
+        <ui:include src="includes/css.xhtml"/>
+    </h:head>
+    <h:body class="  ">
+        <!-- Wrapper Start -->
+        <div class="wrapper">
+
+            <!--Navigation-->
+            <ui:include src="includes/navigation.xhtml"></ui:include>
+
+            <!-- Header  -->
+            <ui:include src="includes/header.xhtml"></ui:include>
+
+            <!-- FriendList -->
+            <ui:include id="friendList" src="includes/friendlist.xhtml" />
+
+            <div id="content-page" class="content-page">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between">
+                                    <div class="header-title">
+                                        <h4 class="card-title">Your Block List</h4>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="request-list m-0 p-0">
+                                        <f:ajax event="click" render="@form">
+                                            <h:form>
+                                                <c:forEach var="people" items="#{friendManagedBean.peopleYouMayKnow()}">
+                                                    <c:if test="#{friendManagedBean.checkStatus(people.userid) ne 'requested' }">
+                                                        <c:if test="#{friendManagedBean.checkStatus2(people.userid) ne 'requested'}">
+                                                            <li class="d-flex align-items-center  flex-wrap">
+                                                                <div class="user-img img-fluid flex-shrink-0">
+                                                                    <c:if test="#{people.profilephoto eq null }">
+                                                                        <img class="rounded-circle avatar-40" src="/Vibe/Images/ProfileImage/images.jpg" alt=""/>
+                                                                    </c:if>
+                                                                    <c:if test="#{people.profilephoto ne null}">
+                                                                        <img class="rounded-circle avatar-40" src="/Vibe/Images/ProfileImage/#{people.profilephoto}" alt=""/>
+                                                                    </c:if>
+                                                                </div>
+                                                                <div class="flex-grow-1 ms-3">
+                                                                    <h6>#{people.firstname} #{people.lastname}</h6>
+                                                                    <p class="mb-0">#{friendManagedBean.showAllFriends(people.userid).size()} Friends</p>
+                                                                </div>
+                                                                <div class="d-flex align-items-center mt-2 mt-md-0">
+                                                                    <h:commandButton class="me-3 btn btn-primary rounded" action="#{friendManagedBean.sendRequest(people.userid, people.firstname)}"  value="Unblock" ></h:commandButton>
+                                                                </div>
+                                                            </li>
+                                                            <hr/>
+                                                        </c:if>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </h:form>
+                                        </f:ajax>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Wrapper End-->
+
+
+        <!-- Scripts -->
+        <ui:include src="includes/bottomscript.xhtml" />
+
+    </h:body>
+</html>
