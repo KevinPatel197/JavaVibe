@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     //List By UserId
     @NamedQuery(name = "FriendList.findAllByUserId", query = "SELECT f FROM FriendList f WHERE f.userid.userid = :userId"),
     
+    
     @NamedQuery(name = "FriendList.findAll", query = "SELECT f FROM FriendList f"),
     @NamedQuery(name = "FriendList.findByFlId", query = "SELECT f FROM FriendList f WHERE f.flId = :flId"),
     @NamedQuery(name = "FriendList.findByAcceptedDatetime", query = "SELECT f FROM FriendList f WHERE f.acceptedDatetime = :acceptedDatetime"),
