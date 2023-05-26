@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/ManageBean/AdminManagedBean.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/ejb/VibeSessionBeanLocal.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/web/web/profile.xhtml</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/web/web/friendlist.xhtml</file>
             <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/entity/FriendList.java</file>
-            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/web/admin/home.xhtml</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/ManageBean/FriendManagedBean.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/entity/FriendRequest.java</file>
         </group>
     </open-files>
 </project-private>

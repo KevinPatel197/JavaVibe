@@ -21,6 +21,8 @@ public interface VibeSessionBeanLocal {
     public User vibeLogin(String email, String password);
    
     
+    //public String unfriend(int userID,int friendId);
+    
     
     //Country
     public String countryInsert(int countryId, String sortName, String countryName, int phoneCode, boolean isActive);
