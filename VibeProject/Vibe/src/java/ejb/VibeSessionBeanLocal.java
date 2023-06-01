@@ -19,7 +19,6 @@ public interface VibeSessionBeanLocal {
     
     //Login
     public User vibeLogin(String email, String password);
-   
     
     //public String unfriend(int userID,int friendId);
     

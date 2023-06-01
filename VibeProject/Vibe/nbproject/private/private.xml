@@ -3,7 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/web/web/home.xhtml</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/web/login.xhtml</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/ManageBean/UserManagedBean.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/web/register.xhtml</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/ManageBean/LoginManagedBean.java</file>
+            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/web/web/forgotpass.xhtml</file>
         </group>
     </open-files>
 </project-private>
