@@ -26,6 +26,8 @@ import javax.servlet.http.Part;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
+import org.primefaces.model.file.UploadedFile;
+import org.primefaces.shaded.commons.io.FilenameUtils;
 
 /**
  *
@@ -35,31 +37,30 @@ import javax.ws.rs.core.Response;
 @ApplicationScoped
 public class ProductManagedBean {
 
-    
-    
     @EJB
     private VibeSessionBeanLocal vibeSessionBean;
     private final VibeClient vibeClient = new VibeClient();
-    
-    private String catid;
+
+    private int catid;
     private String catname;
     private List<Categories> catList;
-    
-    private String productid;
+
+    private int productid;
     private String productname;
     private String title;
     private String description;
     private String price;
     private String image;
     private String isActive;
-    
-    Part file;
-    
+
+    UploadedFile  file;
+    //Part file;
+
     private List<Products> productlist;
-    
+
     public ProductManagedBean() {
     }
-    
+
     @PostConstruct
     public void init() {
         this.isActive = "true";
@@ -73,11 +74,11 @@ public class ProductManagedBean {
         this.vibeSessionBean = vibeSessionBean;
     }
 
-    public String getCatid() {
+    public int getCatid() {
         return catid;
     }
 
-    public void setCatid(String catid) {
+    public void setCatid(int catid) {
         this.catid = catid;
     }
 
@@ -97,11 +98,11 @@ public class ProductManagedBean {
         this.catList = catList;
     }
 
-    public String getProductid() {
+    public int getProductid() {
         return productid;
     }
 
-    public void setProductid(String productid) {
+    public void setProductid(int productid) {
         this.productid = productid;
     }
 
@@ -145,13 +146,22 @@ public class ProductManagedBean {
         this.isActive = isActive;
     }
 
-    public Part getFile() {
+    public UploadedFile getFile() {
         return file;
     }
 
-    public void setFile(Part file) {
+    public void setFile(UploadedFile  file) {
         this.file = file;
     }
+    
+    
+//    public Part getFile() {
+//        return file;
+//    }
+//
+//    public void setFile(Part file) {
+//        this.file = file;
+//    }
 
     public String getImage() {
         return image;
@@ -160,8 +170,6 @@ public class ProductManagedBean {
     public void setImage(String image) {
         this.image = image;
     }
-    
-    
 
     public List<Products> getProductlist() {
         return productlist;
@@ -170,125 +178,86 @@ public class ProductManagedBean {
     public void setProductlist(List<Products> productlist) {
         this.productlist = productlist;
     }
-    
-    
-    private void clearUpdate(){
-        this.productid=null;
-        this.productname=null;
-        this.title=null;
-        this.description=null;
-        this.price=null;
-        this.catid=null;
-        this.image=null;
+
+    private void clearUpdate() {
+        this.productid = 0;
+        this.productname = null;
+        this.title = null;
+        this.description = null;
+        this.price = null;
+        this.catid = 0;
+        this.image = null;
     }
-    
-    
-    public void productInsert(){
-        
-        HttpServletRequest requests = (HttpServletRequest) FacesContext.getCurrentInstance()
-                .getExternalContext().getRequest();
-        HttpSession adminSession = requests.getSession();
-        
-        try {
+
+    public String productInsert() throws IOException {
+
+        if (file != null) {
             
-            if (file == null) {
-                
-                vibeClient.productInsert("0", productname, catid, title, description, price, image, isActive);
+            InputStream input = file.getInputStream();
+            String fullPath = "C:\\Users\\kevin\\OneDrive\\Desktop\\EEProject\\VibeProject\\Vibe\\web\\Images";
+
+            Random random = new Random();
+            StringBuilder sb = new StringBuilder();
+
+            sb.append(random.nextInt(9) + 1);
+            for (int i = 0; i < 11; i++) {
+                sb.append(random.nextInt(10));
             }
-            else
-            {
-                if (file.getSubmittedFileName().contains(".jpg") || file.getSubmittedFileName().contains(".jpeg") || file.getSubmittedFileName().contains(".png")) {
+            String temp = sb.toString();
 
-                    InputStream input = file.getInputStream();
-                    String fullPath = "\\C:\\Users\\kevin\\OneDrive\\Desktop\\EEProject\\VibeProject\\Vibe\\web\\Images\\ProductImg\\";
+            String ext = FilenameUtils.getExtension(file.getFileName());
+            //image = "IMG_" + temp + ".jpg";
+            image = temp + "_IMG." + ext;
+            Files.copy(input, new File(fullPath, image).toPath());
 
-                    Random random = new Random();
-                    StringBuilder sb = new StringBuilder();
-
-                    sb.append(random.nextInt(9) + 1);
-                    for (int i = 0; i < 11; i++) {
-                        sb.append(random.nextInt(10));
-                    }
-                    String temp = sb.toString();
-
-                    image = "IMG_" + temp + ".jpg";
-                    Files.copy(input, new File(fullPath, image).toPath());
-
-                    vibeClient.productInsert("0", productname, catid, title, description, price, image, isActive);
-                }
-                
-                if (file.getSubmittedFileName().contains(".mp4") || file.getSubmittedFileName().contains(".mov") || file.getSubmittedFileName().contains(".mkv") || file.getSubmittedFileName().contains(".avi")) {
-
-                    InputStream input = file.getInputStream();
-                    String fullPath = "\\C:\\Users\\kevin\\OneDrive\\Desktop\\EEProject\\VibeProject\\Vibe\\web\\Images\\ProductImg\\";
-
-                    Random random = new Random();
-                    StringBuilder sb = new StringBuilder();
-
-                    sb.append(random.nextInt(9) + 1);
-                    for (int i = 0; i < 11; i++) {
-                        sb.append(random.nextInt(10));
-                    }
-                    String temp = sb.toString();
-
-                    image = "VID_" + temp + ".mp4";
-                    Files.copy(input, new File(fullPath, image).toPath());
-
-                    vibeClient.productInsert("0", productname, catid, title, description, price, image, isActive);
-                
-                }
-            }
-        } catch (ClientErrorException | IOException e) {
-            System.out.println(e.getMessage());
         }
+        
+        vibeSessionBean.productInsert(productid, productname, catid, title, description, price, image, true);
+        
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance()
+                    .getExternalContext().getRequest();
+        HttpSession adminsession = request.getSession();
+        adminsession.setAttribute("ProductImg", image);
+        
+        
+        clearUpdate();
+        return "/admin/products.xhtml?faces-redirect=true";
 
-     
     }
-    
-    public List<Products> getAllProducts(){
-       
+
+    public List<Products> getAllProducts() {
+
         Response response = vibeClient.productShowAll(Response.class);
         ArrayList<Products> prodArrayList = new ArrayList<>();
-        GenericType<List<Products>> showAllProd  = new GenericType<List<Products>>() {
+        GenericType<List<Products>> showAllProd = new GenericType<List<Products>>() {
         };
-        prodArrayList = (ArrayList<Products>)response.readEntity(showAllProd);
+        prodArrayList = (ArrayList<Products>) response.readEntity(showAllProd);
         return prodArrayList;
     }
-    
-     public List<Categories> getAllCategories(){
-       
+
+    public List<Categories> getAllCategories() {
+
         Response response = vibeClient.categoryShowAll(Response.class);
         ArrayList<Categories> catArrayList = new ArrayList<>();
-        GenericType<List<Categories>> showAllcat  = new GenericType<List<Categories>>() {
+        GenericType<List<Categories>> showAllcat = new GenericType<List<Categories>>() {
         };
-        catArrayList = (ArrayList<Categories>)response.readEntity(showAllcat);
+        catArrayList = (ArrayList<Categories>) response.readEntity(showAllcat);
         return catArrayList;
     }
-    
-     
-    public String ProductFindById(String id) {
-        Response response = vibeClient.productFindById(Response.class, id);
-        GenericType<Products> productSearch = new GenericType<Products>(){};
-        Products p = response.readEntity(productSearch);
-        
-        productid = p.getProductid().toString();
-        productname = p.getProductname();
-        title = p.getTitle();
-        description = p.getDescription();
-        price = p.getPrice();
-        image = p.getImage();
-        catid = p.getCategories().toString();
-        
-        return "/admin/product-detail.xhtml?faces-redirect=true";
-    }
-    
-   
+
     public void deleteProduct(String id) {
-        
+
         vibeClient.productDelete(id);
-        
+
     }
     
-    
-    
+    public List<Products> findByName(String pname) {
+        Response response = vibeClient.productFindByName(Response.class, pname);
+        ArrayList<Products> productArrayList = new ArrayList<>();
+        GenericType<List<Products>> showAllProd = new GenericType<List<Products>>() {
+        };
+        productArrayList = (ArrayList<Products>) response.readEntity(showAllProd);
+        return productArrayList;
+    }
+
 }

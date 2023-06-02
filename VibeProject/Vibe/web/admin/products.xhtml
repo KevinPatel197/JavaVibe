@@ -35,7 +35,7 @@
                         <div class="admin_card">
                             <div class="card-header d-flex justify-content-between">
                                 <div class="header-title">
-                                    <h4 class="card-title">Products</h4>
+                                    <h4 class="card-title">Vibe Products</h4>
                                     <a href="addproduct.xhtml"><button type="button" class="btn btn-success btn-rounded btn-sm my-0">Add New Product</button></a>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">Image</f:facet>
-                                                        #{item.image} 
+                                                    <img src="/Vibe/Images/ProductImg/#{item.image}"  alt="product"/>
                                                 </h:column>
                                                 <h:column id="remove">
                                                     <f:facet name="header">IsActive</f:facet>
