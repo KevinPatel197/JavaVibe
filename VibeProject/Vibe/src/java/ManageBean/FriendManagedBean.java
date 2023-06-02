@@ -419,24 +419,7 @@ public class FriendManagedBean {
         return null;
     }
     
-    
-//    public String unfriend() {
-//        
-//        HttpServletRequest requests = (HttpServletRequest) FacesContext.getCurrentInstance()
-//                    .getExternalContext().getRequest();
-//        HttpSession userSessions = requests.getSession(); 
-//        
-//        Response response = vibeClient.friend_request_CheckStatus(Response.class, userSessions.getAttribute("UuserId").toString(), senderid);
-//        GenericType<List<FriendRequest>> friendsGenericType = new GenericType<List<FriendRequest>>(){};
-//        
-//        ArrayList<FriendRequest> frList = (ArrayList<FriendRequest>)response.readEntity(friendsGenericType);
-//        
-//        for(FriendRequest fr : frList) {
-//            return fr.getStatus();
-//        }
-//        return null;
-//    }
-//    
+
     //public methods ends
     
     

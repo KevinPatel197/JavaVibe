@@ -20,8 +20,25 @@ public interface VibeSessionBeanLocal {
     //Login
     public User vibeLogin(String email, String password);
     
-    //public String unfriend(int userID,int friendId);
     
+    //Product Category
+    public String categoryInsert(int catId,String catName,boolean isActive);
+    public String categoryUpdate(int catId,String catName,boolean isActive);
+    public String categoryDelete(int catId);
+    public Categories categoryFindById(int catId);
+    public Categories categoryFindByName(String catName);
+    public List<Categories> categoryShowAll(); //admin
+    public List<Categories> categoryShowActive();
+    
+    //Product MarketPlace
+    public String productInsert(int productId,String productName,int catId, String title, String description,String price, String image,boolean isActive);
+    public String productUpdate(int productId,String productName,int catId, String title, String description,String price, String image,boolean isActive);
+    public String productDelete(int productId);
+    public Products productFindById(int productId);
+    public Products productFindByName(String productName);
+    public Products productFindByCat(int catId);
+    public List<Products> productShowAll(); //admin
+    public List<Products> productShowActive();
     
     //Country
     public String countryInsert(int countryId, String sortName, String countryName, int phoneCode, boolean isActive);

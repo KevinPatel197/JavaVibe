@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/WebServices/JerseyClient.java to edit this template
  */
 package client;
 
@@ -70,6 +69,12 @@ public class VibeClient {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
+    public <T> T productFindById(Class<T> responseType, String productid) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("productfindbyid/{0}", new Object[]{productid}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
     public <T> T cityShowAll(Class<T> responseType) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path("cityshowall");
@@ -83,6 +88,12 @@ public class VibeClient {
     public <T> T likeCount(Class<T> responseType, String postid) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("likecount/{0}", new Object[]{postid}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
+    public <T> T categoryShowAll(Class<T> responseType) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path("categoryshowall");
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
@@ -120,6 +131,10 @@ public class VibeClient {
         WebTarget resource = webTarget;
         resource = resource.path("stateshowall");
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
+    public String categoryInsert(String catid, String catname, String isActive) throws ClientErrorException {
+        return webTarget.path(java.text.MessageFormat.format("categoryinsert/{0}/{1}/{2}", new Object[]{catid, catname, isActive})).request().post(null, String.class);
     }
 
     public <T> T groupFindById(Class<T> responseType, String groupid) throws ClientErrorException {
@@ -224,6 +239,10 @@ public class VibeClient {
         return webTarget.path(java.text.MessageFormat.format("friendlistinsert/{0}/{1}/{2}/{3}", new Object[]{flId, friendStatus, userId, friendId})).request().post(null, String.class);
     }
 
+    public String productInsert(String productid, String productname, String catid, String title, String description, String price, String image, String isActive) throws ClientErrorException {
+        return webTarget.path(java.text.MessageFormat.format("productinsert/{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}", new Object[]{productid, productname, catid, title, description, price, image, isActive})).request().post(null, String.class);
+    }
+
     public <T> T commentsFindById(Class<T> responseType, String commentId) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("commentsfindbyid/{0}", new Object[]{commentId}));
@@ -255,6 +274,12 @@ public class VibeClient {
     public <T> T event_usercount_FindByEventId(Class<T> responseType, String eventid) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("event_usercount_findbyeventid/{0}", new Object[]{eventid}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
+    public <T> T productShowAll(Class<T> responseType) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path("productshowall");
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
@@ -368,6 +393,12 @@ public class VibeClient {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
+    public <T> T productFindByName(Class<T> responseType, String productname) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("productfindbyname/{0}", new Object[]{productname}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
     public <T> T group_member_FindById(Class<T> responseType, String gmId) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("group_member_findbyid/{0}", new Object[]{gmId}));
@@ -390,6 +421,10 @@ public class VibeClient {
         WebTarget resource = webTarget;
         resource = resource.path("user_contact_info_showall");
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
+    public String categoryDelete(String catid) throws ClientErrorException {
+        return webTarget.path(java.text.MessageFormat.format("categorydelete/{0}", new Object[]{catid})).request().post(null, String.class);
     }
 
     public <T> T user_work_FindByUserId(Class<T> responseType, String userId) throws ClientErrorException {
@@ -447,6 +482,18 @@ public class VibeClient {
     public <T> T commentsFindByPostId(Class<T> responseType, String postid) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("commentsfindbypostid/{0}", new Object[]{postid}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
+    public <T> T categoryFindById(Class<T> responseType, String catid) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("categoryfindbyid/{0}", new Object[]{catid}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
+    public <T> T categoryShowActive(Class<T> responseType, String isActive) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("categoryshowactive/{0}", new Object[]{isActive}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
@@ -542,6 +589,12 @@ public class VibeClient {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
+    public <T> T productShowActive(Class<T> responseType) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path("productshowactive");
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
     public void adsInsert(String adsId, String adsType, String price, String timeLimit, String description, String isRemoved) throws ClientErrorException {
         webTarget.path(java.text.MessageFormat.format("adsinsert/{0}/{1}/{2}/{3}/{4}/{5}", new Object[]{adsId, adsType, price, timeLimit, description, isRemoved})).request().post(null);
     }
@@ -588,10 +641,18 @@ public class VibeClient {
         return webTarget.path(java.text.MessageFormat.format("countryupdate/{0}/{1}/{2}/{3}/{4}", new Object[]{countryId, sortName, countryName, phoneCode, isActive})).request().post(null, String.class);
     }
 
+    public String productDelete(String productid) throws ClientErrorException {
+        return webTarget.path(java.text.MessageFormat.format("productdelete/{0}", new Object[]{productid})).request().post(null, String.class);
+    }
+
     public <T> T group_member_ShowAll(Class<T> responseType) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path("group_member_showall");
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
+    public String categoryUpdate(String catid, String catname, String isActive) throws ClientErrorException {
+        return webTarget.path(java.text.MessageFormat.format("categoryupdate/{0}/{1}/{2}", new Object[]{catid, catname, isActive})).request().post(null, String.class);
     }
 
     public <T> T stateFindByName(Class<T> responseType, String stateName) throws ClientErrorException {
@@ -610,6 +671,10 @@ public class VibeClient {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
+    public String productUpdate(String productid, String productname, String catid, String title, String description, String price, String image, String isActive) throws ClientErrorException {
+        return webTarget.path(java.text.MessageFormat.format("productupdate/{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}", new Object[]{productid, productname, catid, title, description, price, image, isActive})).request().post(null, String.class);
+    }
+
     public <T> T groupInsert(Class<T> responseType, String groupid, String groupName, String description, String membersCount, String isDeleted, String adminId) throws ClientErrorException {
         return webTarget.path(java.text.MessageFormat.format("groupinsert/{0}/{1}/{2}/{3}/{4}/{5}", new Object[]{groupid, groupName, description, membersCount, isDeleted, adminId})).request().post(null, responseType);
     }
@@ -626,6 +691,12 @@ public class VibeClient {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
+    public <T> T categoryFindByName(Class<T> responseType, String catname) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("categoryfindbyname/{0}", new Object[]{catname}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
     public <T> T groupShowAllByUser(Class<T> responseType, String userId) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("groupshowallbyuser/{0}", new Object[]{userId}));
@@ -635,6 +706,12 @@ public class VibeClient {
     public <T> T user_education_FindByUserId(Class<T> responseType, String userid) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("user_education_findbyuserid/{0}", new Object[]{userid}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
+    public <T> T productFindByCat(Class<T> responseType, String catid) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("productfindbycat/{0}", new Object[]{catid}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 

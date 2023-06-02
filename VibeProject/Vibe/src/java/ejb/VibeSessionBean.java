@@ -8,6 +8,7 @@ package ejb;
 import entity.ActivityFeed;
 import entity.Ads;
 import entity.AdsUser;
+import entity.Categories;
 import entity.Chat;
 import entity.City;
 import entity.Comments;
@@ -20,6 +21,7 @@ import entity.GroupMembers;
 import entity.Groups;
 import entity.Likes;
 import entity.Post;
+import entity.Products;
 import entity.State;
 import entity.User;
 import entity.UserContactInfo;
@@ -55,8 +57,6 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     //DONE
-    
-    
     //Country
     @Override
     public String countryInsert(int countryId, String sortName, String countryName, int phoneCode, boolean isActive) {
@@ -3534,8 +3534,351 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
             return null;
 
         }
+
     }
 
-   
+    //categories
+    @Override
+    public String categoryInsert(int catId, String catName, boolean isActive) {
 
+        Object id = null;
+
+        try {
+
+            try {
+                id = em.createNamedQuery("Categories.findIdByCategoryname")
+                        .setParameter("catname", catName)
+                        .getSingleResult();
+
+                System.out.println(id);
+
+            } catch (Exception e) {
+
+                Categories c = new Categories(catId, catName, isActive);
+                em.persist(c);
+
+            }
+
+            if (id != null) {
+                Categories c = em.find(Categories.class, id);
+                boolean active = c.getIsActive();
+                if (!active) {
+                    c.setIsActive(true);
+                    em.merge(c);
+                }
+                return "Category Exists";
+            }
+
+            return "Category Inserted " + catName;
+
+        } catch (Exception e) {
+
+            return e.getMessage();
+
+        }
+
+    }
+
+    @Override
+    public String categoryUpdate(int catId, String catName, boolean isActive) {
+
+        try {
+
+            Categories c = em.find(Categories.class, catId);
+
+            if (c == null) {
+                return "ID does not exist " + String.valueOf(catId);
+            }
+
+            c.setCatname(catName);
+            c.setIsActive(isActive);
+
+            em.merge(c);
+            return "Category Updated";
+
+        } catch (Exception e) {
+
+            return e.getMessage();
+
+        }
+    }
+
+    @Override
+    public String categoryDelete(int catId) {
+
+        try {
+
+            Categories a = em.find(Categories.class, catId);
+
+            if (a.getIsActive()== true) {
+                a.setIsActive(false);
+                em.merge(a);
+
+                return "Ad Added Again..";
+            }
+            if (a.getIsActive() == false) {
+                a.setIsActive(true);
+                em.merge(a);
+
+                return "Ad Removed..";
+            }
+
+            return "null";
+
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    @Override
+    public Categories categoryFindById(int catId) {
+
+        try {
+
+            Categories c = em.find(Categories.class, catId);
+            return c;
+
+        } catch (Exception e) {
+
+            e.getMessage();
+            return null;
+
+        }
+    }
+
+    @Override
+    public Categories categoryFindByName(String catName) {
+
+        try {
+
+            return (Categories) em.createNamedQuery("Categories.findByCatname")
+                    .setParameter("catname", catName)
+                    .getSingleResult();
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public List<Categories> categoryShowAll() {
+
+        try {
+
+            return em.createNamedQuery("Categories.findAll")
+                    .getResultList();
+
+        } catch (Exception e) {
+
+            e.getMessage();
+            return null;
+
+        }
+    }
+
+    @Override
+    public List<Categories> categoryShowActive() {
+
+        try {
+
+            return em.createNamedQuery("Categories.findByIsActive")
+                    .setParameter("isActive", true)
+                    .getResultList();
+
+        } catch (Exception e) {
+
+            e.getMessage();
+            return null;
+
+        }
+    }
+
+    //products
+
+    @Override
+    public String productInsert(int productId, String productName, int catId, String title, String description, String price, String image, boolean isActive) {
+
+        try {
+            
+            Categories cat =  em.find(Categories.class, catId);
+            Collection<Products> product = cat.getProductsCollection();
+            
+            Products p = new Products();
+            p.setProductid(productId);
+            p.setProductname(productName);
+            p.setCategories(cat);
+            p.setTitle(title);
+            p.setDescription(description);
+            p.setPrice(price);
+            p.setImage(image);
+            p.setIsActive(isActive);
+            
+            product.add(p);
+            cat.setProductsCollection(product);
+            
+            em.persist(p);
+            em.merge(cat);
+            
+            return "Product Inserted ..";
+            
+        } catch (Exception e) {
+            
+            return e.getMessage();
+        }
+    }
+
+    @Override
+    public String productUpdate(int productId, String productName, int catId, String title, String description, String price, String image, boolean isActive) {
+
+        try {
+            
+            Categories cat =  em.find(Categories.class, catId);
+            Collection<Products> product = cat.getProductsCollection();
+            
+            Products p = em.find(Products.class, productId);
+                    
+            p.setProductid(productId);
+            p.setProductname(productName);
+            p.setCategories(cat);
+            p.setTitle(title);
+            p.setDescription(description);
+            p.setPrice(price);
+            p.setImage(image);
+            p.setIsActive(isActive);
+            
+            product.add(p);
+            cat.setProductsCollection(product);
+            
+            em.persist(p);
+            em.merge(cat);
+            
+            return "Product Updated ..";
+            
+        } catch (Exception e) {
+            
+            return e.getMessage();
+        }
+
+    }
+
+    @Override
+    public String productDelete(int productId) {
+
+        try {
+
+            Products a = em.find(Products.class, productId);
+
+            if (a.getIsActive()== true) {
+                a.setIsActive(false);
+                em.merge(a);
+
+                return "Product Added Again..";
+            }
+            if (a.getIsActive() == false) {
+                a.setIsActive(true);
+                em.merge(a);
+
+                return "Product Removed..";
+            }
+
+            return "null";
+
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    @Override
+    public Products productFindById(int productId) {
+
+        try {
+
+            Products p = em.find(Products.class, productId);
+
+            return p;
+
+        } catch (Exception e) {
+
+            return null;
+
+        }
+    }
+
+    @Override
+    public Products productFindByName(String productName) {
+
+        try {
+
+            return (Products) em.createNamedQuery("Products.findByProductname")
+                    .setParameter("catname", productName)
+                    .getSingleResult();
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public Products productFindByCat(int catId) {
+
+        try {
+
+            return (Products) em.createNamedQuery("Products.findAllProductsByCat")
+                    .setParameter("catid", catId)
+                    .getSingleResult();
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+            return null;
+        }
+        
+    }
+
+    
+    @Override
+    public List<Products> productShowAll() {
+
+        try {
+
+            List<Products> product = em.createNamedQuery("Products.findAll")
+                    .getResultList();
+
+            if (product.isEmpty()) {
+                return null;
+            }
+
+            return product;
+
+        } catch (Exception e) {
+
+            return null;
+
+        }
+    }
+
+    @Override
+    public List<Products> productShowActive() {
+
+        try {
+
+            return em.createNamedQuery("Products.findByIsActive")
+                    .setParameter("isActive", true)
+                    .getResultList();
+
+        } catch (Exception e) {
+
+            e.getMessage();
+            return null;
+
+        }
+    }
+    
+    
+    
+    
 }
