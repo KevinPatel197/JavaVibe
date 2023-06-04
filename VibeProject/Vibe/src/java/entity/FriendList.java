@@ -33,8 +33,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     
     //List By UserId
-    @NamedQuery(name = "FriendList.findAllByUserId", query = "SELECT f FROM FriendList f WHERE f.userid.userid = :userId "), //AND f.friendStatus = 0
+    @NamedQuery(name = "FriendList.findAllByUserId", query = "SELECT f FROM FriendList f WHERE f.userid.userid = :userId AND f.friendStatus = :friendStatus "), //AND f.friendStatus = 0
     
+    //Find by userid and friendid
+    @NamedQuery(name = "FriendList.uf", query = "SELECT f FROM FriendList f WHERE f.userid.userid = :userId AND f.friendid.userid = :friendId AND f.friendStatus = true"),
+    
+    //Find by friendid and userid
+    @NamedQuery(name = "FriendList.fu", query = "SELECT f FROM FriendList f WHERE f.userid.userid = :friendId AND f.friendid.userid = :userId AND f.friendStatus = true"),
     
     @NamedQuery(name = "FriendList.findAll", query = "SELECT f FROM FriendList f"),
     @NamedQuery(name = "FriendList.findByFlId", query = "SELECT f FROM FriendList f WHERE f.flId = :flId"),

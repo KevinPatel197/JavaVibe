@@ -263,8 +263,9 @@ public class FriendManagedBean {
         HttpServletRequest requests = (HttpServletRequest) FacesContext.getCurrentInstance()
                     .getExternalContext().getRequest();
         HttpSession userSessions = requests.getSession(); 
-        
+        //System.out.println("userSessions" + userSessions.getAttribute("UuserId"));
         Response response = vibeClient.friend_request_FindByReceiverId(Response.class, userSessions.getAttribute("UuserId").toString(), "requested");
+        //System.out.println("response : " + response);
         ArrayList<FriendRequest> friendRequestArrayList = new ArrayList<>();
         GenericType<List<FriendRequest>> friendRequestGenericType = new GenericType<List<FriendRequest>>(){};
         
@@ -280,12 +281,12 @@ public class FriendManagedBean {
         HttpSession userSessions = requests.getSession(); 
         
         Response response = vibeClient.friend_list_ShowAllByUserId(Response.class, userSessions.getAttribute("UuserId").toString());
-        
+
         ArrayList<FriendList> friendsArrayList = new ArrayList<>();
         GenericType<List<FriendList>> friendsGenericType = new GenericType<List<FriendList>>(){};
         
         friendsArrayList = (ArrayList<FriendList>)response.readEntity(friendsGenericType);
-        
+
         return friendsArrayList;
     }
     
@@ -419,6 +420,21 @@ public class FriendManagedBean {
         return null;
     }
     
+    public void unfriend(String userId){
+        
+        try {
+            
+            HttpServletRequest requests = (HttpServletRequest) FacesContext.getCurrentInstance()
+                    .getExternalContext().getRequest();
+            HttpSession userSessions = requests.getSession();
+            
+            vibeClient.friend_unfriend(userSessions.getAttribute("UuserId").toString(), userId);
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+    }
 
     //public methods ends
     

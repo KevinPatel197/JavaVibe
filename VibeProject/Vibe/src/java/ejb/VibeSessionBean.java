@@ -735,6 +735,40 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
 
         }
     }
+    
+    @Override
+    public List<User> findUserByFname(String firstName){
+        
+        try {
+
+            return em.createNamedQuery("User.findByFirstname")
+                    .setParameter("firstname", firstName)
+                    .getResultList();
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+            return null;
+
+        }
+    }
+    
+    @Override
+    public List<User> findUserByLname(String lastName){
+        try {
+
+            return em.createNamedQuery("User.findByLastname")
+                    .setParameter("lastname", lastName)
+                    .getResultList();
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+            return null;
+
+        }
+    }
+    
 
     //User_Contact_Info
     @Override
@@ -2237,8 +2271,10 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
                     .setParameter("receiverid", receiverId)
                     .setParameter("status", status)
                     .getResultList();
-
+            
+            System.out.println(fr);
             return fr;
+           
 
         } catch (Exception e) {
 
@@ -2411,8 +2447,9 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
 
             List<FriendList> fl = em.createNamedQuery("FriendList.findAllByUserId")
                     .setParameter("userId", userId)
+                    .setParameter("friendStatus", true)
                     .getResultList();
-
+            
             return fl;
 
         } catch (Exception e) {
@@ -2444,6 +2481,49 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
 
     }
 
+    public String friend_unfriend(int senderId, int receiverId){
+        try{
+            
+            // update friend_status in friend list using userid and friendid and friend and userid
+            
+            FriendList uf = (FriendList)em.createNamedQuery("FriendList.uf")
+                    .setParameter("userId", senderId)
+                    .setParameter("friendId", receiverId)
+                    .getSingleResult();
+            System.out.println("uf "+ uf);
+            
+            
+            
+            FriendList fu = (FriendList)em.createNamedQuery("FriendList.fu")
+                    .setParameter("userId", senderId)
+                    .setParameter("friendId", receiverId)
+                    .getSingleResult();
+            System.out.println("fu "+ fu);
+            
+            FriendRequest fr = (FriendRequest) em.createNamedQuery("FriendRequest.statusUnfriend")
+                    .setParameter("senderId", senderId)
+                    .setParameter("receiverId", receiverId)
+                    .getSingleResult();
+            System.out.println("fr " + fr);
+            
+            if (uf != null && fu != null){
+                
+                uf.setFriendStatus(false);
+                fu.setFriendStatus(false);
+                fr.setStatus("unfriend");
+                
+            }
+            
+            return null;
+            
+        } catch(Exception e){
+            
+            System.out.println(e.getMessage());
+            
+            return null;
+        }
+    }
+    
     //Events
     @Override
     public String eventInsert(int eventId, String eventName, String post, String eventStartDate, String eventEndDate, String eventInfo, String venue, String type, int fees, String mode, int guestCount, boolean is_removed, int hostId) {
@@ -3693,6 +3773,7 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
             return null;
 
         }
+        
     }
 
     //products

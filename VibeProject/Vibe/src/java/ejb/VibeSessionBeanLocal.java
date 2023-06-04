@@ -20,6 +20,7 @@ public interface VibeSessionBeanLocal {
     //Login
     public User vibeLogin(String email, String password);
     
+  
     
     //Product Category
     public String categoryInsert(int catId,String catName,boolean isActive);
@@ -76,6 +77,8 @@ public interface VibeSessionBeanLocal {
     public List<User> userShowAll(); //admin
     public List<User> adminShowAll(); //admin
     public List<User> peopleYouMayKnow(int senderId, int Id);
+    public List<User> findUserByFname(String firstName);
+    public List<User> findUserByLname(String lastName);
     
     //User_Contact_Info
     public String user_contact_info_Insert(int uciId, String website, String language, String intrested_in, String fb_link, String insta_link, String bio, int userId);
@@ -165,7 +168,7 @@ public interface VibeSessionBeanLocal {
     public FriendList friend_list_FindById(int flId);
     public List<FriendList> friend_list_ShowAllByUserId(int userId);
     public List<FriendList> friend_list_ShowAll();  //admin
-    
+    public String friend_unfriend(int senderId, int receiverId);
     
     
     //Events

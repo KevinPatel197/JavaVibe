@@ -42,10 +42,10 @@
                             <div class="card-body">
                                 <div class="table-responsive table-editable">
                                     <f:ajax event="click" render="@form">
-                                        <h:form>
+                                        <h:form enctype="multipart/form-data">
                                             <h:dataTable id="adstable" class="table table-striped table-bordered" value="#{productManagedBean.getAllProducts()}" var="item">
                                                 <h:column>
-                                                    <f:facet name="header">Product Code</f:facet>
+                                                    <f:facet name="header">Product ID </f:facet>
                                                         #{item.productid}
                                                 </h:column>
                                                 <h:column>
@@ -56,21 +56,21 @@
                                                     <f:facet name="header">Category</f:facet>
                                                         #{item.categories.catname} 
                                                 </h:column>
-                                                <h:column>
+<!--                                                <h:column>
                                                     <f:facet name="header">Title</f:facet>
                                                         #{item.title} 
-                                                </h:column>
+                                                </h:column>-->
                                                 <h:column>
                                                     <f:facet name="header">Price</f:facet>
                                                         #{item.price} 
                                                 </h:column>
-                                                <h:column>
+<!--                                                <h:column>
                                                     <f:facet name="header">Description</f:facet>
                                                         #{item.description} 
-                                                </h:column>
+                                                </h:column>-->
                                                 <h:column>
                                                     <f:facet name="header">Image</f:facet>
-                                                    <img src="/Vibe/Images/ProductImg/#{item.image}"  alt="product"/>
+                                                    <img src="/Vibe/Images/ProductImg/#{item.image}" class="avatar-60 img-fluid" alt="Product"/>
                                                 </h:column>
                                                 <h:column id="remove">
                                                     <f:facet name="header">IsActive</f:facet>
@@ -78,7 +78,7 @@
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">Action</f:facet>
-                                                    <h:commandButton id="btn_delete" class="btn btn-danger btn-rounded btn-sm my-0" action="#{productManagedBean.deleteProduct(item.productid)}" value="Update Status"/>
+                                                    <h:commandButton id="btn_delete" class="btn btn-soft-danger" action="#{productManagedBean.deleteProduct(item.productid)}" value="Update Status"/>
                                                 </h:column>
                                             </h:dataTable>
                                         </h:form>

@@ -79,6 +79,16 @@ public class CategoryManagedBean {
         return catArrayList;
     }
     
+//    public List<Categories> getAllActiveCat(){
+//        
+//        Response response = vibeClient.categoryShowActive(Response.class);
+//         ArrayList<Categories> catArrayList = new ArrayList<>();
+//        GenericType<List<Categories>> showAllcat  = new GenericType<List<Categories>>() {
+//        };
+//        catArrayList = (ArrayList<Categories>)response.readEntity(showAllcat);
+//        return catArrayList;
+//    }
+    
     public String insertCategories(){
         vibeClient.categoryInsert("0", catname, "true");
         return "/admin/categories.xhtml?faces-redirect=true";

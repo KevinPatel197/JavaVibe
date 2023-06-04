@@ -42,6 +42,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     //Find Request by Receiver ID
     @NamedQuery(name = "FriendRequest.checkStatus", query = "SELECT f from FriendRequest f where f.senderid.userid = :senderid AND f.receiverid.userid = :receiverid"),
     
+    //Update friend-request status to unfriend
+    @NamedQuery(name = "FriendRequest.statusUnfriend", query = "SELECT f from FriendRequest f where f.status = 'accepted' AND (f.senderid.userid = :senderId AND f.receiverid.userid = :receiverId) OR (f.senderid.userid = :receiverId AND f.receiverid.userid = :senderId)"),
+    
     @NamedQuery(name = "FriendRequest.findAll", query = "SELECT f FROM FriendRequest f"),
     @NamedQuery(name = "FriendRequest.findByFrId", query = "SELECT f FROM FriendRequest f WHERE f.frId = :frId"),
     @NamedQuery(name = "FriendRequest.findByStatus", query = "SELECT f FROM FriendRequest f WHERE f.status = :status"),

@@ -659,4 +659,15 @@ public class UserManagedBean {
         }
         return "/web/profileinfo.xhtml?faces-redirect=true";
     }
+    
+    public List<User> userFindBFname()
+    {
+        Response response = vibeClient.findUserByFname(Response.class, firstName);
+        ArrayList<User> userArrayList = new ArrayList<>();
+        GenericType<List<User>> showAllUser = new GenericType<List<User>>() {
+        };
+        userArrayList = (ArrayList<User>) response.readEntity(showAllUser);
+        return userArrayList;
+        
+    }
 }

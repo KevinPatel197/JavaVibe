@@ -223,6 +223,12 @@ public class VibeClient {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
+    public <T> T findUserByFname(Class<T> responseType, String firstname) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("finduserbyfname/{0}", new Object[]{firstname}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
     public <T> T group_member_checkGroupMember(Class<T> responseType, String userId, String groupId) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("group_member_checkgroupmember/{0}/{1}", new Object[]{userId, groupId}));
@@ -237,6 +243,10 @@ public class VibeClient {
 
     public String friend_list_Insert(String flId, String friendStatus, String userId, String friendId) throws ClientErrorException {
         return webTarget.path(java.text.MessageFormat.format("friendlistinsert/{0}/{1}/{2}/{3}", new Object[]{flId, friendStatus, userId, friendId})).request().post(null, String.class);
+    }
+
+    public String friend_unfriend(String senderId, String receiverId) throws ClientErrorException {
+        return webTarget.path(java.text.MessageFormat.format("friendunfriend/{0}/{1}", new Object[]{senderId, receiverId})).request().post(null, String.class);
     }
 
     public String productInsert(String productid, String productname, String catid, String title, String description, String price, String image, String isActive) throws ClientErrorException {
@@ -538,6 +548,12 @@ public class VibeClient {
     public <T> T stateShowActive(Class<T> responseType) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path("stateshowactive");
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
+    public <T> T findUserByLname(Class<T> responseType, String lastname) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("finduserbylname/{0}", new Object[]{lastname}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 

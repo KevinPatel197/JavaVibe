@@ -50,11 +50,13 @@ public class ProductManagedBean {
     private String title;
     private String description;
     private String price;
+
     private String image;
+
     private String isActive;
 
-    UploadedFile  file;
-    //Part file;
+    //UploadedFile  file;
+    Part file;
 
     private List<Products> productlist;
 
@@ -146,22 +148,20 @@ public class ProductManagedBean {
         this.isActive = isActive;
     }
 
-    public UploadedFile getFile() {
-        return file;
-    }
-
-    public void setFile(UploadedFile  file) {
-        this.file = file;
-    }
-    
-    
-//    public Part getFile() {
+//    public UploadedFile getFile() {
 //        return file;
 //    }
 //
-//    public void setFile(Part file) {
+//    public void setFile(UploadedFile  file) {
 //        this.file = file;
 //    }
+    public Part getFile() {
+        return file;
+    }
+
+    public void setFile(Part file) {
+        this.file = file;
+    }
 
     public String getImage() {
         return image;
@@ -192,9 +192,8 @@ public class ProductManagedBean {
     public String productInsert() throws IOException {
 
         if (file != null) {
-            
             InputStream input = file.getInputStream();
-            String fullPath = "C:\\Users\\kevin\\OneDrive\\Desktop\\EEProject\\VibeProject\\Vibe\\web\\Images";
+            String fullPath = "\\C:\\Users\\kevin\\OneDrive\\Desktop\\EEProject\\VibeProject\\Vibe\\web\\Images\\ProfileImage\\";
 
             Random random = new Random();
             StringBuilder sb = new StringBuilder();
@@ -205,22 +204,21 @@ public class ProductManagedBean {
             }
             String temp = sb.toString();
 
-            String ext = FilenameUtils.getExtension(file.getFileName());
-            //image = "IMG_" + temp + ".jpg";
-            image = temp + "_IMG." + ext;
+            //String ext = FilenameUtils.getExtension(file.getName());
+            //image = temp + "_IMG." + ext;
+            image = "IMG_" + temp + ".jpg";
             Files.copy(input, new File(fullPath, image).toPath());
-
         }
-        
-        vibeSessionBean.productInsert(productid, productname, catid, title, description, price, image, true);
-        
+
+        String value = vibeSessionBean.productInsert(productid, productname, catid, title, description, price, image, true);
+
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance()
-                    .getExternalContext().getRequest();
-        HttpSession adminsession = request.getSession();
-        adminsession.setAttribute("ProductImg", image);
-        
-        
+                .getExternalContext().getRequest();
+        HttpSession userSession = request.getSession();
+        userSession.setAttribute("ProductImg", image);
+
         clearUpdate();
+
         return "/admin/products.xhtml?faces-redirect=true";
 
     }
@@ -249,15 +247,6 @@ public class ProductManagedBean {
 
         vibeClient.productDelete(id);
 
-    }
-    
-    public List<Products> findByName(String pname) {
-        Response response = vibeClient.productFindByName(Response.class, pname);
-        ArrayList<Products> productArrayList = new ArrayList<>();
-        GenericType<List<Products>> showAllProd = new GenericType<List<Products>>() {
-        };
-        productArrayList = (ArrayList<Products>) response.readEntity(showAllProd);
-        return productArrayList;
     }
 
 }

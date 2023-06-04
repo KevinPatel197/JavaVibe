@@ -302,6 +302,20 @@ public class GenericResource {
         return vibe.peopleYouMayKnow(senderId, Id);
     }
     
+    @Path("finduserbyfname/{firstname}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<User> findUserByFname(@PathParam("firstname")String firstName){
+        return vibe.findUserByFname(firstName);
+    }
+    
+    @Path("finduserbylname/{lastname}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<User> findUserByLname(@PathParam("lastname")String lastName){
+        return vibe.findUserByLname(lastName);
+    }
+    
     //User Contact Info
     
     @Path("user_contact_info_insert/{uci_id}/{website}/{language}/{intrested_in}/{fb_link}/{insta_link}/{bio}/{userid}")
@@ -1045,6 +1059,13 @@ public class GenericResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<FriendList> friend_list_ShowAll() {
         return vibe.friend_list_ShowAll();
+    }
+    
+    @Path("friendunfriend/{senderId}/{receiverId}")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public String friend_unfriend(@PathParam("senderId") int senderId, @PathParam("receiverId") int receiverId) {
+        return vibe.friend_unfriend(senderId, receiverId);
     }
 
     //Events User Counts
