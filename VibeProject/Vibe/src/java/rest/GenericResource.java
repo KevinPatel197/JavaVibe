@@ -1184,59 +1184,5 @@ public class GenericResource {
         return vibe.categoryShowActive();
     }
     
-    @Path("productinsert/{productid}/{productname}/{catid}/{title}/{description}/{price}/{image}/{isActive}")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    public String productInsert(@PathParam("productid")int productId,@PathParam("productname")String productName,@PathParam("catid")int catId,@PathParam("title")String title,@PathParam("description")String description,@PathParam("price")String price,@PathParam("image")String image,@PathParam("isActive")boolean isActive){
-        return vibe.productInsert(productId, productName, catId, title, description, price, image, isActive);
-    }
     
-    @Path("productupdate/{productid}/{productname}/{catid}/{title}/{description}/{price}/{image}/{isActive}")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    public String productUpdate(@PathParam("productid")int productId,@PathParam("productname")String productName,@PathParam("catid")int catId,@PathParam("title")String title,@PathParam("description")String description,@PathParam("price")String price,@PathParam("image")String image,@PathParam("isActive")boolean isActive){
-        return vibe.productUpdate(productId, productName, catId, title, description, price, image, isActive);
-    }
-    
-    @Path("productdelete/{productid}")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    public String productDelete(@PathParam("productid")int productId){
-        return vibe.productDelete(productId);
-    }
-    
-    @Path("productfindbyid/{productid}")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Products productFindById(@PathParam("productid")int productId){
-        return vibe.productFindById(productId);
-    }
-    
-    @Path("productfindbyname/{productname}")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Products productFindByName(@PathParam("productname")String productName){
-        return vibe.productFindByName(productName);
-    }
-    
-    @Path("productfindbycat/{catid}")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Products productFindByCat(@PathParam("catid")int catId){
-        return vibe.productFindByCat(catId);
-    }
-    
-    @Path("productshowall")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Products> productShowAll(){
-        return vibe.productShowAll();
-    }
-    
-    @Path("productshowactive")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Products> productShowActive(){
-        return vibe.productShowActive();
-    }
 }
