@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,19 +28,15 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author kevin
  */
 @Entity
-@Table(name = "categories")
+@Table(name = "category")
 @XmlRootElement
 @NamedQueries({
-    
-    // Find Id by Category Name
-    @NamedQuery(name = "Categories.findIdByCategoryname", query = "SELECT c.catid FROM Categories c WHERE c.catname = :catname"),
-    
-    
-    @NamedQuery(name = "Categories.findAll", query = "SELECT c FROM Categories c"),
-    @NamedQuery(name = "Categories.findByCatid", query = "SELECT c FROM Categories c WHERE c.catid = :catid"),
-    @NamedQuery(name = "Categories.findByCatname", query = "SELECT c FROM Categories c WHERE c.catname = :catname"),
-    @NamedQuery(name = "Categories.findByIsActive", query = "SELECT c FROM Categories c WHERE c.isActive = :isActive")})
-public class Categories implements Serializable {
+    @NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c"),
+    @NamedQuery(name = "Category.findByCatid", query = "SELECT c FROM Category c WHERE c.catid = :catid"),
+    @NamedQuery(name = "Category.findByCatname", query = "SELECT c FROM Category c WHERE c.catname = :catname"),
+    @NamedQuery(name = "Category.findByDescription", query = "SELECT c FROM Category c WHERE c.description = :description"),
+    @NamedQuery(name = "Category.findByIsactive", query = "SELECT c FROM Category c WHERE c.isactive = :isactive")})
+public class Category implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -52,24 +49,27 @@ public class Categories implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "catname")
     private String catname;
+    @Size(max = 45)
+    @Column(name = "description")
+    private String description;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "isActive")
-    private boolean isActive;
-    @OneToMany(mappedBy = "categories")
-    private Collection<Products> productsCollection;
+    @Column(name = "isactive")
+    private boolean isactive;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "catid")
+    private Collection<Product> productCollection;
 
-    public Categories() {
+    public Category() {
     }
 
-    public Categories(Integer catid) {
+    public Category(Integer catid) {
         this.catid = catid;
     }
 
-    public Categories(Integer catid, String catname, boolean isActive) {
+    public Category(Integer catid, String catname, boolean isactive) {
         this.catid = catid;
         this.catname = catname;
-        this.isActive = isActive;
+        this.isactive = isactive;
     }
 
     public Integer getCatid() {
@@ -88,22 +88,30 @@ public class Categories implements Serializable {
         this.catname = catname;
     }
 
-    public boolean getIsActive() {
-        return isActive;
+    public String getDescription() {
+        return description;
     }
 
-    public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean getIsactive() {
+        return isactive;
+    }
+
+    public void setIsactive(boolean isactive) {
+        this.isactive = isactive;
     }
 
     @XmlTransient
     @JsonbTransient
-    public Collection<Products> getProductsCollection() {
-        return productsCollection;
+    public Collection<Product> getProductCollection() {
+        return productCollection;
     }
 
-    public void setProductsCollection(Collection<Products> productsCollection) {
-        this.productsCollection = productsCollection;
+    public void setProductCollection(Collection<Product> productCollection) {
+        this.productCollection = productCollection;
     }
 
     @Override
@@ -116,10 +124,10 @@ public class Categories implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Categories)) {
+        if (!(object instanceof Category)) {
             return false;
         }
-        Categories other = (Categories) object;
+        Category other = (Category) object;
         if ((this.catid == null && other.catid != null) || (this.catid != null && !this.catid.equals(other.catid))) {
             return false;
         }
@@ -128,7 +136,7 @@ public class Categories implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Categories[ catid=" + catid + " ]";
+        return "entity.Category[ catid=" + catid + " ]";
     }
     
 }

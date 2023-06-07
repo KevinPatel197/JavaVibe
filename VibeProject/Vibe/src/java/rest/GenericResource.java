@@ -9,7 +9,7 @@ import ejb.VibeSessionBeanLocal;
 import entity.ActivityFeed;
 import entity.Ads;
 import entity.AdsUser;
-import entity.Categories;
+import entity.Category;
 import entity.Chat;
 import entity.City;
 import entity.Comments;
@@ -22,7 +22,7 @@ import entity.GroupMembers;
 import entity.Groups;
 import entity.Likes;
 import entity.Post;
-import entity.Products;
+import entity.Product;
 import entity.State;
 import entity.User;
 import entity.UserContactInfo;
@@ -1135,18 +1135,18 @@ public class GenericResource {
     
     //categories
     
-    @Path("categoryinsert/{catid}/{catname}/{isActive}")
+    @Path("categoryinsert/{catname}/{description}/{isactive}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public String categoryInsert(@PathParam("catid")int catId,@PathParam("catname")String catName,@PathParam("isActive")boolean isActive){
-        return vibe.categoryInsert(catId, catName, isActive);
+    public String categoryInsert(@PathParam("catname")String catname,@PathParam("description")String description,@PathParam("isactive")boolean isActive){
+        return vibe.categoryInsert(catname, description, isActive);
     }
     
-    @Path("categoryupdate/{catid}/{catname}/{isActive}")
+    @Path("categoryupdate/{catid}/{catname}/{description}/{isactive}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public String categoryUpdate(@PathParam("catid")int catId,@PathParam("catname")String catName,@PathParam("isActive")boolean isActive){
-        return vibe.categoryUpdate(catId, catName, isActive);
+    public String categoryUpdate(@PathParam("catid")int catid,@PathParam("catname")String catname,@PathParam("description")String description,@PathParam("isactive")boolean isActive){
+        return vibe.categoryUpdate(catid, catname, description, isActive);
     }
     
     @Path("categorydelete/{catid}")
@@ -1156,33 +1156,70 @@ public class GenericResource {
         return vibe.categoryDelete(catId);
     }
     
-    @Path("categoryfindbyid/{catid}")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Categories categoryFindById(@PathParam("catid")int catId){
-        return vibe.categoryFindById(catId);
-    }
-    
-    @Path("categoryfindbyname/{catname}")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Categories categoryFindByName(@PathParam("catname")String catName){
-        return vibe.categoryFindByName(catName);
-    }
-    
     @Path("categoryshowall")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Categories> categoryShowAll(){
+    public List<Category> categoryShowAll(){
         return vibe.categoryShowAll();
     }
     
     @Path("categoryshowactive/{isActive}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Categories> categoryShowActive(){
+    public List<Category> categoryShowActive(){
         return vibe.categoryShowActive();
     }
     
     
+    //products
+    
+    @Path("productinsert/{pid}/{pname}/{catid}/{description}/{price}/{pimage}/{isactive}")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public String productInsert(@PathParam("pid")int pid,@PathParam("pname")String pname,@PathParam("catid")int catid,@PathParam("description")String description,@PathParam("price")String price,@PathParam("pimage")String pimage,@PathParam("isactive")boolean isactive){
+        return vibe.productInsert(pid,pname, catid, description, price, pimage, isactive);
+    }
+    
+    @Path("productupdate/{pid}/{pname}/{catid}/{description}/{price}/{pimage}/{isactive}")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public String productUpdate(@PathParam("pid")int pid,@PathParam("pname")String pname,@PathParam("catid")int catid,@PathParam("description")String description,@PathParam("price")String price,@PathParam("pimage")String pimage,@PathParam("isactive")boolean isactive){
+        return vibe.productUpdate(pid, pname, catid, description, price, pimage, isactive);
+    }
+    
+    @Path("productdelete/{pid}")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public String productDelete(@PathParam("pid")int pid){
+        return vibe.productDelete(pid);
+    }
+    
+    @Path("productfindbyid/{pid}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Product productFindById(@PathParam("pid")int pid){
+        return vibe.productFindById(pid);
+    }
+    
+    @Path("productfindbyname/{pname}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Product productFindByName(@PathParam("pname")String pname){
+        return vibe.productFindByName(pname);
+    }
+
+    
+    @Path("productshowall")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Product> productShowAll(){
+        return vibe.productShowAll();
+    }
+    
+    @Path("productshowactive")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Product> productShowActive(){
+        return vibe.productShowActive();
+    }
 }

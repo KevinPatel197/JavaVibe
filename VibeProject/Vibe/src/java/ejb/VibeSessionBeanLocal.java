@@ -6,7 +6,6 @@
 package ejb;
 
 import entity.*;
-import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -23,23 +22,21 @@ public interface VibeSessionBeanLocal {
   
     
     //Product Category
-    public String categoryInsert(int catId,String catName,boolean isActive);
-    public String categoryUpdate(int catId,String catName,boolean isActive);
-    public String categoryDelete(int catId);
-    public Categories categoryFindById(int catId);
-    public Categories categoryFindByName(String catName);
-    public List<Categories> categoryShowAll(); //admin
-    public List<Categories> categoryShowActive();
+    public String categoryInsert(String catname,String description,boolean isactive);
+    public String categoryUpdate(int catid,String catname,String description,boolean isactive);
+    public String categoryDelete(int catid);
+    public List<Category> categoryShowAll(); //admin
+    public List<Category> categoryShowActive();
     
-    //Product MarketPlace
-//    public String productInsert(String productName,int catId, String title, String description,String price, String image,boolean isActive);
-//    public String productUpdate(int productId,String productName,int catId, String title, String description,String price, String image,boolean isActive);
-//    public String productDelete(int productId);
-//    public Products productFindById(int productId);
-//    public Products productFindByName(String productName);
-//    public Products productFindByCat(int catId);
-//    public List<Products> productShowAll(); 
-//    public List<Products> productShowActive();
+    //Products
+    public String productInsert(int pid,String pname,int catid,String description,String price,String pimage,boolean isactive);
+    public String productUpdate(int pid,String pname,int catid,String description,String price, String pimage,boolean isactive);
+    public String productDelete(int pid);
+    public Product productFindById(int pid);
+    public Product productFindByName(String pname);
+    public List<Product> productShowAll(); 
+    public List<Product> productShowActive();
+    
     
     //Country
     public String countryInsert(int countryId, String sortName, String countryName, int phoneCode, boolean isActive);

@@ -8,7 +8,7 @@ package ejb;
 import entity.ActivityFeed;
 import entity.Ads;
 import entity.AdsUser;
-import entity.Categories;
+import entity.Category;
 import entity.Chat;
 import entity.City;
 import entity.Comments;
@@ -21,7 +21,7 @@ import entity.GroupMembers;
 import entity.Groups;
 import entity.Likes;
 import entity.Post;
-import entity.Products;
+import entity.Product;
 import entity.State;
 import entity.User;
 import entity.UserContactInfo;
@@ -735,10 +735,10 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
 
         }
     }
-    
+
     @Override
-    public List<User> findUserByFname(String firstName){
-        
+    public List<User> findUserByFname(String firstName) {
+
         try {
 
             return em.createNamedQuery("User.findByFirstname")
@@ -752,9 +752,9 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
 
         }
     }
-    
+
     @Override
-    public List<User> findUserByLname(String lastName){
+    public List<User> findUserByLname(String lastName) {
         try {
 
             return em.createNamedQuery("User.findByLastname")
@@ -768,7 +768,6 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
 
         }
     }
-    
 
     //User_Contact_Info
     @Override
@@ -2271,10 +2270,9 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
                     .setParameter("receiverid", receiverId)
                     .setParameter("status", status)
                     .getResultList();
-            
+
             System.out.println(fr);
             return fr;
-           
 
         } catch (Exception e) {
 
@@ -2449,7 +2447,7 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
                     .setParameter("userId", userId)
                     .setParameter("friendStatus", true)
                     .getResultList();
-            
+
             return fl;
 
         } catch (Exception e) {
@@ -2481,49 +2479,46 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
 
     }
 
-    public String friend_unfriend(int senderId, int receiverId){
-        try{
-            
+    public String friend_unfriend(int senderId, int receiverId) {
+        try {
+
             // update friend_status in friend list using userid and friendid and friend and userid
-            
-            FriendList uf = (FriendList)em.createNamedQuery("FriendList.uf")
+            FriendList uf = (FriendList) em.createNamedQuery("FriendList.uf")
                     .setParameter("userId", senderId)
                     .setParameter("friendId", receiverId)
                     .getSingleResult();
-            System.out.println("uf "+ uf);
-            
-            
-            
-            FriendList fu = (FriendList)em.createNamedQuery("FriendList.fu")
+            System.out.println("uf " + uf);
+
+            FriendList fu = (FriendList) em.createNamedQuery("FriendList.fu")
                     .setParameter("userId", senderId)
                     .setParameter("friendId", receiverId)
                     .getSingleResult();
-            System.out.println("fu "+ fu);
-            
+            System.out.println("fu " + fu);
+
             FriendRequest fr = (FriendRequest) em.createNamedQuery("FriendRequest.statusUnfriend")
                     .setParameter("senderId", senderId)
                     .setParameter("receiverId", receiverId)
                     .getSingleResult();
             System.out.println("fr " + fr);
-            
-            if (uf != null && fu != null){
-                
+
+            if (uf != null && fu != null) {
+
                 uf.setFriendStatus(false);
                 fu.setFriendStatus(false);
                 fr.setStatus("unfriend");
-                
+
             }
-            
+
             return null;
-            
-        } catch(Exception e){
-            
+
+        } catch (Exception e) {
+
             System.out.println(e.getMessage());
-            
+
             return null;
         }
     }
-    
+
     //Events
     @Override
     public String eventInsert(int eventId, String eventName, String post, String eventStartDate, String eventEndDate, String eventInfo, String venue, String type, int fees, String mode, int guestCount, boolean is_removed, int hostId) {
@@ -3619,59 +3614,38 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
 
     //categories
     @Override
-    public String categoryInsert(int catId, String catName, boolean isActive) {
-
-        Object id = null;
-
+    public String categoryInsert(String catname,String description, boolean isactive) {
+        
         try {
 
-            try {
-                id = em.createNamedQuery("Categories.findIdByCategoryname")
-                        .setParameter("catname", catName)
-                        .getSingleResult();
-
-                System.out.println(id);
-
-            } catch (Exception e) {
-
-                Categories c = new Categories(catId, catName, isActive);
-                em.persist(c);
-
-            }
-
-            if (id != null) {
-                Categories c = em.find(Categories.class, id);
-                boolean active = c.getIsActive();
-                if (!active) {
-                    c.setIsActive(true);
-                    em.merge(c);
-                }
-                return "Category Exists";
-            }
-
-            return "Category Inserted " + catName;
+            Category cat = new Category();
+            cat.setCatname(catname);
+            cat.setDescription(description);
+            cat.setIsactive(isactive);
+            em.persist(cat);
+            return "Category Inserted.. " + catname;
 
         } catch (Exception e) {
 
             return e.getMessage();
-
         }
 
     }
 
     @Override
-    public String categoryUpdate(int catId, String catName, boolean isActive) {
+    public String categoryUpdate(int catid, String catname,String description, boolean isactive) {
 
         try {
 
-            Categories c = em.find(Categories.class, catId);
+            Category c = em.find(Category.class, catid);
 
             if (c == null) {
-                return "ID does not exist " + String.valueOf(catId);
+                return "ID does not exist " + String.valueOf(catname);
             }
 
-            c.setCatname(catName);
-            c.setIsActive(isActive);
+            c.setCatname(catname);
+            c.setDescription(description);
+            c.setIsactive(isactive);
 
             em.merge(c);
             return "Category Updated";
@@ -3688,19 +3662,19 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
 
         try {
 
-            Categories a = em.find(Categories.class, catId);
+            Category a = em.find(Category.class, catId);
 
-            if (a.getIsActive()== true) {
-                a.setIsActive(false);
+            if (a.getIsactive()== true) {
+                a.setIsactive(false);
                 em.merge(a);
 
-                return "Ad Added Again..";
+                return "Category Added Again..";
             }
-            if (a.getIsActive() == false) {
-                a.setIsActive(true);
+            if (a.getIsactive()== false) {
+                a.setIsactive(true);
                 em.merge(a);
 
-                return "Ad Removed..";
+                return "Category Removed..";
             }
 
             return "null";
@@ -3711,12 +3685,12 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
     }
 
     @Override
-    public Categories categoryFindById(int catId) {
+    public List<Category> categoryShowAll() {
 
         try {
 
-            Categories c = em.find(Categories.class, catId);
-            return c;
+            return em.createNamedQuery("Category.findAll")
+                    .getResultList();
 
         } catch (Exception e) {
 
@@ -3727,12 +3701,136 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
     }
 
     @Override
-    public Categories categoryFindByName(String catName) {
+    public List<Category> categoryShowActive() {
 
         try {
 
-            return (Categories) em.createNamedQuery("Categories.findByCatname")
-                    .setParameter("catname", catName)
+            return em.createNamedQuery("Category.findByIsactive")
+                    .setParameter("isactive", true)
+                    .getResultList();
+
+        } catch (Exception e) {
+
+            e.getMessage();
+            return null;
+
+        }
+
+    }
+
+    
+    //products
+    @Override
+    public String productInsert(int pid,String pname, int catid, String description, String price, String pimage, boolean isactive) {
+
+        try {
+            
+            Category cat =  em.find(Category.class, catid);
+            Collection<Product> product = cat.getProductCollection();
+            
+            Product p = new Product();
+            
+            p.setPid(pid);
+            p.setPname(pname);
+            p.setCatid(cat);
+            p.setDescription(description);
+            p.setPrice(price);
+            p.setPimage(pimage);
+            p.setIsactive(isactive);
+            
+            product.add(p);
+            cat.setProductCollection(product);
+            
+            em.persist(p);
+            em.merge(cat);
+            
+            return "Product Inserted ..";
+            
+        } catch (Exception e) {
+            
+            return e.getMessage();
+        }
+    }
+
+    @Override
+    public String productUpdate(int pid, String pname, int catid, String description, String price, String pimage, boolean isactive) {
+
+        try {
+            
+            Category cat =  em.find(Category.class, catid);
+            Collection<Product> product = cat.getProductCollection();
+            
+            Product p = em.find(Product.class, pid);
+            p.setPname(pname);
+            p.setCatid(cat);
+            p.setDescription(description);
+            p.setPrice(price);
+            p.setPimage(pimage);
+            p.setIsactive(isactive);
+            
+            product.add(p);
+            cat.setProductCollection(product);
+            
+            em.persist(p);
+            em.merge(cat);
+            
+            return "Product Inserted ..";
+            
+        } catch (Exception e) {
+            
+            return e.getMessage();
+        }
+    }
+
+    @Override
+    public String productDelete(int pid) {
+
+        try {
+
+            Product a = em.find(Product.class, pid);
+
+            if (a.getIsactive()== true) {
+                a.setIsactive(false);
+                em.merge(a);
+
+                return "Product Added Again..";
+            }
+            if (a.getIsactive() == false) {
+                a.setIsactive(true);
+                em.merge(a);
+
+                return "Product Removed..";
+            }
+
+            return "null";
+
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    @Override
+    public Product productFindById(int pid) {
+
+        try {
+
+            Product p = em.find(Product.class, pid);
+            return p;
+
+        } catch (Exception e) {
+
+            return null;
+
+        }
+    }
+
+    @Override
+    public Product productFindByName(String pname) {
+
+        try {
+
+            return (Product) em.createNamedQuery("Product.findByPname")
+                    .setParameter("catname", pname)
                     .getSingleResult();
 
         } catch (Exception e) {
@@ -3743,28 +3841,33 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
     }
 
     @Override
-    public List<Categories> categoryShowAll() {
+    public List<Product> productShowAll() {
 
         try {
 
-            return em.createNamedQuery("Categories.findAll")
+            List<Product> product = em.createNamedQuery("Product.findAll")
                     .getResultList();
+
+            if (product.isEmpty()) {
+                return null;
+            }
+
+            return product;
 
         } catch (Exception e) {
 
-            e.getMessage();
             return null;
 
         }
     }
 
     @Override
-    public List<Categories> categoryShowActive() {
+    public List<Product> productShowActive() {
 
         try {
 
-            return em.createNamedQuery("Categories.findByIsActive")
-                    .setParameter("isActive", true)
+            return em.createNamedQuery("Product.findByIsactive")
+                    .setParameter("isactive", true)
                     .getResultList();
 
         } catch (Exception e) {
@@ -3773,10 +3876,7 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
             return null;
 
         }
-        
     }
 
-    
-    
     
 }

@@ -6,13 +6,12 @@ package ManageBean;
 
 import client.VibeClient;
 import ejb.VibeSessionBeanLocal;
-import entity.Categories;
+import entity.Category;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
-import javax.servlet.http.HttpSession;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
@@ -21,9 +20,9 @@ import javax.ws.rs.core.Response;
  *
  * @author kevin
  */
-@Named(value = "categoryManagedBean")
+@Named(value = "categoryManage")
 @ApplicationScoped
-public class CategoryManagedBean {
+public class CategoryManage {
 
     @EJB
     private VibeSessionBeanLocal vibeSessionBean;
@@ -31,10 +30,11 @@ public class CategoryManagedBean {
     
     private String catid;
     private String catname;
-    private String isActive;
+    private String description;
+    private String isactive;
+    private List<Category> catlist;
     
-    
-    public CategoryManagedBean() {
+    public CategoryManage() {
     }
 
     public VibeSessionBeanLocal getVibeSessionBean() {
@@ -61,40 +61,62 @@ public class CategoryManagedBean {
         this.catname = catname;
     }
 
-    public String getIsActive() {
-        return isActive;
+    public String getDescription() {
+        return description;
     }
 
-    public void setIsActive(String isActive) {
-        this.isActive = isActive;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getIsactive() {
+        return isactive;
+    }
+
+    public void setIsactive(String isactive) {
+        this.isactive = isactive;
+    }
+
+    public List<Category> getCatlist() {
+        return catlist;
+    }
+
+    public void setCatlist(List<Category> catlist) {
+        this.catlist = catlist;
     }
     
-    public List<Categories> getAllCategories(){
+    private void clearUpdate(){
+        this.catname=null;
+        this.description=null;
+    }
+    
+    public List<Category> showAllCategory(){
        
         Response response = vibeClient.categoryShowAll(Response.class);
-        ArrayList<Categories> catArrayList = new ArrayList<>();
-        GenericType<List<Categories>> showAllcat  = new GenericType<List<Categories>>() {
+        ArrayList<Category> catArrayList = new ArrayList<>();
+        GenericType<List<Category>> showAllcat  = new GenericType<List<Category>>() {
         };
-        catArrayList = (ArrayList<Categories>)response.readEntity(showAllcat);
+        catArrayList = (ArrayList<Category>)response.readEntity(showAllcat);
         return catArrayList;
     }
     
-//    public List<Categories> getAllActiveCat(){
-//        
-//        Response response = vibeClient.categoryShowActive(Response.class);
-//         ArrayList<Categories> catArrayList = new ArrayList<>();
-//        GenericType<List<Categories>> showAllcat  = new GenericType<List<Categories>>() {
-//        };
-//        catArrayList = (ArrayList<Categories>)response.readEntity(showAllcat);
-//        return catArrayList;
-//    }
+    public List<Category> categoryShowActive(){
+       
+        Response response = vibeClient.categoryShowActive(Response.class, "true");
+        ArrayList<Category> catArrayList = new ArrayList<>();
+        GenericType<List<Category>> showAllcat  = new GenericType<List<Category>>() {
+        };
+        catArrayList = (ArrayList<Category>)response.readEntity(showAllcat);
+        return catArrayList;
+    }
     
-    public String insertCategories(){
-        vibeClient.categoryInsert("0", catname, "true");
+    public String categoryInsert(){
+        vibeClient.categoryInsert(catname, description, "true");
+        clearUpdate();
         return "/admin/categories.xhtml?faces-redirect=true";
     }
     
-    public void deletecat(int id){
+    public void categoryDelete(int id){
         try {
             vibeClient.categoryDelete(String.valueOf(id));
         } catch (ClientErrorException e) {

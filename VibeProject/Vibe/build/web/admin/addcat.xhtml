@@ -50,9 +50,13 @@
                                     <h:form>                                        
                                         <div class="form-group">
                                             <h:outputLabel for="" class="form-label"> Category Name : </h:outputLabel> 
-                                            <h:inputText id="type" class="form-control" value="#{categoryManagedBean.catname}"/>
+                                            <h:inputText id="catname" class="form-control" value="#{categoryManage.catname}"/>
                                         </div>
-                                        <h:commandButton  id="btn_insert" class="btn btn-primary"  action="#{categoryManagedBean.insertCategories()}" value="Insert"/><br/><br/>
+                                        <div class="form-group">
+                                            <h:outputLabel for="" class="form-label"> Description : </h:outputLabel> 
+                                            <h:inputText id="description" class="form-control" value="#{categoryManage.description}"/>
+                                        </div>
+                                        <h:commandButton  id="btn_insert" class="btn btn-primary"  action="#{categoryManage.categoryInsert()}" value="Insert"/><br/><br/>
                                     </h:form>
                                 </div>
                             </div>
