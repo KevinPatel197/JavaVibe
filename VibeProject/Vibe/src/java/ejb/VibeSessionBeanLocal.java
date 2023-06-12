@@ -19,21 +19,13 @@ public interface VibeSessionBeanLocal {
     //Login
     public User vibeLogin(String email, String password);
     
-  
-    
-    //Product Category
-    public String categoryInsert(String catname,String description,boolean isactive);
-    public String categoryUpdate(int catid,String catname,String description,boolean isactive);
-    public String categoryDelete(int catid);
-    public List<Category> categoryShowAll(); //admin
-    public List<Category> categoryShowActive();
-    
     //Products
-    public String productInsert(int pid,String pname,int catid,String description,String price,String pimage,boolean isactive);
-    public String productUpdate(int pid,String pname,int catid,String description,String price, String pimage,boolean isactive);
+    public String productInsert(String pname,String category,String description,String price,String pimage,boolean isactive);
+    public String productUpdate(int pid,String pname,String category,String description,String price, String pimage,boolean isactive);
     public String productDelete(int pid);
     public Product productFindById(int pid);
     public Product productFindByName(String pname);
+    public Product productFindByCat(String category);
     public List<Product> productShowAll(); 
     public List<Product> productShowActive();
     

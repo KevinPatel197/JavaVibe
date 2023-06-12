@@ -9,7 +9,6 @@ import ejb.VibeSessionBeanLocal;
 import entity.ActivityFeed;
 import entity.Ads;
 import entity.AdsUser;
-import entity.Category;
 import entity.Chat;
 import entity.City;
 import entity.Comments;
@@ -1133,58 +1132,20 @@ public class GenericResource {
     }
     
     
-    //categories
-    
-    @Path("categoryinsert/{catname}/{description}/{isactive}")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    public String categoryInsert(@PathParam("catname")String catname,@PathParam("description")String description,@PathParam("isactive")boolean isActive){
-        return vibe.categoryInsert(catname, description, isActive);
-    }
-    
-    @Path("categoryupdate/{catid}/{catname}/{description}/{isactive}")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    public String categoryUpdate(@PathParam("catid")int catid,@PathParam("catname")String catname,@PathParam("description")String description,@PathParam("isactive")boolean isActive){
-        return vibe.categoryUpdate(catid, catname, description, isActive);
-    }
-    
-    @Path("categorydelete/{catid}")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    public String categoryDelete(@PathParam("catid")int catId){
-        return vibe.categoryDelete(catId);
-    }
-    
-    @Path("categoryshowall")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Category> categoryShowAll(){
-        return vibe.categoryShowAll();
-    }
-    
-    @Path("categoryshowactive/{isActive}")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Category> categoryShowActive(){
-        return vibe.categoryShowActive();
-    }
-    
-    
     //products
     
-    @Path("productinsert/{pid}/{pname}/{catid}/{description}/{price}/{pimage}/{isactive}")
+    @Path("productinsert/{pname}/{category}/{description}/{price}/{pimage}/{isactive}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public String productInsert(@PathParam("pid")int pid,@PathParam("pname")String pname,@PathParam("catid")int catid,@PathParam("description")String description,@PathParam("price")String price,@PathParam("pimage")String pimage,@PathParam("isactive")boolean isactive){
-        return vibe.productInsert(pid,pname, catid, description, price, pimage, isactive);
+    public String productInsert(@PathParam("pname")String pname,@PathParam("category")String category,@PathParam("description")String description,@PathParam("price")String price,@PathParam("pimage")String pimage,@PathParam("isactive")boolean isactive){
+        return vibe.productInsert(pname, category, description, price, pimage, isactive);
     }
     
-    @Path("productupdate/{pid}/{pname}/{catid}/{description}/{price}/{pimage}/{isactive}")
+    @Path("productupdate/{pid}/{pname}/{category}/{description}/{price}/{pimage}/{isactive}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public String productUpdate(@PathParam("pid")int pid,@PathParam("pname")String pname,@PathParam("catid")int catid,@PathParam("description")String description,@PathParam("price")String price,@PathParam("pimage")String pimage,@PathParam("isactive")boolean isactive){
-        return vibe.productUpdate(pid, pname, catid, description, price, pimage, isactive);
+    public String productUpdate(@PathParam("pid")int pid,@PathParam("pname")String pname,@PathParam("category")String category,@PathParam("description")String description,@PathParam("price")String price,@PathParam("pimage")String pimage,@PathParam("isactive")boolean isactive){
+        return vibe.productUpdate(pid, pname, category, description, price, pimage, isactive);
     }
     
     @Path("productdelete/{pid}")
@@ -1206,6 +1167,14 @@ public class GenericResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Product productFindByName(@PathParam("pname")String pname){
         return vibe.productFindByName(pname);
+    }
+    
+    
+    @Path("productfindbycat/{pname}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Product productFindByCat(@PathParam("category")String category){
+        return vibe.productFindByCat(category);
     }
 
     

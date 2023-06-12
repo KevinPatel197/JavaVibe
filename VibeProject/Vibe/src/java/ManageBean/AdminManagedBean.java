@@ -11,6 +11,8 @@ import entity.Ads;
 import entity.AdsUser;
 import entity.Events;
 import entity.Groups;
+import entity.Post;
+import entity.Product;
 import entity.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -122,6 +124,8 @@ public class AdminManagedBean {
     // Declare Lists
     
     List<User> userlist;
+    List<Post> postList;
+    List<Product> ProductList;
 
     // Declare Lists ends
     
@@ -333,6 +337,23 @@ public class AdminManagedBean {
         this.search = search;
     }
 
+    public List<Post> getPostList() {
+        return postList;
+    }
+
+    public void setPostList(List<Post> postList) {
+        this.postList = postList;
+    }
+
+    public List<Product> getProductList() {
+        return ProductList;
+    }
+
+    public void setProductList(List<Product> ProductList) {
+        this.ProductList = ProductList;
+    }
+
+    
     
     
     //Getters And Setters ends
@@ -492,6 +513,85 @@ public class AdminManagedBean {
         return groupsArrayList;
     }
     
-            
+    
+    
+    
     //Public Methods ends
+    
+    
+    
+    
+    
+    // total count of data 
+    
+    
+    //USER
+    public int userCount() {
+        Response response = vibeClient.userShowAll(Response.class);
+        ArrayList<User> userArrayList = new ArrayList<>();
+        GenericType<List<User>> showAllUser = new GenericType<List<User>>() {
+        };
+        userArrayList = (ArrayList<User>) response.readEntity(showAllUser);
+        return userArrayList.size();
+    }
+    
+    //ads user
+    public int adsuserCount() {
+        Response response = vibeClient.ads_user_ShowAll(Response.class);
+        ArrayList<AdsUser> useradsArrayList = new ArrayList<>();
+        GenericType<List<AdsUser>> showAllUserAds = new GenericType<List<AdsUser>>() {
+        };
+        useradsArrayList = (ArrayList<AdsUser>) response.readEntity(showAllUserAds
+        );
+        return useradsArrayList.size();
+    }
+    
+    //groups
+    public int groupsCount() {
+        Response response = vibeClient.groupShowAllInAdmin(Response.class);
+        ArrayList<Groups> groupsArrayList = new ArrayList<>();
+        GenericType<List<Groups>> showAllGroups = new GenericType<List<Groups>>() {
+        };
+        groupsArrayList = (ArrayList<Groups>) response.readEntity(showAllGroups
+        );
+        return groupsArrayList.size();
+    }
+    
+    //events
+    public int eventsCount() {
+        Response response = vibeClient.eventShowAll(Response.class);
+        ArrayList<Events> eventsArrayList = new ArrayList<>();
+        GenericType<List<Events>> showAllEvents = new GenericType<List<Events>>() {
+        };
+        eventsArrayList = (ArrayList<Events>) response.readEntity(showAllEvents
+        );
+        return eventsArrayList.size();
+    }
+    
+    //products
+    public int productsCount() {
+
+        Response response = vibeClient.productShowAll(Response.class);
+        ArrayList<Product> productArrayList = new ArrayList<>();
+        GenericType<List<Product>> productGenericType = new GenericType<List<Product>>() {
+        };
+
+        productArrayList = (ArrayList<Product>) response.readEntity(productGenericType);
+
+        return productArrayList.size();
+    }
+    
+    //posts
+    public int postCount()
+    {
+        Response response = vibeClient.postShowAll(Response.class);
+        ArrayList<Post> postArrayList = new ArrayList<>();
+        GenericType<List<Post>> postGenericType = new GenericType<List<Post>>() {
+        };
+
+        postArrayList = (ArrayList<Post>) response.readEntity(postGenericType);
+
+        return postArrayList.size();
+    }
+    
 }

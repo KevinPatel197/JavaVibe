@@ -6,7 +6,6 @@ package ManageBean;
 
 import client.VibeClient;
 import ejb.VibeSessionBeanLocal;
-import entity.Category;
 import entity.Product;
 import java.io.File;
 import java.io.IOException;
@@ -23,6 +22,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 
@@ -37,26 +37,24 @@ public class ProductManage {
     @EJB
     private VibeSessionBeanLocal vibeSessionBean;
     private final VibeClient vibeClient = new VibeClient();
-   
+
     private String pid;
     private String pname;
-    private String catid;
+    private String category;
     private String description;
     private String price;
     private String pimage;
     private String isactive;
     private List<Product> productlist;
-    private List<Category> catList;
-    
+
     Part file;
-    
-    
+
     public ProductManage() {
     }
-    
+
     @PostConstruct
     public void init() {
-        this.isactive="true";
+        this.isactive = "true";
     }
 
     public VibeSessionBeanLocal getVibeSessionBean() {
@@ -66,7 +64,7 @@ public class ProductManage {
     public void setVibeSessionBean(VibeSessionBeanLocal vibeSessionBean) {
         this.vibeSessionBean = vibeSessionBean;
     }
-    
+
     public String getPid() {
         return pid;
     }
@@ -82,15 +80,16 @@ public class ProductManage {
     public void setPname(String pname) {
         this.pname = pname;
     }
-    
-    public String getCatid() {
-        return catid;
+
+    public String getCategory() {
+        return category;
     }
 
-    public void setCatid(String catid) {
-        this.catid = catid;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
+   
     public String getDescription() {
         return description;
     }
@@ -131,14 +130,6 @@ public class ProductManage {
         this.productlist = productlist;
     }
 
-    public List<Category> getCatList() {
-        return catList;
-    }
-
-    public void setCatList(List<Category> catList) {
-        this.catList = catList;
-    }
-
     public Part getFile() {
         return file;
     }
@@ -146,25 +137,25 @@ public class ProductManage {
     public void setFile(Part file) {
         this.file = file;
     }
-    
+
     private void clearAll() {
         setPname("");
-        setCatid("");
         setDescription("");
+        setCategory("");
         setPrice("");
         setPimage("");
     }
-    
-    private void clearUpdate(){
-        this.pname=null;
-        this.catid=null;
-        this.description=null;
-        this.price=null;
-        this.pimage=null;
+
+    private void clearUpdate() {
+        this.pname = null;
+        this.category=null;;
+        this.description = null;
+        this.price = null;
+        this.pimage = null;
     }
-    
-    public List<Product> showAllProduct(){
-        
+
+    public List<Product> showAllProduct() {
+
         Response response = vibeClient.productShowAll(Response.class);
         ArrayList<Product> productArrayList = new ArrayList<>();
         GenericType<List<Product>> productGenericType = new GenericType<List<Product>>() {
@@ -175,10 +166,23 @@ public class ProductManage {
         return productArrayList;
     }
     
+    
+    public List<Product> showAllActiveProduct() {
+
+        Response response = vibeClient.productShowActive(Response.class);
+        ArrayList<Product> productArrayList = new ArrayList<>();
+        GenericType<List<Product>> productGenericType = new GenericType<List<Product>>() {
+        };
+
+        productArrayList = (ArrayList<Product>) response.readEntity(productGenericType);
+
+        return productArrayList;
+    }
+
     public String productInsert() throws IOException {
-        
+
         if (file != null) {
-            
+
             InputStream input = file.getInputStream();
             String fullPath = "\\C:\\Users\\kevin\\OneDrive\\Desktop\\EEProject\\VibeProject\\Vibe\\web\\Images\\ProductImage\\";
 
@@ -194,17 +198,52 @@ public class ProductManage {
             pimage = "IMG_" + temp + ".jpg";
             Files.copy(input, new File(fullPath, pimage).toPath());
         }
-        
-        String value = vibeClient.productInsert(String.valueOf(pid), pname, String.valueOf(catid), description, price, pimage, isactive);
-        
+
+        String Value = vibeClient.productInsert(pname, category, description, price, pimage, isactive);
+        System.out.println("Value : " + Value);
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance()
-                    .getExternalContext().getRequest();
+                .getExternalContext().getRequest();
         HttpSession userSession = request.getSession();
         userSession.setAttribute("ProductImage : ", pimage);
-        
+
         clearUpdate();
-        
         return "/admin/products.xhtml?faces-redirect=true";
+
     }
     
+    public void productDelete(int id) {
+        try {
+            vibeClient.productDelete(String.valueOf(id));
+        } catch (ClientErrorException e) {
+            e.getMessage();
+        }
+    }
+
+    public String getproductinfo(String id)
+    {
+        Response response = vibeClient.productFindById(Response.class, id);
+        Product productArrayList = new Product();
+        GenericType<Product> showAllproducts  = new GenericType<Product>() {
+        };
+        productArrayList = (Product)response.readEntity(showAllproducts);
+        pimage = productArrayList.getPimage();
+        pid = productArrayList.getPid().toString();
+        pname = productArrayList.getPname();
+        price = productArrayList.getPrice();
+        category = productArrayList.getCategory();
+        description = productArrayList.getDescription();
+        isactive = String.valueOf(productArrayList.getIsactive());
+        
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance()
+                .getExternalContext().getRequest();
+        HttpSession userSession = request.getSession();
+        userSession.setAttribute("Pid : ", pid);
+        userSession.setAttribute("Pname : ", pname);
+        userSession.setAttribute("Price : ", price);
+        userSession.setAttribute("Pimage : ", pimage);
+        userSession.setAttribute("Desc : ", description);
+        userSession.setAttribute("category : ", category);
+        
+        return "/web/marketplaceinfo.xhtml?faces-redirect=true";
+    }
 }

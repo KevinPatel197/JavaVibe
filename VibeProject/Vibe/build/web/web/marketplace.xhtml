@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Ads</title>
+        <ui:include src="includes/css.xhtml"/>
+    </h:head>
+    <body class="  ">
+        <!-- Wrapper Start -->
+        <div class="wrapper">
+
+            <!--Navigation-->
+            <ui:include src="includes/navigation.xhtml"></ui:include>
+
+            <!-- Header  -->
+            <ui:include src="includes/header.xhtml"></ui:include>
+
+            <!-- FriendList -->
+            <ui:include src="includes/friendlist.xhtml" />
+
+            <!-- Page Content  --> 
+            <div id="content-page" class="content-page">
+                <div class="container">
+                    <div class="header-for-bg">
+                        <div class="background-header position-relative">
+                            <img src="../assets/images/page-img/profile-bg7.jpg" class="img-fluid w-100" alt="header-bg"/>
+                            <div class="title-on-header">
+                                <div class="data-block">
+                                    <h2>MARKETPLACE</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <c:forEach var="item" items="#{productManage.showAllActiveProduct()}">
+                            <div class="col-lg-4 col-md-6 mt-5">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="iq-badges text-left">
+                                            <div class="badges-icon">
+                                                <img src="/Vibe/Images/ProductImage/#{item.pimage}" class="avatar-60 img-fluid" alt="product"/> 
+                                            </div>
+                                            <h2 class="mb-2 text-uppercase">#{item.pname}</h2>
+                                            <h4 class="mb-2 text-uppercase">#{item.price}/- </h4>
+                                            <h6 class="mb-2">Category : #{item.category}</h6>
+                                            <h6 class="mb-2">#{item.description}</h6>
+                                            <h:form>
+                                                <h:commandButton  id="btn_add" class="btn btn-info"  action="#{productManage.getproductinfo(item.pid)}" value="BUY"/><br/><br/>
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Wrapper End-->
+
+
+        <!-- Scripts -->
+        <ui:include src="includes/bottomscript.xhtml" />
+
+
+
+    </body>
+</html>

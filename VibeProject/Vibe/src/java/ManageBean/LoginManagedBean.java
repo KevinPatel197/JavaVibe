@@ -191,7 +191,7 @@ public class LoginManagedBean {
                 setFalse();
                 
                 if(adminSession.getAttribute("AuserId") !=  null) {
-                    return "/admin/home.xhtml?faces-redirect=true";
+                    return "/admin/dashboard.xhtml?faces-redirect=true";
                 }
                 
             }
@@ -214,11 +214,8 @@ public class LoginManagedBean {
                 setFalse();
                 return "/web/home.xhtml?faces-redirect=true";
                 
-            }
-            
-            
-            
-            
+            }          
+                      
         } catch (ClientErrorException e) {
             
             System.out.println("Error:- " + e.getMessage());

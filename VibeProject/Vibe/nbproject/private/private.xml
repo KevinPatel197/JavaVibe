@@ -2,14 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/web/admin/addproduct.xhtml</file>
-            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/client/VibeClient.java</file>
-            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/ejb/VibeSessionBeanLocal.java</file>
-            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/ejb/VibeSessionBean.java</file>
-            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/rest/GenericResource.java</file>
-            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/web/admin/products.xhtml</file>
-            <file>file:/C:/Users/kevin/OneDrive/Desktop/EEProject/VibeProject/Vibe/src/java/ManageBean/ProductManage.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

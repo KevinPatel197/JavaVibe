@@ -56,9 +56,7 @@
                                         
                                         <div class="form-group">
                                             <h:outputLabel for="" class="form-label"> Category : </h:outputLabel> 
-                                            <h:selectOneMenu value="#{categoryManage.catid}" class="form-control">
-                                                <f:selectItems id="category" value="#{categoryManage.showAllCategory()}" var="c" itemLabel="#{c.catname}" itemValue="#{c.catid}" />
-                                            </h:selectOneMenu>
+                                            <h:inputText id="category" class="form-control" value="#{productManage.category}"/>
                                         </div>
                                         
                                         <div class="form-group">
@@ -72,7 +70,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <h:outputLabel for="" class="form-label">Product Image : </h:outputLabel> 
+                                            <h:outputLabel for="" class="form-label">Product Image : </h:outputLabel>
                                             <h:inputFile id="pimage" class="form-control" value="#{productManage.file}"/>
                                         </div>
 
