@@ -5,12 +5,28 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Header</title>
+        <style>
+            .hms {
+                font-size: 18pt;
+                font-weight: 150;
+                margin-right: 5px;
+            }
+            .ampm {
+                font-size: 10pt;
+                margin-right: 5px;
+            }
+            .date {
+                font-size: 10pt;
+                margin-right: 50px;
+            }
+        </style>
     </h:head>
     <h:body>
         <div class="iq-top-navbar">
             <div class="iq-navbar-custom">
                 <nav class="navbar navbar-expand-lg navbar-light p-0">
                     <div class="iq-navbar-logo d-flex justify-content-between">
+
                         <a href="dashboard.xhtml">
                             <img src="../assets/images/logo.png" class="img-fluid" alt=""/>
                             <span>Vibe</span>
@@ -27,6 +43,13 @@
                         <i class="ri-menu-3-line"></i>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        
+                        <!--date-time-->
+                        <span class="hms"></span>
+                        <span class="ampm"></span><br/>
+                        <span class="date"></span>
+                        <!--date-time-->
+                        
                         <ul class="navbar-nav  ms-auto navbar-list">
                             <h:form>
                                 <h:commandButton class="btn btn-primary iq-sign-btn" action="#{loginManagedBean.vibeLogout()}" value="Sign Out"></h:commandButton>
@@ -34,10 +57,10 @@
                             <li class="nav-item dropdown">
                                 <a href="#" class="   d-flex align-items-center dropdown-toggle" id="drop-down-arrow" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <c:if test="#{session.getAttribute('AImage') eq null }">
-                                        <img src="/Vibe/Images/ProfileImage/images.jpg" class="img-fluid rounded-circle me-3" alt="user"/>
+                                        <img src="../assets/images/user/20.jpeg" class="img-fluid rounded-circle me-3" alt="user"/>
                                     </c:if>
                                     <c:if test="#{session.getAttribute('AImage') ne null}">
-                                        <img src="/Vibe/Images/ProfileImage/#{session.getAttribute('UImage')}" class="img-fluid rounded-circle me-3" alt="user"/>
+                                        <img src="../assets/images/user/20.jpeg" class="img-fluid rounded-circle me-3" alt="user"/>
                                     </c:if>
                                     <div class="caption">
                                         <h6 class="mb-0 line-height">#{session.getAttribute('AfullName')}</h6>

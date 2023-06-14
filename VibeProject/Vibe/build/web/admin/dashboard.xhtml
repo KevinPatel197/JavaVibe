@@ -10,6 +10,32 @@
     <h:head>
         <title>Admin | Home</title>
         <ui:include src="includes/css.xhtml" />
+        <style>
+            body {
+                font-family: "Work Sans", sans-serif;
+            }
+            .time {
+                background: #FFF;
+                color: #000;
+                border: 10px solid rgb(255, 252, 252);
+                border-radius: 10px;
+                box-shadow: 0 2px 10px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+                padding: 5px;
+                text-align: center;
+                width: 200px;
+                align-content: left;
+            }
+            .hms {
+                font-size: 18pt;
+                font-weight: 150;
+            }
+            .ampm {
+                font-size: 10pt;
+            }
+            .date {
+                font-size: 10pt;
+            }
+        </style>
     </h:head>
     <h:body>
         <!-- loader Start -->
@@ -29,10 +55,19 @@
 
 
             <div id="content-page" class="content-page">
+
                 <div class="container">
-
-
                     <div class="row">
+                        <center>
+                            <!--datetime-->
+<!--                            <div class="time">
+                                <span class="hms"></span>
+                                <span class="ampm"></span><br/>
+                                <span class="date"></span>
+                            </div>
+                            <hr/>-->
+                            <!--datetime-->
+                        </center>
 
                         <div class="col-lg-4 col-md-6 mt-5">
                             <div class="card">
@@ -107,7 +142,7 @@
                                         </div>
                                         <div class="mt-1">
                                             <a href="#"><h2>Total Posts</h2>
-                                            <h3>#{adminManagedBean.postCount()}</h3></a>
+                                                <h3>#{adminManagedBean.postCount()}</h3></a>
                                         </div>
                                     </div>
                                 </div>
