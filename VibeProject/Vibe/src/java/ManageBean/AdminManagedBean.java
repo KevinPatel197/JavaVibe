@@ -11,6 +11,7 @@ import entity.Ads;
 import entity.AdsUser;
 import entity.Events;
 import entity.Groups;
+import entity.Payment;
 import entity.Post;
 import entity.Product;
 import entity.User;
@@ -594,4 +595,16 @@ public class AdminManagedBean {
         return postArrayList.size();
     }
     
+    
+    //payments
+    public int paymentShowAll() {
+
+        Response response = vibeClient.paymentShowAll(Response.class);
+        ArrayList<Payment> paymentArrayList = new ArrayList<>();
+        GenericType<List<Payment>> paymentGenericType = new GenericType<List<Payment>>() {
+        };
+
+        paymentArrayList = (ArrayList<Payment>) response.readEntity(paymentGenericType);
+        return paymentArrayList.size();
+    }
 }

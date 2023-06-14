@@ -20,6 +20,7 @@ import entity.FriendRequest;
 import entity.GroupMembers;
 import entity.Groups;
 import entity.Likes;
+import entity.Payment;
 import entity.Post;
 import entity.Product;
 import entity.State;
@@ -1190,5 +1191,41 @@ public class GenericResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Product> productShowActive(){
         return vibe.productShowActive();
+    }
+    
+    //payment
+    @Path("paymentinsert/{cardnumber}/{cardholder}/{expmonth}/{expyear}/{cvv}")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public String paymentInsert(@PathParam("cardnumber")String cardnumber,@PathParam("cardholder")String cardholder,@PathParam("expmonth")String expmonth,@PathParam("expyear")String expyear,@PathParam("cvv")String cvv){
+        return vibe.paymentInsert(cardnumber, cardholder, expmonth, expyear, cvv);
+    }
+    
+    @Path("paymentdelete/{payid}")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public String paymentDelete(@PathParam("payid")int payid){
+        return vibe.paymentDelete(payid);
+    }
+    
+    @Path("payfindbyid/{payid}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Payment payFindById(@PathParam("payid")int payid){
+        return vibe.payFindById(payid);
+    }
+    
+    @Path("payfindbycardholder/{cardholder}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Payment payFindByCardholder(@PathParam("cardholder")String cardholder){
+        return vibe.payFindByCardholder(cardholder);
+    }
+    
+    @Path("paymentshowall")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Payment> paymentShowAll(){
+        return vibe.paymentShowAll();
     }
 }

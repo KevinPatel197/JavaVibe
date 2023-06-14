@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Website</title>
+        <ui:include src="includes/css.xhtml"/>
+    </h:head>
+    <body class="  ">
+        <!-- Wrapper Start -->
+        <div class="wrapper">
+
+            <!--Navigation-->
+            <ui:include src="includes/navigation.xhtml"></ui:include>
+
+            <!-- Header  -->
+            <ui:include src="includes/header.xhtml"></ui:include>
+
+            <!-- FriendList -->
+            <ui:include src="includes/friendlist.xhtml" />
+
+            <!-- Page Content  --> 
+            <div id="content-page" class="content-page">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card position-relative inner-page-bg bg-primary" style="height: 150px;">
+                                <div class="inner-page-title">
+                                    <h3 class="text-white">Checkout</h3>
+                                </div>  
+                            </div>
+                        </div>
+                        <div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3>Product Info</h3><hr/>
+                                    <h:form> 
+                                        <h:inputHidden id="euc_id" value="#{productManage.pid}"/>
+                                        <div class="blog-description p-2">
+                                            <div class="image-block">
+                                                <img src="/Vibe/Images/ProductImage/#{productManage.pimage}" class="img-fluid rounded" alt="blog-img"/><br/><br/>
+                                            </div>
+                                            <h4 class="mb-2">Product Name : #{productManage.pname}</h4>
+                                            <h4 class="mb-2">Product Price : #{productManage.price}/-</h4>
+                                        </div>
+                                    </h:form>
+                                    <hr/>
+
+                                    <h3>Payment Info</h3>
+
+                                    <div class="card-body">
+                                        <h:form> 
+                                            
+                                            <div class="form-group">
+                                                <h:outputLabel for="" class="form-label"><i class="ri-emotion-normal-fill"></i> YOUR EMAIL : </h:outputLabel> 
+                                                <h:inputText id="useremail" class="form-control" value="#{session.getAttribute('Uemail')}" disabled="true"/>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <h:outputLabel for="" class="form-label"><i class="ri-group-fill"></i> CARD HOLDER NAME</h:outputLabel> 
+                                                <h:inputText id="cardholder" class="form-control" value="#{paymentManage.cardholder}" a:placeholder="NAME AS PER CARD" required="true" />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <h:outputLabel for="" class="form-label"><i class="ri-paypal-fill"></i> CARD NUMBER</h:outputLabel> 
+                                                <h:inputText id="cardnumber" class="form-control" value="#{paymentManage.cardnumber}" a:placeholder="XXXX-XXXX-XXXX-XXXX" required="true" maxlength="16"/>
+                                            </div>
+
+
+                                            <div class="d-flex">
+                                                <div class="form-group mx-1">
+                                                    <h:outputLabel for="" class="form-label"><i class="ri-calendar-fill"></i> EXPIRY MONTH</h:outputLabel> 
+                                                    <h:inputText id="expmonth" class="form-control mb-0" value="#{paymentManage.expmonth}" a:placeholder="MM" required="true" maxlength="2" />
+                                                </div>
+                                                <div class="form-group mx-1">
+                                                    <h:outputLabel for="" class="form-label"><i class="ri-calendar-fill"></i> EXPIRY YEAR</h:outputLabel> 
+                                                    <h:inputText id="expyear" class="form-control mb-0" value="#{paymentManage.expyear}" a:placeholder="YYYY" required="true" maxlength="4"/>
+                                                </div>
+                                                <div class="form-group mx-1">
+                                                    <h:outputLabel for="" class="form-label"><i class="ri-secure-payment-fill"></i> CVV </h:outputLabel>
+                                                    <h:inputText id="cvv" class="form-control mb-0" value="#{paymentManage.cvv}" a:placeholder="***" required="true" maxlength="3" />
+                                                </div>
+                                            </div>
+
+                                            <h:commandButton  id="btn_insert" class="btn btn-primary"  action="#{paymentManage.paymentInsert()}" value="PAY"/>
+                                            <a href="marketplace.xhtml" class="btn btn-primary">Cancle</a>
+                                        </h:form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Wrapper End-->
+
+
+        <!-- Scripts -->
+        <ui:include src="includes/bottomscript.xhtml" />
+
+
+    </body>
+</html>

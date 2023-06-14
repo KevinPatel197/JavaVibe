@@ -246,4 +246,7 @@ public class ProductManage {
         
         return "/web/marketplaceinfo.xhtml?faces-redirect=true";
     }
+    
+    
+    
 }

@@ -19,6 +19,15 @@ public interface VibeSessionBeanLocal {
     //Login
     public User vibeLogin(String email, String password);
     
+
+    //payment
+    public String paymentInsert(String cardnumber,String cardholder,String expmonth,String expyear,String cvv);
+    public String paymentDelete(int payid);
+    public Payment payFindById(int payid);
+    public Payment payFindByCardholder(String cardholder);
+    public List<Payment> paymentShowAll();
+    public Payment getLastValue();
+    
     //Products
     public String productInsert(String pname,String category,String description,String price,String pimage,boolean isactive);
     public String productUpdate(int pid,String pname,String category,String description,String price, String pimage,boolean isactive);

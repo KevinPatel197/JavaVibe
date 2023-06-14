@@ -19,6 +19,7 @@ import entity.FriendRequest;
 import entity.GroupMembers;
 import entity.Groups;
 import entity.Likes;
+import entity.Payment;
 import entity.Post;
 import entity.Product;
 import entity.State;
@@ -3772,5 +3773,109 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
         }
     }
 
+    
+    //payment
+    @Override
+    public String paymentInsert(String cardnumber, String cardholder, String expmonth, String expyear, String cvv) {
+
+        try {
+            
+            Payment pay = new Payment();
+            pay.setCardnumber(cardnumber);
+            pay.setCardholder(cardholder);
+            pay.setExpmonth(expmonth);
+            pay.setExpyear(expyear);
+            pay.setCvv(cvv);
+            
+            em.persist(pay);
+            
+            return "Payment Done !";
+            
+        } catch (Exception e) {
+            
+            return e.getMessage();
+        }
+    }
+
+    @Override
+    public String paymentDelete(int payid) {
+
+        try {
+
+            Payment p = em.find(Payment.class, payid);
+            em.remove(p);
+
+            return "Record Deleted !!";
+
+        } catch (Exception e) {
+            return e.getMessage();
+        }  
+    }
+
+    @Override
+    public Payment payFindById(int payid) {
+
+        try {
+
+            Payment p = em.find(Payment.class, payid);
+            return p;
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public Payment payFindByCardholder(String cardholder) {
+
+        try {
+
+            return (Payment) em.createNamedQuery("Payment.findByCardholder")
+                    .setParameter("cardholder", cardholder)
+                    .getSingleResult();
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+            return null;
+        }
+
+    }
+    
+    @Override
+    public List<Payment> paymentShowAll(){
+        
+        try {
+
+            List<Payment> payment = em.createNamedQuery("Payment.findAll")
+                    .getResultList();
+
+            if (payment.isEmpty()) {
+                return null;
+            }
+
+            return payment;
+
+        } catch (Exception e) {
+
+            return null;
+
+        }
+        
+    }
+
+    @Override
+    public Payment getLastValue() {
+
+        try {
+            
+            return (Payment) em.createQuery("SELECT p FROM Payment p ORDER BY P.payid DESC")
+                    .setMaxResults(1).getSingleResult();
+        } catch (Exception e) {
+            
+            e.getMessage();
+            return null;
+        }
+    }
     
 }

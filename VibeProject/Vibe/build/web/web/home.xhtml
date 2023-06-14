@@ -11,6 +11,31 @@
     <h:head>
         <title>Vibe | Home</title>
         <ui:include src="includes/css.xhtml" />
+        <style>
+            body {
+                font-family: "Work Sans", sans-serif;
+            }
+            .time {
+                background: #FFF;
+                color: #000;
+                border: 5px solid rgb(255, 252, 252);
+                border-radius: 10px;
+                box-shadow: 0 2px 10px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+                padding: 8px;
+                text-align: center;
+                width: 315px;
+            }
+            .hms {
+                font-size: 30pt;
+                font-weight: 200;
+            }
+            .ampm {
+                font-size: 18pt;
+            }
+            .date {
+                font-size: 15pt;
+            }
+        </style>
     </h:head>
     <body class="  ">
         <!-- Wrapper Start -->
@@ -482,6 +507,15 @@
                         </div>
                         <div class="col-lg-4">
 
+                            <!--datetime-->
+                            <div class="time">
+                                <span class="hms"></span>
+                                <span class="ampm"></span><br/>
+                                <span class="date"></span>
+                            </div>
+                            <hr/>
+                            <!--datetime-->
+                            
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between">
                                     <div class="header-title">
@@ -678,9 +712,9 @@
             </div>
         </div>
         <!-- Wrapper End-->
-
         <!-- Scripts -->
         <ui:include src="includes/bottomscript.xhtml" />
+
 
     </body>
 

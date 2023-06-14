@@ -205,11 +205,13 @@ public class LoginManagedBean {
                 userSession.setAttribute("Uonline", true);
                 userSession.setAttribute("Utype", users.getIsadmin());
                 userSession.setAttribute("UImage", users.getProfilephoto());
+                userSession.setAttribute("Uemail", users.getEmail());
                 
                 System.out.println(userSession.getAttribute("UuserId").toString() + " " + 
                         userSession.getAttribute("UfullName") + " " + 
                         userSession.getAttribute("Uonline") + " " + 
-                        userSession.getAttribute("Utype"));
+                        userSession.getAttribute("Utype")  + " " +
+                        userSession.getAttribute("Uemail"));
                 
                 setFalse();
                 return "/web/home.xhtml?faces-redirect=true";

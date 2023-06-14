@@ -361,6 +361,12 @@ public class VibeClient {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
+    public <T> T payFindById(Class<T> responseType, String payid) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("payfindbyid/{0}", new Object[]{payid}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
     public String userUpdate(String userId, String firstName, String middleName, String lastName, String gender, String dob, String email, String username, String password, String mobile, String profilePhoto, String coverPhoto, String countryId, String stateId, String cityId) throws ClientErrorException {
         return webTarget.path(java.text.MessageFormat.format("userupdate/{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}/{9}/{10}/{11}/{12}/{13}/{14}", new Object[]{userId, firstName, middleName, lastName, gender, dob, email, username, password, mobile, profilePhoto, coverPhoto, countryId, stateId, cityId})).request().post(null, String.class);
     }
@@ -495,6 +501,10 @@ public class VibeClient {
         return webTarget.path(java.text.MessageFormat.format("eventupdate/{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}/{9}/{10}/{11}/{12}", new Object[]{eventid, hostid, eventname, post, eventstartdate, eventenddate, eventinfo, venue, type, fees, mode, guestcount, isremoved})).request().post(null, String.class);
     }
 
+    public String paymentDelete(String payid) throws ClientErrorException {
+        return webTarget.path(java.text.MessageFormat.format("paymentdelete/{0}", new Object[]{payid})).request().post(null, String.class);
+    }
+
     public String activity_feed_Insert(String afId, String description, String senderMsg, String receiverMsg, String targerURL, String activityType, String isRead, String isDeleted, String senderId, String receiverId, String groupId) throws ClientErrorException {
         return webTarget.path(java.text.MessageFormat.format("activity_feed_insert/{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}/{9}/{10}", new Object[]{afId, description, senderMsg, receiverMsg, targerURL, activityType, isRead, isDeleted, senderId, receiverId, groupId})).request().post(null, String.class);
     }
@@ -565,6 +575,12 @@ public class VibeClient {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
+    public <T> T paymentShowAll(Class<T> responseType) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path("paymentshowall");
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
     public String cityUpdate(String cityId, String cityName, String isActive, String stateId) throws ClientErrorException {
         return webTarget.path(java.text.MessageFormat.format("cityupdate/{0}/{1}/{2}/{3}", new Object[]{cityId, cityName, isActive, stateId})).request().post(null, String.class);
     }
@@ -615,6 +631,10 @@ public class VibeClient {
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("subscribedEvents/{0}", new Object[]{userid}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
+    public String paymentInsert(String cardnumber, String cardholder, String expmonth, String expyear, String cvv) throws ClientErrorException {
+        return webTarget.path(java.text.MessageFormat.format("paymentinsert/{0}/{1}/{2}/{3}/{4}", new Object[]{cardnumber, cardholder, expmonth, expyear, cvv})).request().post(null, String.class);
     }
 
     public <T> T postShowAll(Class<T> responseType) throws ClientErrorException {
@@ -753,6 +773,12 @@ public class VibeClient {
 
     public String likeDelete(String likeId) throws ClientErrorException {
         return webTarget.path(java.text.MessageFormat.format("likedelete/{0}", new Object[]{likeId})).request().post(null, String.class);
+    }
+
+    public <T> T payFindByCardholder(Class<T> responseType, String cardholder) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("payfindbycardholder/{0}", new Object[]{cardholder}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
     public String event_usercount_Delete(String eucId) throws ClientErrorException {
