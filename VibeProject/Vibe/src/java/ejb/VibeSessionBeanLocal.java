@@ -77,6 +77,7 @@ public interface VibeSessionBeanLocal {
     public List<User> peopleYouMayKnow(int senderId, int Id);
     public List<User> findUserByFname(String firstName);
     public List<User> findUserByLname(String lastName);
+    public String UserForgetPass(String email,String password);
     
     //User_Contact_Info
     public String user_contact_info_Insert(int uciId, String website, String language, String intrested_in, String fb_link, String insta_link, String bio, int userId);

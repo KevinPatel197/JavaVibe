@@ -58,16 +58,17 @@
                                                             <div class="d-flex align-items-center justify-content-between">
                                                                 <div class="d-flex align-items-center">
                                                                     <a href="#">
-                                                                        <img src="../assets/images/user/05.jpg" alt="profile-img" class="img-fluid"/>
+                                                                        <img src="/Vibe/Images/ProfileImage/#{bday.friendid.profilephoto}" alt="profile-img" class="img-fluid"/>
                                                                     </a>
                                                                     <div class="friend-info ms-0 ms-md-3 mt-md-0 mt-2">
                                                                         <h5>#{bday.friendid.firstname} #{bday.friendid.lastname}</h5>
+                                                                        <h5>#{bday.friendid.email}</h5>
                                                                         <h:outputText value="#{bday.friendid.dob}">
                                                                             <f:convertDateTime pattern="dd.MM.yyyy" />
                                                                         </h:outputText>
                                                                     </div>
                                                                 </div>
-                                                                <h:commandButton  action="chat.xhtml?faces-edirect=true" value="Wish Your Friend" class="btn btn-primary" />
+                                                                <h:commandButton  action="#{friendManagedBean.bdayMail(bday.friendid.email, bday.friendid.firstname)}" value="Wish" class="btn btn-primary ms-4" />
                                                             </div>
                                                         </div>
                                                     </div>

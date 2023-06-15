@@ -7,6 +7,7 @@ package ManageBean;
 
 import client.VibeClient;
 import ejb.VibeSessionBeanLocal;
+import email.MailSender;
 import entity.ActivityFeed;
 import entity.FriendList;
 import entity.FriendRequest;
@@ -438,7 +439,12 @@ public class FriendManagedBean {
 
     //public methods ends
     
-    
-    
+    public String bdayMail(String email,String name)
+    {
+        MailSender ms=new MailSender();
+        ms.SendMail(email, "Birthday Wishes ","🎂🎂🎂" + "Wish You a Many Many  Happy Returns of The Day Dear" + " "+name+"🎂🎂🎂");
+        return "mailsend.xhtml?faces-redirect=true";
+        
+    }
     
 }

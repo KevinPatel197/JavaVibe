@@ -7,6 +7,7 @@ package ManageBean;
 
 import client.VibeClient;
 import ejb.VibeSessionBeanLocal;
+import email.MailSender;
 import entity.User;
 import java.io.IOException;
 import javax.annotation.PostConstruct;
@@ -33,40 +34,36 @@ public class LoginManagedBean {
     // Session Bean
     @EJB
     private VibeSessionBeanLocal vibeSessionBean;
-    
+
     //VibeClient
     private VibeClient vibeClient = new VibeClient();
-    
-    
+
     //Declare Variables
-    
     @NotNull(message = "Email Required")
     @Pattern(regexp = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$", message = "Invalid Email")
     private String email;
-    
+
     @NotNull(message = "Password Required")
     private String password;
-    
+
     //Declare Variables ends
-    
-    
     //Custom Variables
-    
     private boolean remember;
-    private boolean deniedUser,invalidpass;
+    private boolean deniedUser, invalidpass;
+    
+    
+    private String otp;
+    
 
     //Custom Variables ends
-    
-    
     /**
      * Creates a new instance of LoginManagedBean
      */
     public LoginManagedBean() {
-        
+
     }
-    
+
     //Post Construct
-    
     @PostConstruct
     public void init() {
         this.deniedUser = false;
@@ -74,9 +71,7 @@ public class LoginManagedBean {
     }
 
     //Post Construct ends
-    
     //Getters and setters
-    
     public VibeSessionBeanLocal getVibeSessionBean() {
         return vibeSessionBean;
     }
@@ -132,120 +127,154 @@ public class LoginManagedBean {
     public void setInvalidpass(boolean invalidpass) {
         this.invalidpass = invalidpass;
     }
+
+    public String getOtp() {
+        return otp;
+    }
+
+    public void setOtp(String otp) {
+        this.otp = otp;
+    }
     
+    
+
     //Getters and setters
-    
     //Private Methods
-    
     private void setFalse() {
         this.deniedUser = false;
         this.invalidpass = false;
     }
-    
+
     //Private Methods ends
-    
-    
     //ManageBeans Methods
-    
-    public String vibeLogin(){
-        
+    public String vibeLogin() {
+
         try {
-            
+
             Response response = vibeClient.vibeLogin(Response.class, email, password);
-            
+
             System.out.println(response.hasEntity());
             System.out.println(response.toString());
-            
-            if(!response.hasEntity()) {
+
+            if (!response.hasEntity()) {
                 invalidpass = true;
                 return null;
             }
-            
-            GenericType<User> vibeLogin = new GenericType<User>(){};
-            
+
+            GenericType<User> vibeLogin = new GenericType<User>() {
+            };
+
             User users = response.readEntity(vibeLogin);
-            
+
             HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance()
                     .getExternalContext().getRequest();
-            
-            if(users.getAccess() == false || users.getIsactive() == false) {
+
+            if (users.getAccess() == false || users.getIsactive() == false) {
                 deniedUser = true;
                 return null;
             }
-            
-            if(users.getIsadmin()) {
-                
+
+            if (users.getIsadmin()) {
+
                 HttpSession adminSession = request.getSession();
-                
+
                 adminSession.setAttribute("AuserId", users.getUserid());
                 adminSession.setAttribute("AfullName", users.getFirstname() + " " + users.getLastname());
                 adminSession.setAttribute("Aonline", true);
                 adminSession.setAttribute("Atype", users.getIsadmin());
                 adminSession.setAttribute("AImage", users.getProfilephoto());
-                
-                System.out.println(adminSession.getAttribute("AuserId").toString() + " " + 
-                        adminSession.getAttribute("AfullName") + " " + 
-                        adminSession.getAttribute("Aonline") + " " +
-                        adminSession.getAttribute("Atype"));
-                
+
+                System.out.println(adminSession.getAttribute("AuserId").toString() + " "
+                        + adminSession.getAttribute("AfullName") + " "
+                        + adminSession.getAttribute("Aonline") + " "
+                        + adminSession.getAttribute("Atype"));
+
                 setFalse();
-                
-                if(adminSession.getAttribute("AuserId") !=  null) {
+
+                if (adminSession.getAttribute("AuserId") != null) {
                     return "/admin/dashboard.xhtml?faces-redirect=true";
                 }
-                
+
             }
-            
-            if(!users.getIsadmin()) {
-                
+
+            if (!users.getIsadmin()) {
+
                 HttpSession userSession = request.getSession();
-                
+
                 userSession.setAttribute("UuserId", users.getUserid());
                 userSession.setAttribute("UfullName", users.getFirstname() + " " + users.getLastname());
                 userSession.setAttribute("Uonline", true);
                 userSession.setAttribute("Utype", users.getIsadmin());
                 userSession.setAttribute("UImage", users.getProfilephoto());
                 userSession.setAttribute("Uemail", users.getEmail());
-                
-                System.out.println(userSession.getAttribute("UuserId").toString() + " " + 
-                        userSession.getAttribute("UfullName") + " " + 
-                        userSession.getAttribute("Uonline") + " " + 
-                        userSession.getAttribute("Utype")  + " " +
-                        userSession.getAttribute("Uemail"));
-                
+
+                System.out.println(userSession.getAttribute("UuserId").toString() + " "
+                        + userSession.getAttribute("UfullName") + " "
+                        + userSession.getAttribute("Uonline") + " "
+                        + userSession.getAttribute("Utype") + " "
+                        + userSession.getAttribute("Uemail"));
+
                 setFalse();
                 return "/web/home.xhtml?faces-redirect=true";
-                
-            }          
-                      
+
+            }
+
         } catch (ClientErrorException e) {
-            
+
             System.out.println("Error:- " + e.getMessage());
-            
+
             setFalse();
             return "/login.xhtml?faces-redirect=true";
-            
+
         }
-        
+
         System.out.println("Outside Exception");
         setFalse();
         return "/login.xhtml?faces-redirect=true";
     }
-    
+
     public void vibeLogout() {
-        
+
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        
+
         try {
             setFalse();
             FacesContext.getCurrentInstance().getExternalContext().redirect("../login.xhtml");
-            
+
         } catch (IOException e) {
-            
+
             System.out.println(e.getMessage());
-            
+
         }
     }
+
+    public void clearUpdate() {
+        this.email = null;
+        this.password = null;
+        this.otp = null;
+    }
+
+    public int OTP() {
+        int min = 100000;
+        int max = 999999;
+        return (int) Math.floor(Math.random()*(max-min+1)+min);
+    }
+
+    public String forgetPass(String email) {
+        int s = OTP();
+        MailSender ms = new MailSender();
+        ms.SendMail(email, "You Can Reset Your Password ","Your One Time Password is = "  + s + " " + "http://localhost:8080/Vibe/resetPass.xhtml");
+        clearUpdate();
+        return "resetPass.xhtml?faces-redirect=true";
+    }
     
+    public String ResetPass()
+    {
+        System.out.println("user email : " + email);
+        System.out.println("user password : " + password);
+        vibeSessionBean.UserForgetPass(email, password);
+        clearUpdate();
+        return "login.xhtml?faces-redirect=true";
+    }
     //ManageBeans Methods ends
 }

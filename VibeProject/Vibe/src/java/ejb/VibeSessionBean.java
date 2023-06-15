@@ -769,6 +769,27 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
         }
     }
 
+    @Override
+    public String UserForgetPass(String email, String password) {
+
+        //int otp=this.generateOTP();
+        List<User> userList = em.createNamedQuery("User.findUserByEmail")
+                .setParameter("email", email)
+                .getResultList();
+
+        if (!userList.isEmpty()) {
+            for (User user : userList) {
+                boolean PassToHash = hashPassword.checkPassword(user.getPassword(), password);
+                if (!PassToHash) {
+                    user.setPassword(hashPassword.getHashPassword(password));
+                    em.merge(user);
+                }
+
+            }
+        }
+        return "Passsword Forgot Successfully...";
+    }
+
     //User_Contact_Info
     @Override
     public String user_contact_info_Insert(int uciId, String website, String language, String intrested_in, String fb_link, String insta_link, String bio, int userId) {
@@ -3617,22 +3638,22 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
     public String productInsert(String pname, String category, String description, String price, String pimage, boolean isactive) {
 
         try {
-            
+
             Product p = new Product();
-            
+
             p.setPname(pname);
             p.setCategory(category);
             p.setDescription(description);
             p.setPrice(price);
             p.setPimage(pimage);
             p.setIsactive(isactive);
-            
+
             em.persist(p);
-            
+
             return "Product Inserted ..";
-            
+
         } catch (Exception e) {
-            
+
             return e.getMessage();
         }
     }
@@ -3641,8 +3662,7 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
     public String productUpdate(int pid, String pname, String category, String description, String price, String pimage, boolean isactive) {
 
         try {
-            
-            
+
             Product p = em.find(Product.class, pid);
             p.setPname(pname);
             p.setCategory(category);
@@ -3650,13 +3670,13 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
             p.setPrice(price);
             p.setPimage(pimage);
             p.setIsactive(isactive);
-            
+
             em.persist(p);
-            
+
             return "Product Updated ..";
-            
+
         } catch (Exception e) {
-            
+
             return e.getMessage();
         }
     }
@@ -3668,7 +3688,7 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
 
             Product a = em.find(Product.class, pid);
 
-            if (a.getIsactive()== true) {
+            if (a.getIsactive() == true) {
                 a.setIsactive(false);
                 em.merge(a);
 
@@ -3773,26 +3793,25 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
         }
     }
 
-    
     //payment
     @Override
     public String paymentInsert(String cardnumber, String cardholder, String expmonth, String expyear, String cvv) {
 
         try {
-            
+
             Payment pay = new Payment();
             pay.setCardnumber(cardnumber);
             pay.setCardholder(cardholder);
             pay.setExpmonth(expmonth);
             pay.setExpyear(expyear);
             pay.setCvv(cvv);
-            
+
             em.persist(pay);
-            
+
             return "Payment Done !";
-            
+
         } catch (Exception e) {
-            
+
             return e.getMessage();
         }
     }
@@ -3809,7 +3828,7 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
 
         } catch (Exception e) {
             return e.getMessage();
-        }  
+        }
     }
 
     @Override
@@ -3841,10 +3860,10 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
         }
 
     }
-    
+
     @Override
-    public List<Payment> paymentShowAll(){
-        
+    public List<Payment> paymentShowAll() {
+
         try {
 
             List<Payment> payment = em.createNamedQuery("Payment.findAll")
@@ -3861,21 +3880,21 @@ public class VibeSessionBean implements VibeSessionBeanLocal {
             return null;
 
         }
-        
+
     }
 
     @Override
     public Payment getLastValue() {
 
         try {
-            
+
             return (Payment) em.createQuery("SELECT p FROM Payment p ORDER BY P.payid DESC")
                     .setMaxResults(1).getSingleResult();
         } catch (Exception e) {
-            
+
             e.getMessage();
             return null;
         }
     }
-    
+
 }
