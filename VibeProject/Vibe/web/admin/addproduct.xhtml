@@ -51,32 +51,32 @@
                                         
                                         <div class="form-group">
                                             <h:outputLabel for="" class="form-label"> Product Name : </h:outputLabel> 
-                                            <h:inputText id="pname" class="form-control" value="#{productManage.pname}"/>
+                                            <h:inputText id="pname" class="form-control" value="#{productManage.pname}"  required="true"  />
                                         </div>
                                         
                                         <div class="form-group">
                                             <h:outputLabel for="" class="form-label"> Category : </h:outputLabel> 
-                                            <h:inputText id="category" class="form-control" value="#{productManage.category}"/>
+                                            <h:inputText id="category" class="form-control" value="#{productManage.category}" required="true"  />
                                         </div>
                                         
                                         <div class="form-group">
                                             <h:outputLabel for="" class="form-label"> Description : </h:outputLabel> 
-                                            <h:inputText id="description" class="form-control" value="#{productManage.description}"/>
+                                            <h:inputText id="description" class="form-control" value="#{productManage.description}" required="true"  />
                                         </div>
-                                        
+                                         
                                         <div class="form-group">
                                             <h:outputLabel for="" class="form-label"> Price : </h:outputLabel> 
-                                            <h:inputText id="price" class="form-control" value="#{productManage.price}"/>
+                                            <h:inputText id="price" class="form-control" value="#{productManage.price}" required="true"  />
                                         </div>
 
                                         <div class="form-group">
                                             <h:outputLabel for="" class="form-label">Product Image : </h:outputLabel>
-                                            <h:inputFile id="pimage" class="form-control" value="#{productManage.file}"/>
+                                            <h:inputFile id="pimage" class="form-control" value="#{productManage.file}" required="true"  />
                                         </div>
 
                                         <div class="form-group">
                                             <h:outputLabel for="" class="form-label">IsActive : </h:outputLabel> 
-                                            <h:inputText id="isactive" class="form-control" value="#{productManage.isactive}" />
+                                            <h:inputText id="isactive" class="form-control" value="#{productManage.isactive}" required="true"   />
                                         </div>
                                         
                                         <h:commandButton  id="btn_insert" class="btn btn-primary"  action="#{productManage.productInsert()}" value="Insert"/><br/><br/>

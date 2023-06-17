@@ -575,8 +575,7 @@ public class UserManagedBean {
         
         Response response = vibeClient.userFindById(Response.class, id);
         ArrayList<User> infoArrayList = new ArrayList<>();
-        GenericType<List<User>> showAllinfo  = new GenericType<List<User>>() {
-        };
+        GenericType<List<User>> showAllinfo  = new GenericType<List<User>>() {};
         infoArrayList = (ArrayList<User>) response.readEntity(showAllinfo);
         
         for(User u : infoArrayList) {

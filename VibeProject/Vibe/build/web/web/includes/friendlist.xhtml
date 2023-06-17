@@ -20,12 +20,11 @@
                                                 <img class="rounded-circle avatar-50" src="/Vibe/Images/ProfileImage/images.jpg" alt=""/>
                                             </c:if>
                                             <c:if test="#{friends.friendid.profilephoto ne null}">
-                                                <img class="rounded-circle avatar-50" src="/Vibe/Images/ProfileImage/#{friends.friendid.profilephoto}" alt=""/>
+                                                <img class="rounded-circle avatar-55" src="/Vibe/Images/ProfileImage/#{friends.friendid.profilephoto}" alt=""/>
                                             </c:if>
                                         </div>
                                         <div class="ms-3">
-                                            <h6 class="mb-0">#{friends.friendid.firstname} #{friends.friendid.lastname}</h6>
-                                            <!--                                            <p class="mb-0">Just Now</p>-->
+                                            <a href="chat.xhtml?faces-redirect=true"><h5 class="mb-0">#{friends.friendid.firstname} #{friends.friendid.lastname}</h5></a>
                                         </div>
                                     </div>
                                 </c:forEach>

@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <h:head>
+        <title>Admin | Marketplace</title>
+        <ui:include src="includes/css.xhtml" />
+
+    </h:head>
+    <h:body>
+        <!-- loader Start -->
+        <div id="loading">
+            <div id="loading-center">
+            </div>
+        </div>
+        <!-- loader END -->
+
+        <!-- Wrapper Start -->
+        <div class="wrapper">
+            <!--Navigation-->
+            <ui:include src="includes/navigation.xhtml"></ui:include>
+
+            <!-- Header  -->
+            <ui:include src="includes/header.xhtml"></ui:include>
+
+
+            <div id="content-page" class="content-page">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card position-relative inner-page-bg bg-primary" style="height: 150px;">
+                                <div class="inner-page-title">
+                                    <h3 class="text-white">Edit Product</h3>
+                                </div>  
+                            </div>
+                        </div>
+                        <div>
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between">
+                                    <div class="header-title">
+                                        <h4 class="card-title">Input Details</h4>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <h:form enctype="multipart/form-data">  
+                                        
+                                        <div class="form-group">
+                                            <h:outputLabel for="" class="form-label"> Product Code : </h:outputLabel> 
+                                            <h:inputText id="pid" class="form-control" value="#{productManage.pid}"  disabled="true"/>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <h:outputLabel for="" class="form-label"> Product Name : </h:outputLabel> 
+                                            <h:inputText id="pname" class="form-control" value="#{productManage.pname}"  />
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <h:outputLabel for="" class="form-label"> Category : </h:outputLabel> 
+                                            <h:inputText id="category" class="form-control" value="#{productManage.category}"/>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <h:outputLabel for="" class="form-label"> Description : </h:outputLabel> 
+                                            <h:inputText id="description" class="form-control" value="#{productManage.description}"/>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <h:outputLabel for="" class="form-label"> Price : </h:outputLabel> 
+                                            <h:inputText id="price" class="form-control" value="#{productManage.price}"/>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h:outputLabel for="" class="form-label">Product Image : </h:outputLabel>
+                                            <h:inputFile id="pimage" class="form-control" value="#{productManage.file}"/>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h:outputLabel for="" class="form-label">IsActive : </h:outputLabel> 
+                                            <h:inputText id="isactive" class="form-control" value="#{productManage.isactive}" disabled="true" />
+                                        </div>
+                                        
+                                        <h:commandButton  id="btn_insert" class="btn btn-primary"  action="#{productManage.productUpdate()}" value="Update"/><br/><br/>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Wrapper End-->
+
+
+        <!-- Scripts -->
+        <ui:include src="includes/bottomscript.xhtml" />      
+
+
+    </h:body>
+</html>
+

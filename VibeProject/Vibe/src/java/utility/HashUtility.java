@@ -31,7 +31,6 @@ public class HashUtility {
             
         } catch (NoSuchAlgorithmException e) {
             
-            
             return e.getMessage();
         }
         

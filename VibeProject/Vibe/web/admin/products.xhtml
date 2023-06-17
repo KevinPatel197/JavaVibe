@@ -73,10 +73,11 @@
                                                     <f:facet name="header">Available</f:facet>
                                                         #{item.isactive}
                                                 </h:column>
+
                                                 <h:column>
-                                                    <f:facet name="header">Action</f:facet>
-                                                    <h:commandLink action="#{productManage.productDelete(item.pid)}"><i class="ri-delete-bin-fill"  ></i></h:commandLink><p:spacer width="25" />
-                                                    <h:commandLink action="#{productManage.productDelete(item.pid)}"><i class="ri-edit-fill"></i></h:commandLink>
+                                                    <f:facet name="header">Actions</f:facet>
+                                                    <h:commandButton action="#{productManage.productDelete(item.pid)}" value="Delete" class="btn btn-danger" /><p:spacer width="25" />
+                                                    <h:commandButton action="#{productManage.productEdit(item.pid)}" value="Edit" class="btn btn-info" />
                                                 </h:column>
                                             </h:dataTable>
                                         </h:form>

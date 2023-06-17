@@ -89,7 +89,6 @@ public class ProductManage {
         this.category = category;
     }
 
-   
     public String getDescription() {
         return description;
     }
@@ -148,7 +147,7 @@ public class ProductManage {
 
     private void clearUpdate() {
         this.pname = null;
-        this.category=null;;
+        this.category = null;;
         this.description = null;
         this.price = null;
         this.pimage = null;
@@ -165,8 +164,7 @@ public class ProductManage {
 
         return productArrayList;
     }
-    
-    
+
     public List<Product> showAllActiveProduct() {
 
         Response response = vibeClient.productShowActive(Response.class);
@@ -210,7 +208,7 @@ public class ProductManage {
         return "/admin/products.xhtml?faces-redirect=true";
 
     }
-    
+
     public void productDelete(int id) {
         try {
             vibeClient.productDelete(String.valueOf(id));
@@ -219,13 +217,60 @@ public class ProductManage {
         }
     }
 
-    public String getproductinfo(String id)
-    {
+    public String productEdit(String id) {
         Response response = vibeClient.productFindById(Response.class, id);
         Product productArrayList = new Product();
-        GenericType<Product> showAllproducts  = new GenericType<Product>() {
+        GenericType<Product> showAllproducts = new GenericType<Product>() {
         };
-        productArrayList = (Product)response.readEntity(showAllproducts);
+        productArrayList = (Product) response.readEntity(showAllproducts);
+        
+        pid = productArrayList.getPid().toString();
+        pname = productArrayList.getPname();
+        category = productArrayList.getCategory();
+        description = productArrayList.getDescription();
+        price = productArrayList.getPrice();
+        pimage = productArrayList.getPimage();
+        isactive = String.valueOf(productArrayList.getIsactive());
+
+        return "/admin/editproduct.xhtml?faces-redirect=true";
+    }
+
+    public String productUpdate() throws IOException {
+
+        if (file != null) {
+
+            InputStream input = file.getInputStream();
+            String fullPath = "\\C:\\Users\\kevin\\OneDrive\\Desktop\\EEProject\\VibeProject\\Vibe\\web\\Images\\ProductImage\\";
+
+            Random random = new Random();
+            StringBuilder sb = new StringBuilder();
+
+            sb.append(random.nextInt(9) + 1);
+            for (int i = 0; i < 11; i++) {
+                sb.append(random.nextInt(10));
+            }
+            String temp = sb.toString();
+
+            pimage = "IMG_" + temp + ".jpg";
+            Files.copy(input, new File(fullPath, pimage).toPath());
+        }
+
+        String value = vibeClient.productUpdate(String.valueOf(pid), pname, category, description, price, pimage, isactive);
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance()
+                .getExternalContext().getRequest();
+        HttpSession userSession = request.getSession();
+
+        userSession.setAttribute("ProductImage", pimage);
+
+        return "/admin/products.xhtml?faces-redirect=true";
+    }
+
+    public String getproductinfo(String id) {
+        Response response = vibeClient.productFindById(Response.class, id);
+        Product productArrayList = new Product();
+        GenericType<Product> showAllproducts = new GenericType<Product>() {
+        };
+        productArrayList = (Product) response.readEntity(showAllproducts);
         pimage = productArrayList.getPimage();
         pid = productArrayList.getPid().toString();
         pname = productArrayList.getPname();
@@ -233,7 +278,7 @@ public class ProductManage {
         category = productArrayList.getCategory();
         description = productArrayList.getDescription();
         isactive = String.valueOf(productArrayList.getIsactive());
-        
+
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance()
                 .getExternalContext().getRequest();
         HttpSession userSession = request.getSession();
@@ -243,10 +288,8 @@ public class ProductManage {
         userSession.setAttribute("Pimage : ", pimage);
         userSession.setAttribute("Desc : ", description);
         userSession.setAttribute("category : ", category);
-        
+
         return "/web/marketplaceinfo.xhtml?faces-redirect=true";
     }
-    
-    
-    
+
 }
