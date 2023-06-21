@@ -240,7 +240,7 @@ public class GenericResource {
     
     //User
     
-    @Path("userregister/{userId}/{firstName}/{lastName}/{dob}/{email}/{password}/{isActive}/{isAdmin}/{access}")
+    @Path("userregister/{UserForgetPassd}/{firstName}/{lastName}/{dob}/{email}/{password}/{isActive}/{isAdmin}/{access}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public String userRegister(@PathParam("userId")int userId, @PathParam("firstName")String firstName, @PathParam("lastName")String lastName, @PathParam("dob")String dob, @PathParam("email")String email, @PathParam("password")String password, @PathParam("isActive")boolean isActive , @PathParam("isAdmin")boolean isAdmin, @PathParam("access")boolean access) {
